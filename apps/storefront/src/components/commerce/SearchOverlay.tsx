@@ -2,6 +2,7 @@ import { ArrowRight, Search, X } from 'lucide-react'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import products from '../../data/catalogue.generated.json'
+import { useDelayedUnmount } from '../../features/motion/useMotion'
 import { formatVnd } from '../../lib/format'
 
 type SearchOverlayProps = {
@@ -13,6 +14,7 @@ export function SearchOverlay({ open, onClose }: SearchOverlayProps) {
   const [query, setQuery] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
   const navigate = useNavigate()
+  const mounted = useDelayedUnmount(open)
 
   useEffect(() => {
     if (!open) return
@@ -37,7 +39,7 @@ export function SearchOverlay({ open, onClose }: SearchOverlayProps) {
       .slice(0, 8)
   }, [query])
 
-  if (!open) return null
+  if (!mounted) return null
 
   const submit = () => {
     const normalized = query.trim()
@@ -47,7 +49,7 @@ export function SearchOverlay({ open, onClose }: SearchOverlayProps) {
   }
 
   return (
-    <div aria-label="Tìm kiếm sản phẩm" aria-modal="true" className="search-overlay" role="dialog">
+    <div aria-hidden={!open} aria-label="Tìm kiếm sản phẩm" aria-modal="true" className={`search-overlay ${open ? 'is-open' : 'is-closing'}`} inert={!open} role="dialog">
       <button aria-label="Đóng tìm kiếm" className="search-overlay__backdrop" onClick={onClose} type="button" />
       <section className="search-overlay__panel">
         <header>
