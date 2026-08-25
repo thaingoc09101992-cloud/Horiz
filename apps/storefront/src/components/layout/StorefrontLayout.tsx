@@ -56,7 +56,6 @@ export function StorefrontLayout() {
 
   return (
     <div className="storefront-shell">
-      <div className="announcement">Miễn phí giao hàng từ 1.500.000₫ · Phí tiêu chuẩn 30.000₫ · Đổi trả minh bạch</div>
       <header className="storefront-header">
         <div className="storefront-header__inner">
           <button aria-expanded={menuOpen} aria-label={menuOpen ? 'Đóng menu' : 'Mở menu'} className="icon-button mobile-menu-button" onClick={() => setMenuOpen((open) => !open)} type="button">
