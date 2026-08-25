@@ -16,7 +16,6 @@ import {
 import { useState } from 'react'
 import { NavLink, Outlet } from 'react-router'
 import { Wordmark } from '../../components/brand/Wordmark'
-import { ThemeActions } from '../../components/ui/ThemeActions'
 import { useAuth } from '../../features/auth/AuthProvider'
 
 const adminNav = [
@@ -72,7 +71,6 @@ export function AdminLayout() {
             <input placeholder="Tìm sản phẩm, đơn hàng, thành viên…" type="search" />
           </label>
           <div className="admin-topbar__actions">
-            <ThemeActions />
             <div className="admin-user">
               <span className="admin-user__avatar">{user?.email?.slice(0, 1).toUpperCase() ?? 'A'}</span>
               <div><strong>Admin HORIZ</strong><small>{user?.email}</small></div>

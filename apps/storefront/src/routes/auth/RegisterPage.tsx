@@ -1,8 +1,10 @@
 import { useState, type FormEvent } from 'react'
+import { useNavigate } from 'react-router'
 import { isSupabaseConfigured, supabase } from '../../lib/supabase'
 import { AuthCard } from './AuthCard'
 
 export function RegisterPage() {
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -54,6 +56,11 @@ export function RegisterPage() {
 
     if (!data.user) {
       setMessage('Supabase chưa trả về tài khoản mới. Vui lòng thử lại.')
+      return
+    }
+
+    if (data.session) {
+      void navigate('/account', { replace: true })
       return
     }
 

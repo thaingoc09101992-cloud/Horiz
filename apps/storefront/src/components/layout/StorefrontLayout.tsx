@@ -1,15 +1,14 @@
-import { ChevronDown, LogOut, Menu, Search, ShoppingBag, UserRound, X } from 'lucide-react'
-import { lazy, useEffect, useRef, useState, type FormEvent } from 'react'
+import { ChevronDown, LogOut, Menu, Search, ShieldCheck, ShoppingBag, UserRound, X } from 'lucide-react'
+import { lazy, useEffect, useState, type FormEvent } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router'
 import { useAuth } from '../../features/auth/AuthProvider'
 import { useCart } from '../../features/cart/CartProvider'
 import { supabase } from '../../lib/supabase'
 import { Wordmark } from '../brand/Wordmark'
-import { ThemeActions } from '../ui/ThemeActions'
 
 const navItems = [
-  { label: 'Nữ', href: '/women' },
   { label: 'Nam', href: '/men' },
+  { label: 'Nữ', href: '/women' },
   { label: 'Unisex', href: '/unisex' },
   { label: 'Trẻ em', href: '/toddler' },
 ]
@@ -29,11 +28,9 @@ export function StorefrontLayout() {
   const [accountOpen, setAccountOpen] = useState(false)
   const [newsletterEmail, setNewsletterEmail] = useState('')
   const [newsletterMessage, setNewsletterMessage] = useState('')
-  const [cartDrawerOpen, setCartDrawerOpen] = useState(false)
-  const previousItemCount = useRef(0)
   const location = useLocation()
   const { role, signOut, user } = useAuth()
-  const { itemCount, items } = useCart()
+  const { itemCount } = useCart()
 
   useEffect(() => {
     queueMicrotask(() => {
@@ -42,11 +39,6 @@ export function StorefrontLayout() {
       setAccountOpen(false)
     })
   }, [location.pathname])
-
-  useEffect(() => {
-    if (itemCount > previousItemCount.current) setCartDrawerOpen(true)
-    previousItemCount.current = itemCount
-  }, [itemCount])
 
   const subscribe = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -76,7 +68,6 @@ export function StorefrontLayout() {
             <button aria-expanded={megaOpen} onClick={() => setMegaOpen((open) => !open)} type="button">Khám phá <ChevronDown aria-hidden="true" /></button>
           </nav>
           <div className="header-actions">
-            <ThemeActions />
             <button aria-label="Tìm kiếm" className="icon-button" onClick={() => setSearchOpen(true)} type="button"><Search aria-hidden="true" strokeWidth={1.65} /></button>
             <div className="account-menu">
               <button aria-expanded={accountOpen} aria-label="Tài khoản" className="icon-button" onClick={() => setAccountOpen((open) => !open)} type="button"><UserRound aria-hidden="true" strokeWidth={1.65} /></button>
@@ -89,10 +80,15 @@ export function StorefrontLayout() {
             <Link aria-label={`Giỏ hàng, ${itemCount} sản phẩm`} className="icon-button bag-button" to="/cart">
               <ShoppingBag aria-hidden="true" strokeWidth={1.65} />{itemCount > 0 ? <span>{itemCount}</span> : null}
             </Link>
+            {role === 'admin' ? (
+              <Link aria-label="Quản trị hệ thống" className="icon-button admin-entry-button" to="/admin/dashboard">
+                <ShieldCheck aria-hidden="true" strokeWidth={1.65} />
+              </Link>
+            ) : null}
           </div>
         </div>
         {megaOpen ? <div className="mega-menu"><div className="mega-menu__inner">{megaColumns.map((column) => <section key={column.title}><strong>{column.title}</strong>{column.links.map(([label, href]) => <Link key={href} to={href}>{label}</Link>)}</section>)}<Link className="mega-menu__feature" to="/collections/new"><img alt="Bộ sưu tập HORIZ mới" src="/prototype/story-city.jpg" /><span><small>HORIZ EDIT</small><strong>Nhẹ nhàng qua từng chuyển động</strong></span></Link></div></div> : null}
-        {menuOpen ? <nav aria-label="Điều hướng di động" className="mobile-nav">{navItems.map((item) => <NavLink key={item.href} to={item.href}>{item.label}</NavLink>)}<NavLink to="/collections/new">Sản phẩm mới</NavLink><NavLink to="/materials">Chất liệu</NavLink><NavLink to={user ? '/account' : '/login'}>{user ? 'Tài khoản của tôi' : 'Đăng nhập'}</NavLink>{role === 'admin' ? <NavLink to="/admin/dashboard">Administrator</NavLink> : null}</nav> : null}
+        {menuOpen ? <nav aria-label="Điều hướng di động" className="mobile-nav">{navItems.map((item) => <NavLink key={item.href} to={item.href}>{item.label}</NavLink>)}<NavLink to="/search">Khám phá</NavLink><NavLink to={user ? '/account' : '/login'}>{user ? 'Tài khoản của tôi' : 'Đăng nhập'}</NavLink>{role === 'admin' ? <NavLink to="/admin/dashboard">Administrator</NavLink> : null}</nav> : null}
       </header>
 
       <Outlet />
@@ -111,7 +107,6 @@ export function StorefrontLayout() {
         </div>
         <p className="footer-legal">© 2026 HORIZ. Thiết kế cho chuyển động tự nhiên.</p>
       </footer>
-      {cartDrawerOpen ? <aside aria-live="polite" className="cart-drawer"><header><strong>Đã thêm vào giỏ hàng</strong><button aria-label="Đóng" className="icon-button" onClick={() => setCartDrawerOpen(false)} type="button"><X aria-hidden="true" /></button></header>{items.length ? <div className="cart-drawer__item"><img alt="" src={items[items.length - 1]?.image} /><span><strong>{items[items.length - 1]?.name}</strong><small>Size {items[items.length - 1]?.size} · Số lượng {items[items.length - 1]?.quantity}</small></span></div> : null}<Link className="button button--primary button--wide" onClick={() => setCartDrawerOpen(false)} to="/cart">Xem giỏ hàng ({itemCount})</Link><button className="button button--secondary button--wide" onClick={() => setCartDrawerOpen(false)} type="button">Tiếp tục mua sắm</button></aside> : null}
       {searchOpen ? <SearchOverlay onClose={() => setSearchOpen(false)} open /> : null}
     </div>
   )

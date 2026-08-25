@@ -2,6 +2,12 @@ import { useState, type FormEvent } from 'react'
 import { useNavigate, useSearchParams } from 'react-router'
 import { isSupabaseConfigured, supabase } from '../../lib/supabase'
 import { AuthCard } from './AuthCard'
+import { getLoginErrorFeedback } from './authMessages'
+
+interface FormMessage {
+  text: string
+  tone: 'error' | 'neutral'
+}
 
 function safeReturnTo(value: string | null): string {
   return value?.startsWith('/') && !value.startsWith('//') ? value : '/'
@@ -12,27 +18,58 @@ export function LoginPage() {
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [message, setMessage] = useState<string | null>(null)
+  const [message, setMessage] = useState<FormMessage | null>(null)
+  const [requiresEmailConfirmation, setRequiresEmailConfirmation] = useState(false)
   const [submitting, setSubmitting] = useState(false)
+  const [resending, setResending] = useState(false)
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     if (!supabase) {
-      setMessage('Supabase chưa được cấu hình. Hãy sao chép .env.example thành .env.local.')
+      setMessage({ text: 'Supabase chưa được cấu hình. Hãy sao chép .env.example thành .env.local.', tone: 'error' })
       return
     }
 
     setSubmitting(true)
     setMessage(null)
-    const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password })
+    setRequiresEmailConfirmation(false)
+    const normalizedEmail = email.trim().toLowerCase()
+    const { error } = await supabase.auth.signInWithPassword({ email: normalizedEmail, password })
     setSubmitting(false)
 
     if (error) {
-      setMessage('Không thể đăng nhập. Hãy kiểm tra thông tin và thử lại.')
+      const feedback = getLoginErrorFeedback(error)
+      setMessage({ text: feedback.message, tone: 'error' })
+      setRequiresEmailConfirmation(feedback.requiresEmailConfirmation)
       return
     }
 
     void navigate(safeReturnTo(searchParams.get('returnTo')), { replace: true })
+  }
+
+  const handleResendConfirmation = async () => {
+    if (!supabase || !email.trim()) return
+
+    setResending(true)
+    const { error } = await supabase.auth.resend({
+      type: 'signup',
+      email: email.trim().toLowerCase(),
+      options: { emailRedirectTo: `${window.location.origin}/login` },
+    })
+    setResending(false)
+
+    if (error) {
+      const rateLimited = error.status === 429 || error.code?.includes('rate_limit') || error.message.toLowerCase().includes('rate limit')
+      setMessage({
+        text: rateLimited
+          ? 'Email vừa được gửi gần đây. Vui lòng đợi một lúc rồi thử lại.'
+          : 'Chưa thể gửi lại email xác minh. Vui lòng thử lại sau.',
+        tone: 'error',
+      })
+      return
+    }
+
+    setMessage({ text: 'Đã gửi lại email xác minh. Hãy kiểm tra cả hộp thư Spam.', tone: 'neutral' })
   }
 
   return (
@@ -74,7 +111,16 @@ export function LoginPage() {
       <button className="button button--primary button--wide" disabled={submitting} type="submit">
         {submitting ? 'Đang đăng nhập…' : 'Đăng nhập'}
       </button>
-      {message ? <p className="form-message" role="alert">{message}</p> : null}
+      {message ? (
+        <p className={`form-message${message.tone === 'neutral' ? ' form-message--neutral' : ''}`} role={message.tone === 'error' ? 'alert' : 'status'}>
+          {message.text}
+        </p>
+      ) : null}
+      {requiresEmailConfirmation ? (
+        <button className="button button--secondary button--wide" disabled={resending} onClick={() => void handleResendConfirmation()} type="button">
+          {resending ? 'Đang gửi lại…' : 'Gửi lại email xác minh'}
+        </button>
+      ) : null}
       <a className="auth-card__minor-link" href="/forgot-password">
         Quên mật khẩu?
       </a>
