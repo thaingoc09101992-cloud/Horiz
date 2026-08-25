@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router'
 import { formatVnd } from '../../lib/format'
 import { supabase } from '../../lib/supabase'
+import { orderStatusLabels } from './adminLabels'
 
 type OrderRow = { id: string; status: string; payment_status: string; grand_total: number; created_at: string }
 type InventoryRow = { on_hand: number; reserved: number; reorder_level: number; unit_cost: number | null }
@@ -56,7 +57,7 @@ export function AdminDashboardPage() {
 
   return (
     <main className="admin-main" id="main-content">
-      <div className="admin-page-heading"><div><p className="eyebrow">{new Intl.DateTimeFormat('vi-VN', { dateStyle: 'full' }).format(new Date())}</p><h1>Tình hình kinh doanh</h1><p>{loading ? 'Đang cập nhật dữ liệu…' : 'Dữ liệu Supabase · múi giờ Asia/Ho_Chi_Minh'}</p></div><select aria-label="Khoảng thời gian dashboard" onChange={(event) => setPeriod(event.target.value)} value={period}><option value="today">Hôm nay</option><option value="7d">7 ngày qua</option><option value="30d">30 ngày qua</option><option value="month">Tháng này</option></select></div>
+      <div className="admin-page-heading"><div><p className="eyebrow">{new Intl.DateTimeFormat('vi-VN', { dateStyle: 'full' }).format(new Date())}</p><h1>Tình hình kinh doanh</h1><p>{loading ? 'Đang cập nhật dữ liệu…' : 'Theo dõi doanh thu, đơn hàng và cảnh báo tồn kho trong kỳ đã chọn.'}</p></div><select aria-label="Khoảng thời gian dashboard" onChange={(event) => setPeriod(event.target.value)} value={period}><option value="today">Hôm nay</option><option value="7d">7 ngày qua</option><option value="30d">30 ngày qua</option><option value="month">Tháng này</option></select></div>
       {message ? <p className="form-message" role="alert">{message}</p> : null}
       <section aria-label="Chỉ số bán hàng" className="kpi-grid">
         {[['Doanh thu', formatVnd(revenue)], ['Đơn hàng', String(paidOrders.length)], ['Giá trị đơn TB', formatVnd(average)]].map(([label, value]) => <article className="stat-card" key={label}><div className="stat-card__label"><span>{label}</span><WalletCards aria-hidden="true" /></div><strong>{value}</strong><p className="trend trend--up"><ArrowUpRight aria-hidden="true" /><span>Trong kỳ đã chọn</span></p></article>)}
@@ -68,7 +69,7 @@ export function AdminDashboardPage() {
       </section>
       <div className="dashboard-grid">
         <section className="dashboard-panel dashboard-panel--wide"><div className="panel-heading"><div><h2>Doanh thu theo ngày</h2><p>{daily.length} ngày có dữ liệu trong kỳ</p></div></div><div aria-label="Biểu đồ doanh thu theo ngày" className="sales-chart" role="img">{daily.map(([date, value]) => <div className="sales-chart__column" key={date}><span className="sales-chart__value">{Math.round(value / 1000000)}</span><span className="sales-chart__bar" style={{ height: String(Math.round((value / maxDaily) * 100)) + '%' }} /><small>{date.slice(8)}</small></div>)}</div></section>
-        <section className="dashboard-panel"><div className="panel-heading"><div><h2>Trạng thái đơn</h2><p>{orders.length} đơn trong kỳ</p></div></div><ul className="status-list">{Object.entries(statuses).map(([status, count]) => <li key={status}><span>{status}</span><strong>{count}</strong></li>)}{orders.length === 0 ? <li><span>Chưa có đơn</span><strong>0</strong></li> : null}</ul></section>
+        <section className="dashboard-panel"><div className="panel-heading"><div><h2>Trạng thái đơn</h2><p>{orders.length} đơn trong kỳ</p></div></div><ul className="status-list">{Object.entries(statuses).map(([status, count]) => <li key={status}><span>{orderStatusLabels[status] ?? status}</span><strong>{count}</strong></li>)}{orders.length === 0 ? <li><span>Chưa có đơn</span><strong>0</strong></li> : null}</ul></section>
         <section className="dashboard-panel dashboard-panel--wide"><div className="panel-heading"><div><h2>Hành động cần xử lý</h2><p>Ưu tiên theo mức ảnh hưởng vận hành</p></div></div><div className="dashboard-actions"><Link to="/admin/orders"><strong>{orders.filter((order) => ['pending_payment', 'paid', 'processing'].includes(order.status)).length}</strong><span>Đơn cần xử lý</span></Link><Link to="/admin/inventory"><strong>{outOfStock + lowStock}</strong><span>SKU cần bổ sung</span></Link><Link to="/admin/products"><strong>{inventory.length}</strong><span>SKU đang theo dõi</span></Link></div></section>
         <section className="dashboard-panel"><div className="panel-heading"><div><h2>Giá trị tồn kho</h2><p>Theo giá vốn hiện có</p></div></div><strong className="inventory-value">{formatVnd(stockValue)}</strong><p className="panel-footnote">{inventory.reduce((sum, item) => sum + item.on_hand, 0)} sản phẩm thực tế · {reserved} đang reserve</p></section>
       </div>
