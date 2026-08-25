@@ -4,6 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#f7f5ef" />
+    <script>
+      try {
+        const shapeTheme = localStorage.getItem('horiz-shape-theme:v1') === 'square' ? 'square' : 'rounded'
+        document.documentElement.dataset.shapeTheme = shapeTheme
+      } catch {
+        document.documentElement.dataset.shapeTheme = 'rounded'
+      }
+    </script>
     <meta
       name="description"
       content="HORIZ — thiết kế chuyển động tự nhiên cho nhịp sống mỗi ngày."

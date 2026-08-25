@@ -7,6 +7,58 @@ import { orderStatusLabels } from './adminLabels'
 
 type OrderRow = { id: string; status: string; payment_status: string; grand_total: number; created_at: string }
 type InventoryRow = { on_hand: number; reserved: number; reorder_level: number; unit_cost: number | null }
+type StatusEntry = [status: string, count: number]
+
+const statusColors = [
+  'var(--brand)',
+  'var(--accent)',
+  'var(--warning)',
+  'var(--success)',
+  'var(--danger)',
+  '#7697a8',
+  '#9b7b93',
+  'var(--muted)',
+]
+
+export function OrderStatusDonut({ entries, total }: { entries: StatusEntry[]; total: number }) {
+  const segments = entries.map(([status, count], index) => {
+    const percentage = total ? (count / total) * 100 : 0
+    const previousTotal = entries.slice(0, index).reduce((sum, [, previousCount]) => sum + previousCount, 0)
+    return { status, count, percentage, dashOffset: total ? -(previousTotal / total) * 100 : 0 }
+  })
+
+  return (
+    <div className="donut-wrap">
+      <div className="donut-chart">
+        <svg aria-label={`Biểu đồ trạng thái của ${total} đơn hàng`} role="img" viewBox="0 0 120 120">
+          <circle className="donut-chart__track" cx="60" cy="60" r="48" />
+          {segments.map(({ status, count, percentage, dashOffset }, index) => {
+            return (
+              <circle
+                className="donut-chart__segment"
+                cx="60"
+                cy="60"
+                key={status}
+                pathLength="100"
+                r="48"
+                stroke={statusColors[index % statusColors.length]}
+                strokeDasharray={`${percentage} ${100 - percentage}`}
+                strokeDashoffset={dashOffset}
+              >
+                <title>{`${orderStatusLabels[status] ?? status}: ${count} đơn`}</title>
+              </circle>
+            )
+          })}
+        </svg>
+        <div className="donut-chart__total"><strong>{total}</strong><span>đơn hàng</span></div>
+      </div>
+      <ul className="status-list">
+        {entries.map(([status, count], index) => <li key={status}><span><i aria-hidden="true" className="dot" style={{ backgroundColor: statusColors[index % statusColors.length] }} />{orderStatusLabels[status] ?? status}</span><strong>{count}</strong></li>)}
+        {total === 0 ? <li><span><i aria-hidden="true" className="dot dot--empty" />Chưa có đơn</span><strong>0</strong></li> : null}
+      </ul>
+    </div>
+  )
+}
 
 function startForPeriod(period: string) {
   const now = new Date()
@@ -54,6 +106,10 @@ export function AdminDashboardPage() {
   }, [orders])
   const maxDaily = Math.max(1, ...daily.map(([, value]) => value))
   const statuses = useMemo(() => orders.reduce<Record<string, number>>((result, order) => ({ ...result, [order.status]: (result[order.status] ?? 0) + 1 }), {}), [orders])
+  const statusEntries = useMemo(() => Object.entries(statuses).sort(([first], [second]) => {
+    const order = Object.keys(orderStatusLabels)
+    return order.indexOf(first) - order.indexOf(second)
+  }), [statuses])
 
   return (
     <main className="admin-main" id="main-content">
@@ -69,7 +125,7 @@ export function AdminDashboardPage() {
       </section>
       <div className="dashboard-grid">
         <section className="dashboard-panel dashboard-panel--wide"><div className="panel-heading"><div><h2>Doanh thu theo ngày</h2><p>{daily.length} ngày có dữ liệu trong kỳ</p></div></div><div aria-label="Biểu đồ doanh thu theo ngày" className="sales-chart" role="img">{daily.map(([date, value]) => <div className="sales-chart__column" key={date}><span className="sales-chart__value">{Math.round(value / 1000000)}</span><span className="sales-chart__bar" style={{ height: String(Math.round((value / maxDaily) * 100)) + '%' }} /><small>{date.slice(8)}</small></div>)}</div></section>
-        <section className="dashboard-panel"><div className="panel-heading"><div><h2>Trạng thái đơn</h2><p>{orders.length} đơn trong kỳ</p></div></div><ul className="status-list">{Object.entries(statuses).map(([status, count]) => <li key={status}><span>{orderStatusLabels[status] ?? status}</span><strong>{count}</strong></li>)}{orders.length === 0 ? <li><span>Chưa có đơn</span><strong>0</strong></li> : null}</ul></section>
+        <section className="dashboard-panel"><div className="panel-heading"><div><h2>Trạng thái đơn</h2><p>{orders.length} đơn trong kỳ</p></div></div><OrderStatusDonut entries={statusEntries} total={orders.length} /></section>
         <section className="dashboard-panel dashboard-panel--wide"><div className="panel-heading"><div><h2>Hành động cần xử lý</h2><p>Ưu tiên theo mức ảnh hưởng vận hành</p></div></div><div className="dashboard-actions"><Link to="/admin/orders"><strong>{orders.filter((order) => ['pending_payment', 'paid', 'processing'].includes(order.status)).length}</strong><span>Đơn cần xử lý</span></Link><Link to="/admin/inventory"><strong>{outOfStock + lowStock}</strong><span>SKU cần bổ sung</span></Link><Link to="/admin/products"><strong>{inventory.length}</strong><span>SKU đang theo dõi</span></Link></div></section>
         <section className="dashboard-panel"><div className="panel-heading"><div><h2>Giá trị tồn kho</h2><p>Theo giá vốn hiện có</p></div></div><strong className="inventory-value">{formatVnd(stockValue)}</strong><p className="panel-footnote">{inventory.reduce((sum, item) => sum + item.on_hand, 0)} sản phẩm thực tế · {reserved} đang reserve</p></section>
       </div>

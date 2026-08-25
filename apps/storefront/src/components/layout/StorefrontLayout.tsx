@@ -18,7 +18,7 @@ const SearchOverlay = lazy(() => import('../commerce/SearchOverlay').then((modul
 const megaColumns = [
   { title: 'Mua sắm', links: [['Sản phẩm mới', '/collections/new'], ['Bán chạy', '/collections/best-sellers'], ['Giày nữ', '/women'], ['Giày nam', '/men']] },
   { title: 'Theo danh mục', links: [['Giày', '/collections/shoes'], ['Trang phục', '/collections/apparel'], ['Tất & phụ kiện', '/collections/accessories'], ['Tất cả sản phẩm', '/search']] },
-  { title: 'Câu chuyện', links: [['Về HORIZ', '/about'], ['Chất liệu', '/materials'], ['Đổi trả', '/returns'], ['Trợ giúp', '/help']] },
+  { title: 'Câu chuyện', links: [['Về chúng tôi', '/about'], ['Chất liệu', '/materials'], ['Đổi trả', '/returns'], ['Trợ giúp', '/help']] },
 ] as const
 
 export function StorefrontLayout() {
@@ -105,7 +105,7 @@ export function StorefrontLayout() {
             {newsletterMessage ? <p aria-live="polite" className="newsletter-message">{newsletterMessage}</p> : null}
           </section>
           <nav aria-label="Liên kết cuối trang" className="footer-links">
-            <div><strong>Khám phá</strong><Link to="/women">Nữ</Link><Link to="/men">Nam</Link><Link to="/materials">Chất liệu</Link><Link to="/about">Về HORIZ</Link></div>
+            <div><strong>Khám phá</strong><Link to="/women">Nữ</Link><Link to="/men">Nam</Link><Link to="/materials">Chất liệu</Link><Link to="/about">Về chúng tôi</Link></div>
             <div><strong>Hỗ trợ</strong><Link to="/help">Liên hệ</Link><Link to="/returns">Đổi trả</Link><Link to="/privacy">Quyền riêng tư</Link><Link to="/terms">Điều khoản</Link></div>
             <div><strong>Tài khoản</strong><Link to={user ? '/account' : '/login'}>{user ? 'Tài khoản của tôi' : 'Đăng nhập'}</Link><Link to="/register">Đăng ký thành viên</Link>{role === 'admin' ? <Link to="/admin/dashboard">Administrator</Link> : null}</div>
           </nav>

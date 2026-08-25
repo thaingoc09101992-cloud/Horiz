@@ -33,6 +33,9 @@ const AdminPlaceholderPage = lazy(() =>
     default: module.AdminPlaceholderPage,
   })),
 )
+const AdminThemePage = lazy(() =>
+  import('../routes/admin/AdminThemePage').then((module) => ({ default: module.AdminThemePage })),
+)
 
 export function App() {
   return (
@@ -70,6 +73,7 @@ export function App() {
             <Route path="admin" element={<AdminLayout />}>
               <Route index element={<Navigate replace to="dashboard" />} />
               <Route path="dashboard" element={<AdminDashboardPage />} />
+              <Route path="theme" element={<AdminThemePage />} />
               <Route path=":section" element={<AdminPlaceholderPage />} />
             </Route>
           </Route>

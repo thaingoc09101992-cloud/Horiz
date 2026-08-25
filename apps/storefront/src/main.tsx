@@ -12,6 +12,7 @@ import '@fontsource/manrope/vietnamese-700.css'
 import { App } from './app/App'
 import { AuthProvider } from './features/auth/AuthProvider'
 import { CartProvider } from './features/cart/CartProvider'
+import { ThemeProvider } from './features/theme/ThemeProvider'
 import './styles/global.css'
 
 const root = document.getElementById('root')
@@ -23,9 +24,11 @@ if (!root) {
 createRoot(root).render(
   <StrictMode>
     <BrowserRouter>
-      <AuthProvider>
-        <CartProvider><App /></CartProvider>
-      </AuthProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <CartProvider><App /></CartProvider>
+        </AuthProvider>
+      </ThemeProvider>
     </BrowserRouter>
   </StrictMode>,
 )
