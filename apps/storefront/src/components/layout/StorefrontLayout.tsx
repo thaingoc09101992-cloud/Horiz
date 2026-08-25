@@ -94,25 +94,23 @@ export function StorefrontLayout() {
       <Outlet />
 
       <footer className="storefront-footer">
-        <section aria-labelledby="footer-newsletter-title" className="footer-newsletter">
-          <div className="footer-newsletter__inner">
-            <p className="eyebrow">Bản tin HORIZ</p>
-            <h2 id="footer-newsletter-title">Nhận tin mới từ HORIZ</h2>
-            <p className="footer-newsletter__description">Sản phẩm mới, bộ sưu tập và ưu đãi được gửi vừa đủ.</p>
+        <div className="footer-main">
+          <section aria-label="Đăng ký nhận bản tin" className="footer-newsletter">
+            <Wordmark />
+            <p className="footer-newsletter__description">Nhận thông tin mới nhất</p>
             <form className="newsletter-form" onSubmit={(event) => void subscribe(event)}>
               <label className="sr-only" htmlFor="newsletter-email">Email nhận bản tin</label>
               <input id="newsletter-email" onChange={(event) => setNewsletterEmail(event.target.value)} placeholder="Email của bạn" required type="email" value={newsletterEmail} />
               <button className="button button--light" type="submit">Đăng ký</button>
             </form>
             {newsletterMessage ? <p aria-live="polite" className="newsletter-message">{newsletterMessage}</p> : null}
-          </div>
-        </section>
-        <nav aria-label="Liên kết cuối trang" className="footer-links">
-          <Wordmark />
-          <div><strong>Khám phá</strong><Link to="/women">Nữ</Link><Link to="/men">Nam</Link><Link to="/materials">Chất liệu</Link><Link to="/about">Về HORIZ</Link></div>
-          <div><strong>Hỗ trợ</strong><Link to="/help">Liên hệ</Link><Link to="/returns">Đổi trả</Link><Link to="/privacy">Quyền riêng tư</Link><Link to="/terms">Điều khoản</Link></div>
-          <div><strong>Tài khoản</strong><Link to={user ? '/account' : '/login'}>{user ? 'Tài khoản của tôi' : 'Đăng nhập'}</Link><Link to="/register">Đăng ký thành viên</Link>{role === 'admin' ? <Link to="/admin/dashboard">Administrator</Link> : null}</div>
-        </nav>
+          </section>
+          <nav aria-label="Liên kết cuối trang" className="footer-links">
+            <div><strong>Khám phá</strong><Link to="/women">Nữ</Link><Link to="/men">Nam</Link><Link to="/materials">Chất liệu</Link><Link to="/about">Về HORIZ</Link></div>
+            <div><strong>Hỗ trợ</strong><Link to="/help">Liên hệ</Link><Link to="/returns">Đổi trả</Link><Link to="/privacy">Quyền riêng tư</Link><Link to="/terms">Điều khoản</Link></div>
+            <div><strong>Tài khoản</strong><Link to={user ? '/account' : '/login'}>{user ? 'Tài khoản của tôi' : 'Đăng nhập'}</Link><Link to="/register">Đăng ký thành viên</Link>{role === 'admin' ? <Link to="/admin/dashboard">Administrator</Link> : null}</div>
+          </nav>
+        </div>
         <p className="footer-legal">© 2026 HORIZ. Thiết kế cho chuyển động tự nhiên.</p>
       </footer>
       {searchOpen ? <SearchOverlay onClose={() => setSearchOpen(false)} open /> : null}
