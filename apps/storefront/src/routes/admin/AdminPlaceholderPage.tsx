@@ -10,6 +10,7 @@ type AdminRow = {
   secondary: string
   status: string
   value: string
+  imageUrl?: string
   rawValue?: number
 }
 
@@ -48,9 +49,16 @@ export function AdminPlaceholderPage() {
     try {
       let next: AdminRow[] = []
       if (section === 'products') {
-        const { data, error } = await supabase.from('products').select('id,name,slug,status,featured,updated_at').order('updated_at', { ascending: false }).limit(200)
+        const { data, error } = await supabase.from('products').select('id,name,slug,source_key,status,featured,updated_at').order('updated_at', { ascending: false }).limit(200)
         if (error) throw error
-        next = (data ?? []).map((item) => ({ id: item.id, primary: item.name, secondary: item.slug, status: item.status, value: item.featured ? 'Nổi bật' : 'Tiêu chuẩn' }))
+        next = (data ?? []).map((item) => ({
+          id: item.id,
+          primary: item.name,
+          secondary: item.slug,
+          status: item.status,
+          value: item.featured ? 'Nổi bật' : 'Tiêu chuẩn',
+          imageUrl: item.source_key ? '/catalogue/' + item.source_key + '-01.jpg' : undefined,
+        }))
       } else if (section === 'inventory') {
         const { data, error } = await supabase.from('inventory_items').select('variant_id,on_hand,reserved,reorder_level,product_variants(sku,title,products(name))').order('updated_at', { ascending: false }).limit(250)
         if (error) throw error
@@ -68,9 +76,23 @@ export function AdminPlaceholderPage() {
         if (error) throw error
         next = (data ?? []).map((item) => ({ id: item.id, primary: item.order_number, secondary: item.email, status: item.status, value: formatVnd(item.grand_total), rawValue: item.grand_total }))
       } else if (section === 'members') {
-        const [{ data: profiles, error }, { data: statuses }, { data: roles }] = await Promise.all([supabase.from('profiles').select('id,full_name,phone,created_at').order('created_at', { ascending: false }).limit(200), supabase.from('member_status').select('user_id,status'), supabase.from('user_roles').select('user_id,role,revoked_at').is('revoked_at', null)])
-        if (error) throw error
-        next = (profiles ?? []).map((item) => ({ id: item.id, primary: item.full_name || 'Thành viên HORIZ', secondary: item.phone || item.id.slice(0, 8), status: statuses?.find((status) => status.user_id === item.id)?.status ?? 'active', value: roles?.find((role) => role.user_id === item.id)?.role ?? 'customer' }))
+        const [profileResult, statusResult, roleResult] = await Promise.all([
+          supabase.from('profiles').select('id,email,full_name,phone,created_at').order('created_at', { ascending: false }).limit(200),
+          supabase.from('member_status').select('user_id,status'),
+          supabase.from('user_roles').select('user_id,role,revoked_at').is('revoked_at', null),
+        ])
+        if (profileResult.error) throw profileResult.error
+        if (statusResult.error) throw statusResult.error
+        if (roleResult.error) throw roleResult.error
+        const statuses = new Map((statusResult.data ?? []).map((item) => [item.user_id, item.status]))
+        const roles = new Map((roleResult.data ?? []).map((item) => [item.user_id, item.role]))
+        next = (profileResult.data ?? []).map((item) => ({
+          id: item.id,
+          primary: item.full_name || item.email || 'Thành viên HORIZ',
+          secondary: item.full_name ? [item.email, item.phone].filter(Boolean).join(' · ') : item.phone || 'Tài khoản khách hàng',
+          status: statuses.get(item.id) ?? 'active',
+          value: roles.get(item.id) ?? 'customer',
+        }))
       } else if (section === 'content') {
         const { data, error } = await supabase.from('content_sections').select('id,page_key,type,active,position,updated_at').order('page_key').order('position')
         if (error) throw error
@@ -137,6 +159,7 @@ export function AdminPlaceholderPage() {
   const canCreate = ['products', 'discounts', 'content'].includes(section)
   const canDelete = ['products', 'discounts', 'content'].includes(section)
   const canEdit = section !== 'audit-logs'
+  const showsProductImages = section === 'products'
 
   return (
     <main className="admin-main" id="main-content">
@@ -144,10 +167,22 @@ export function AdminPlaceholderPage() {
       <section className="dashboard-panel admin-data-panel">
         <div className="admin-data-toolbar"><label><span className="sr-only">Tìm trong {label}</span><input onChange={(event) => setQuery(event.target.value)} placeholder={'Tìm trong ' + label.toLowerCase() + '…'} type="search" value={query} /></label><button aria-label="Tải lại" className="icon-button" onClick={() => void load()} type="button"><RefreshCw aria-hidden="true" /></button></div>
         {message ? <p className="form-message form-message--neutral" role="status">{message}</p> : null}
-        {loading ? <p className="admin-empty">Đang tải dữ liệu…</p> : visibleRows.length === 0 ? <p className="admin-empty">Chưa có dữ liệu phù hợp.</p> : <div className="table-wrap"><table><thead><tr><th>{section === 'orders' ? 'Mã đơn' : label}</th><th>Thông tin</th><th>Trạng thái</th><th>Giá trị</th><th><span className="sr-only">Thao tác</span></th></tr></thead><tbody>{visibleRows.map((row) => <tr key={row.id}><td><strong>{row.primary}</strong></td><td><small>{row.secondary}</small></td><td><span className="status-badge">{row.status}</span></td><td>{row.value}</td><td><div className="row-actions">{canEdit ? <button aria-label={'Sửa ' + row.primary} onClick={() => setEditor(row)} type="button"><Edit3 aria-hidden="true" /></button> : null}{canDelete ? <button aria-label={'Xóa ' + row.primary} onClick={() => void remove(row)} type="button"><Trash2 aria-hidden="true" /></button> : null}</div></td></tr>)}</tbody></table></div>}
+        {loading ? <p className="admin-empty">Đang tải dữ liệu…</p> : visibleRows.length === 0 ? <p className="admin-empty">Chưa có dữ liệu phù hợp.</p> : <div className="table-wrap"><table className={showsProductImages ? 'admin-table admin-table--products' : 'admin-table'}><thead><tr>{showsProductImages ? <th className="admin-image-column">Ảnh</th> : null}<th>{section === 'orders' ? 'Mã đơn' : label}</th><th>Trạng thái</th><th>Giá trị</th><th><span className="sr-only">Thao tác</span></th></tr></thead><tbody>{visibleRows.map((row) => <tr key={row.id}>{showsProductImages ? <td className="admin-image-column"><ProductThumbnail name={row.primary} src={row.imageUrl} /></td> : null}<td><strong>{row.primary}</strong></td><td><span className="status-badge">{row.status}</span></td><td>{row.value}</td><td><div className="row-actions">{canEdit ? <button aria-label={'Sửa ' + row.primary} onClick={() => setEditor(row)} type="button"><Edit3 aria-hidden="true" /></button> : null}{canDelete ? <button aria-label={'Xóa ' + row.primary} onClick={() => void remove(row)} type="button"><Trash2 aria-hidden="true" /></button> : null}</div></td></tr>)}</tbody></table></div>}
       </section>
       {editor ? <div aria-modal="true" className="dialog-backdrop" role="dialog"><form className="admin-editor" onSubmit={(event) => void save(event)}><button aria-label="Đóng" className="icon-button" onClick={() => setEditor(null)} type="button"><X aria-hidden="true" /></button><p className="eyebrow">{editor === 'create' ? 'Tạo bản ghi' : 'Cập nhật'}</p><h2>{editor === 'create' ? 'Thêm ' + label.toLowerCase() : editor.primary}</h2>{editor === 'create' ? <><label className="field"><span>{section === 'content' ? 'Khóa trang' : 'Tên'}</span><input name="name" required /></label>{section !== 'products' ? <label className="field"><span>{section === 'discounts' ? 'Giá trị giảm (₫)' : 'Loại nội dung'}</span><input name="value" required /></label> : null}</> : <EditorFields row={editor} section={section} />}<button className="button button--primary button--wide" type="submit">Lưu thay đổi <ArrowRight aria-hidden="true" /></button></form></div> : null}
     </main>
+  )
+}
+
+function ProductThumbnail({ name, src }: { name: string; src?: string }) {
+  const [failed, setFailed] = useState(false)
+
+  return (
+    <span className="admin-product-image">
+      {src && !failed
+        ? <img alt={name} height="64" loading="lazy" onError={() => setFailed(true)} src={src} width="64" />
+        : <span aria-hidden="true">H</span>}
+    </span>
   )
 }
 
