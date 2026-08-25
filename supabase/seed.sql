@@ -1,0 +1,2 @@
+-- Phase 1 intentionally has no account or commerce seed data.
+-- Create test users through Supabase Auth so auth.users remains the source of truth.

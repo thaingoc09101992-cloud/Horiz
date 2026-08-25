@@ -1,0 +1,26 @@
+{
+  "name": "horiz-commerce",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "workers/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace @horiz/storefront",
+    "build": "npm run build:sitemap && npm run build --workspace @horiz/storefront",
+    "build:sitemap": "node scripts/build-sitemap.mjs",
+    "typecheck": "npm run typecheck --workspace @horiz/storefront",
+    "lint": "npm run lint --workspace @horiz/storefront",
+    "test": "npm run test --workspace @horiz/storefront",
+    "check": "npm run lint && npm run typecheck && npm run test && npm run build"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "devDependencies": {
+    "supabase": "2.115.0"
+  }
+}
