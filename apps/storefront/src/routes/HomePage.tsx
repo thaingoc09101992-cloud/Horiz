@@ -1,7 +1,7 @@
-import { ArrowRight, Leaf, MoveRight, Recycle, Wind } from 'lucide-react'
+import { ArrowRight, ChevronLeft, ChevronRight, Leaf, MoveRight, Recycle, Wind } from 'lucide-react'
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { Link } from 'react-router'
-import { useHeroParallax, useRevealMotion } from '../features/motion/useMotion'
+import { useHeroParallax, useRevealMotion, useTextParallax } from '../features/motion/useMotion'
 import { formatVnd } from '../lib/format'
 import { supabase } from '../lib/supabase'
 
@@ -23,9 +23,34 @@ const revealDelay = (index: number) => ({ '--reveal-index': index } as CSSProper
 export function HomePage() {
   const [heroCopy, setHeroCopy] = useState({ eyebrow: 'HORIZ / NEW SEASON', title: 'Nhẹ bước theo cách của bạn', description: 'Thiết kế linh hoạt, thoáng nhẹ cho mọi chuyển động thường ngày.' })
   const homeRef = useRef<HTMLElement>(null)
+  const productTrackRef = useRef<HTMLDivElement>(null)
+  const [canScrollPrev, setCanScrollPrev] = useState(false)
+  const [canScrollNext, setCanScrollNext] = useState(false)
 
   useRevealMotion(homeRef)
   useHeroParallax(homeRef)
+  useTextParallax(homeRef)
+
+  const updateProductScrollState = () => {
+    const track = productTrackRef.current
+    if (!track) return
+    setCanScrollPrev(track.scrollLeft > 4)
+    setCanScrollNext(track.scrollLeft + track.clientWidth < track.scrollWidth - 4)
+  }
+
+  useEffect(() => {
+    updateProductScrollState()
+    window.addEventListener('resize', updateProductScrollState)
+    return () => window.removeEventListener('resize', updateProductScrollState)
+  }, [])
+
+  const scrollProducts = (direction: 1 | -1) => {
+    const track = productTrackRef.current
+    if (!track) return
+    const card = track.querySelector<HTMLElement>('.ab-product-card')
+    const amount = (card?.offsetWidth ?? track.clientWidth * 0.8) + 16
+    track.scrollBy({ left: amount * direction, behavior: 'smooth' })
+  }
 
   useEffect(() => {
     if (!supabase) return
@@ -69,18 +94,38 @@ export function HomePage() {
           <div><p className="ab-kicker">Được yêu thích nhất</p><h2>Best Sellers</h2></div>
           <Link className="ab-inline-link" to="/collections/best-sellers">Xem tất cả <MoveRight aria-hidden="true" /></Link>
         </div>
-        <div className="ab-product-grid">
-          {products.map((product, index) => (
-            <article className="ab-product-card" data-reveal key={product.name} style={revealDelay(index)}>
-              <Link to={`/products/${product.name.toLowerCase().replace(' ', '-')}`}>
-                <div className="ab-product-card__image">
-                  <img alt={product.name} src={product.image} />
-                  {index === 0 ? <span>Mới</span> : null}
-                </div>
-                <h3>{product.name}</h3><p>{product.note}</p><strong>{formatVnd(product.price)}</strong>
-              </Link>
-            </article>
-          ))}
+        <div className="ab-product-carousel">
+          <button
+            aria-label="Xem sản phẩm trước"
+            className="ab-carousel-nav ab-carousel-nav--prev"
+            disabled={!canScrollPrev}
+            onClick={() => scrollProducts(-1)}
+            type="button"
+          >
+            <ChevronLeft aria-hidden="true" />
+          </button>
+          <div className="ab-product-grid" onScroll={updateProductScrollState} ref={productTrackRef}>
+            {products.map((product, index) => (
+              <article className="ab-product-card" data-reveal key={product.name} style={revealDelay(index)}>
+                <Link to={`/products/${product.name.toLowerCase().replace(' ', '-')}`}>
+                  <div className="ab-product-card__image">
+                    <img alt={product.name} src={product.image} />
+                    {index === 0 ? <span>Mới</span> : null}
+                  </div>
+                  <h3>{product.name}</h3><p>{product.note}</p><strong>{formatVnd(product.price)}</strong>
+                </Link>
+              </article>
+            ))}
+          </div>
+          <button
+            aria-label="Xem sản phẩm tiếp theo"
+            className="ab-carousel-nav ab-carousel-nav--next"
+            disabled={!canScrollNext}
+            onClick={() => scrollProducts(1)}
+            type="button"
+          >
+            <ChevronRight aria-hidden="true" />
+          </button>
         </div>
       </section>
 
@@ -105,7 +150,7 @@ export function HomePage() {
       </section>
 
       <section className="ab-benefits">
-        {benefits.map(({ icon: Icon, title, copy }, index) => <article data-reveal key={title} style={revealDelay(index)}><Icon aria-hidden="true" /><h3>{title}</h3><p>{copy}</p></article>)}
+        {benefits.map(({ icon: Icon, title, copy }, index) => <article data-reveal key={title} style={revealDelay(index)}><Icon aria-hidden="true" strokeWidth={0.8} /><h3>{title}</h3><p>{copy}</p></article>)}
       </section>
     </main>
   )
