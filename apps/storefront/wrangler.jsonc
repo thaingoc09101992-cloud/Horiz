@@ -3,7 +3,7 @@
   // Builds project (Dashboard → your project → Settings → General). A
   // mismatch deploys to (or creates) a different Worker than the one
   // connected to this GitHub repo.
-  "name": "horiz-storefront",
+  "name": "horiz",
   "compatibility_date": "2026-08-26",
   // No "main" — this is a pure static build, nothing runs server-side.
   // `wrangler deploy` serves everything straight out of the assets dir.
