@@ -199,6 +199,8 @@ svg { width: 1.15rem; height: 1.15rem; }
 .admin-search { display: flex; width: min(480px, 45vw); align-items: center; gap: .6rem; color: var(--muted); }
 .admin-search input { width: 100%; border: 0; outline: 0; background: transparent; color: var(--text); font-size: .8rem; }
 .admin-topbar__actions { display: flex; align-items: center; gap: 1rem; }
+.admin-bell-button { position: relative; }
+.admin-bell-button span { position: absolute; right: 2px; top: 2px; display: grid; width: 17px; height: 17px; place-items: center; border-radius: var(--radius-round); background: var(--danger); color: #fff; font-size: .58rem; font-weight: 700; }
 .admin-user { display: flex; align-items: center; gap: .7rem; }
 .admin-user__avatar { display: grid; width: 36px; height: 36px; place-items: center; border-radius: var(--radius-round); background: var(--brand); color: var(--brand-contrast); font-size: .75rem; font-weight: 700; }
 .admin-user div { display: flex; flex-direction: column; }
@@ -226,8 +228,9 @@ svg { width: 1.15rem; height: 1.15rem; }
 .stock-alert a { font-size: .68rem; font-weight: 700; text-decoration: underline; }
 .stock-alert--danger svg { color: var(--danger); }
 .stock-alert--warning svg { color: var(--warning); }
-.dashboard-grid { display: grid; grid-template-columns: minmax(0, 1.8fr) minmax(300px, .8fr); gap: 1rem; }
+.dashboard-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
 .dashboard-panel { min-width: 0; padding: 1.4rem; }
+.dashboard-panel--wide { grid-column: span 2; }
 .panel-heading { display: flex; align-items: start; justify-content: space-between; gap: 1rem; }
 .panel-heading h2 { margin: 0; font-size: .95rem; }
 .panel-heading p { margin: .35rem 0 0; color: var(--muted); font-size: .65rem; }
@@ -422,9 +425,9 @@ td small { margin-top: .25rem; color: var(--muted); }
 .mega-menu section a { font-size: .82rem; font-weight: 600; }
 .mega-menu section a:hover { color: var(--accent); }
 .mega-menu__feature { position: relative; min-height: 210px; overflow: hidden; border-radius: var(--radius-md); color: #fff; }
-.mega-menu__feature::after { position: absolute; inset: 35% 0 0; background: linear-gradient(transparent, rgb(0 0 0 / .7)); content: ''; }
+.mega-menu__feature::after { position: absolute; inset: 0; background: linear-gradient(100deg, rgb(17 17 17 / .68) 0%, rgb(17 17 17 / .45) 30%, rgb(17 17 17 / 0) 56%); content: ''; }
 .mega-menu__feature img { width: 100%; height: 100%; object-fit: cover; }
-.mega-menu__feature span { position: absolute; z-index: 1; right: 1.5rem; bottom: 1.4rem; left: 1.5rem; display: flex; flex-direction: column; gap: .4rem; }
+.mega-menu__feature span { position: absolute; z-index: 1; bottom: 1.4rem; left: 1.5rem; max-width: 55%; display: flex; flex-direction: column; gap: .4rem; }
 .mega-menu__feature small { font-size: .6rem; letter-spacing: .15em; }
 .account-menu { position: relative; }
 .account-popover { position: absolute; top: calc(100% + 12px); right: 0; display: flex; width: 280px; align-items: stretch; transform-origin: top right; flex-direction: column; gap: .8rem; padding: 1.25rem; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface-raised); box-shadow: var(--shadow-card); }
@@ -483,7 +486,6 @@ td small { margin-top: .25rem; color: var(--muted); }
 .search-results__toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; color: var(--muted); font-size: .72rem; }
 .search-results__toolbar label { display: inline-flex; align-items: center; gap: .7rem; }
 .search-product-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
-.search-product-grid > article, .catalogue-grid > article { content-visibility: auto; contain-intrinsic-size: 360px 440px; }
 .search-product-grid h2 { margin: 1rem 0 .2rem; font-size: .9rem; }
 .load-more { display: flex; margin: 3rem auto 0; }
 .empty-state { display: flex; min-height: 420px; align-items: center; justify-content: center; flex-direction: column; text-align: center; }

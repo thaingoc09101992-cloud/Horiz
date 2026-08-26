@@ -1,5 +1,6 @@
 import {
   BadgePercent,
+  Bell,
   Boxes,
   ChevronLeft,
   CircleDollarSign,
@@ -14,10 +15,22 @@ import {
   UsersRound,
   X,
 } from 'lucide-react'
-import { useState } from 'react'
-import { NavLink, Outlet } from 'react-router'
+import { useCallback, useEffect, useState } from 'react'
+import { Link, NavLink, Outlet } from 'react-router'
 import { Wordmark } from '../../components/brand/Wordmark'
 import { useAuth } from '../../features/auth/AuthProvider'
+import { supabase } from '../../lib/supabase'
+
+const ORDERS_LAST_SEEN_KEY = 'horiz-admin-orders-last-seen:v1'
+const DEFAULT_LOOKBACK_MS = 24 * 60 * 60 * 1000
+
+function readOrdersLastSeen(): string {
+  try {
+    return window.localStorage.getItem(ORDERS_LAST_SEEN_KEY) ?? new Date(Date.now() - DEFAULT_LOOKBACK_MS).toISOString()
+  } catch {
+    return new Date(Date.now() - DEFAULT_LOOKBACK_MS).toISOString()
+  }
+}
 
 const adminNav = [
   { label: 'Tổng quan', href: '/admin/dashboard', icon: LayoutDashboard },
@@ -34,7 +47,32 @@ const adminNav = [
 
 export function AdminLayout() {
   const [navOpen, setNavOpen] = useState(false)
+  const [newOrderCount, setNewOrderCount] = useState(0)
   const { signOut, user } = useAuth()
+
+  const refreshNewOrders = useCallback(async () => {
+    if (!supabase) return
+    const { count } = await supabase.from('orders').select('id', { count: 'exact', head: true }).gt('created_at', readOrdersLastSeen())
+    setNewOrderCount(count ?? 0)
+  }, [])
+
+  useEffect(() => {
+    const initial = window.setTimeout(() => void refreshNewOrders(), 0)
+    const interval = window.setInterval(() => void refreshNewOrders(), 60000)
+    return () => {
+      window.clearTimeout(initial)
+      window.clearInterval(interval)
+    }
+  }, [refreshNewOrders])
+
+  const markOrdersSeen = () => {
+    try {
+      window.localStorage.setItem(ORDERS_LAST_SEEN_KEY, new Date().toISOString())
+    } catch {
+      // Notification state is best-effort; nothing to do if storage is unavailable.
+    }
+    setNewOrderCount(0)
+  }
 
   return (
     <div className="admin-shell">
@@ -73,6 +111,15 @@ export function AdminLayout() {
             <input placeholder="Tìm sản phẩm, đơn hàng, thành viên…" type="search" />
           </label>
           <div className="admin-topbar__actions">
+            <Link
+              aria-label={newOrderCount > 0 ? `Đơn hàng mới, ${newOrderCount} đơn chưa xem` : 'Đơn hàng'}
+              className="icon-button admin-bell-button"
+              onClick={markOrdersSeen}
+              to="/admin/orders"
+            >
+              <Bell aria-hidden="true" />
+              {newOrderCount > 0 ? <span>{newOrderCount > 9 ? '9+' : newOrderCount}</span> : null}
+            </Link>
             <div className="admin-user">
               <span className="admin-user__avatar">{user?.email?.slice(0, 1).toUpperCase() ?? 'A'}</span>
               <div><strong>Admin HORIZ</strong><small>{user?.email}</small></div>
