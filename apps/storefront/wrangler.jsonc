@@ -1,8 +1,7 @@
 {
-  // TODO: this must match the exact name of your existing Cloudflare Workers
-  // Builds project (Dashboard → your project → Settings → General). A
-  // mismatch deploys to (or creates) a different Worker than the one
-  // connected to this GitHub repo.
+  // Must match the Cloudflare Workers Builds project name exactly
+  // (Dashboard → your project → Settings → General) — a mismatch deploys
+  // to (or creates) a different Worker than the one connected to this repo.
   "name": "horiz",
   "compatibility_date": "2026-08-26",
   // No "main" — this is a pure static build, nothing runs server-side.
@@ -10,8 +9,11 @@
   "assets": {
     "directory": "./dist",
     // All unmatched paths fall back to index.html so React Router's
-    // client-side routes (e.g. /products/:id) resolve correctly — the
-    // Worker-native equivalent of the public/_redirects catch-all.
+    // client-side routes (e.g. /products/:id) resolve correctly. There is
+    // no public/_redirects file — a `/* /index.html 200` rule there gets
+    // rejected by Cloudflare's asset-upload validator as a false-positive
+    // "infinite loop" (cloudflare/workers-sdk#11824) once this native
+    // setting is already handling the same fallback.
     "not_found_handling": "single-page-application"
   }
 }

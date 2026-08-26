@@ -26,7 +26,7 @@ Project này deploy qua **Workers Builds** (không phải Pages cổ điển) �
 - `name` trong `wrangler.jsonc` **phải khớp chính xác** tên project Workers đã tạo trên dashboard — lệch tên sẽ deploy nhầm/tạo Worker mới.
 - Build command vẫn để `npm run build` (chạy từ gốc repo, ra `apps/storefront/dist`) — không cần đổi thành build riêng cho `apps/storefront` dù Root directory đã trỏ vào đó.
 - `npm run build` **không** chạy lại `scripts/build-sitemap.mjs` mỗi lần deploy. `sitemap.xml` là file tĩnh đã commit sẵn — nhớ chạy `node scripts/build-sitemap.mjs` ở local rồi commit lại mỗi khi catalogue đổi.
-- SPA fallback còn dự phòng thêm ở `apps/storefront/public/_redirects`; security/cache headers tại `apps/storefront/public/_headers` (cả 2 file này vẫn được Workers Assets đọc, hoạt động y hệt Pages).
+- **Không dùng `public/_redirects`** cho SPA fallback (đã xoá) — một rule kiểu `/* /index.html 200` bị API upload asset của Cloudflare từ chối vì báo nhầm "infinite loop" ([cloudflare/workers-sdk#11824](https://github.com/cloudflare/workers-sdk/issues/11824)), trong khi `not_found_handling` trong `wrangler.jsonc` đã lo phần này rồi nên file đó chỉ thừa và gây lỗi. Nếu cần rule redirect thật (không phải SPA fallback) thì thêm `public/_redirects` lại nhưng đừng đụng route `/*`. `_headers` (security/cache headers) vẫn giữ nguyên ở `apps/storefront/public/_headers`, Workers Assets đọc y hệt Pages, không bị ảnh hưởng.
 - Secrets đặt trong Cloudflare dashboard/secret store, không dùng biến `VITE_*` cho secret.
 - Custom domain, TLS, cache rules, compression và security headers.
 - Production deploy chỉ từ `main`; preview từ PR.
