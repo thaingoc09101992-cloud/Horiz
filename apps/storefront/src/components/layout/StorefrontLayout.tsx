@@ -29,6 +29,7 @@ export function StorefrontLayout() {
   const [accountOpen, setAccountOpen] = useState(false)
   const [newsletterEmail, setNewsletterEmail] = useState('')
   const [newsletterMessage, setNewsletterMessage] = useState('')
+  const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
   const { role, signOut, user } = useAuth()
   const { itemCount } = useCart()
@@ -43,6 +44,13 @@ export function StorefrontLayout() {
       setAccountOpen(false)
     })
   }, [location.pathname])
+
+  useEffect(() => {
+    const updateScrolled = () => setScrolled(window.scrollY > 4)
+    updateScrolled()
+    window.addEventListener('scroll', updateScrolled, { passive: true })
+    return () => window.removeEventListener('scroll', updateScrolled)
+  }, [])
 
   const subscribe = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -60,7 +68,7 @@ export function StorefrontLayout() {
 
   return (
     <div className="storefront-shell">
-      <header className="storefront-header">
+      <header className={`storefront-header${scrolled ? ' is-scrolled' : ''}`}>
         <div className="storefront-header__inner">
           <button aria-expanded={menuOpen} aria-label={menuOpen ? 'Đóng menu' : 'Mở menu'} className="icon-button mobile-menu-button" onClick={() => setMenuOpen((open) => !open)} type="button">
             {menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
@@ -109,9 +117,9 @@ export function StorefrontLayout() {
             {newsletterMessage ? <p aria-live="polite" className="newsletter-message">{newsletterMessage}</p> : null}
           </section>
           <nav aria-label="Liên kết cuối trang" className="footer-links">
-            <div><strong>Khám phá</strong><Link to="/women">Nữ</Link><Link to="/men">Nam</Link><Link to="/materials">Chất liệu</Link><Link to="/about">Về chúng tôi</Link></div>
-            <div><strong>Hỗ trợ</strong><Link to="/help">Liên hệ</Link><Link to="/returns">Đổi trả</Link><Link to="/privacy">Quyền riêng tư</Link><Link to="/terms">Điều khoản</Link></div>
-            <div><strong>Tài khoản</strong><Link to={user ? '/account' : '/login'}>{user ? 'Tài khoản của tôi' : 'Đăng nhập'}</Link><Link to="/register">Đăng ký thành viên</Link>{role === 'admin' ? <Link to="/admin/dashboard">Administrator</Link> : null}</div>
+            <div><strong>Mua sắm</strong><Link to="/men">Nam</Link><Link to="/women">Nữ</Link><Link to="/collections/new">Sản phẩm mới</Link></div>
+            <div><strong>Về HORIZ</strong><Link to="/about">Câu chuyện</Link><Link to="/materials">Chất liệu</Link></div>
+            <div><strong>Chăm sóc khách hàng</strong><Link to="/help">Liên hệ</Link><Link to="/returns">Đổi trả</Link><Link to="/privacy">Quyền riêng tư</Link><Link to="/terms">Điều khoản</Link><Link to={user ? '/account' : '/login'}>{user ? 'Tài khoản của tôi' : 'Đăng nhập'}</Link>{user ? null : <Link to="/register">Đăng ký thành viên</Link>}{role === 'admin' ? <Link to="/admin/dashboard">Administrator</Link> : null}</div>
           </nav>
         </div>
         <p className="footer-legal">© 2026 HORIZ. Thiết kế cho chuyển động tự nhiên.</p>

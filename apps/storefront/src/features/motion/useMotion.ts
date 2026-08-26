@@ -49,7 +49,7 @@ export function useRevealMotion(scopeRef: RefObject<HTMLElement | null>) {
 }
 
 const TEXT_PARALLAX_SELECTOR =
-  '.ab-intro, .ab-section-heading, .ab-campaign__content, .ab-story-card > div, .ab-benefits article'
+  '.ab-section-heading, .ab-editorial__content, .ab-philosophy__lines'
 
 export function useTextParallax(scopeRef: RefObject<HTMLElement | null>) {
   useEffect(() => {

@@ -11,7 +11,7 @@ export function CartPage() {
     <main className="cart-page" id="main-content">
       <header><p className="ab-kicker">HORIZ Cart</p><h1>Giỏ hàng</h1></header>
       {items.length === 0 ? (
-        <section className="cart-empty"><ShoppingBag aria-hidden="true" /><h2>Giỏ hàng đang trống</h2><p>Khám phá catalogue và chọn sản phẩm phù hợp với bạn.</p><Link className="ab-button ab-button--dark" to="/collections/new">Tiếp tục mua sắm</Link></section>
+        <section className="cart-empty"><ShoppingBag aria-hidden="true" /><h2>Giỏ hàng đang trống</h2><p>Khám phá catalogue và chọn sản phẩm phù hợp với bạn.</p><Link className="button button--primary" to="/collections/new">Tiếp tục mua sắm</Link></section>
       ) : (
         <div className="cart-layout">
           <section className="cart-items" aria-label="Sản phẩm trong giỏ">

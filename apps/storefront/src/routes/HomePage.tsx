@@ -1,4 +1,4 @@
-import { ArrowRight, ChevronLeft, ChevronRight, Leaf, MoveRight, Recycle, Wind } from 'lucide-react'
+import { ArrowRight, ChevronLeft, ChevronRight, MoveRight, Plus } from 'lucide-react'
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { Link } from 'react-router'
 import { useHeroParallax, useRevealMotion, useTextParallax } from '../features/motion/useMotion'
@@ -12,16 +12,21 @@ const products = [
   { name: 'HORIZ Tide', note: 'Soft Blue', price: 2699000, image: '/prototype/product-tide.jpg' },
 ]
 
-const benefits = [
-  { icon: Wind, title: 'Êm nhẹ cả ngày', copy: 'Form giày linh hoạt và đệm êm giúp bạn thoải mái từ sáng đến tối.' },
-  { icon: Recycle, title: 'Dễ mang mỗi ngày', copy: 'Thiết kế tối giản, dễ phối và phù hợp với nhiều nhịp sống khác nhau.' },
-  { icon: Leaf, title: 'Vật liệu có chủ đích', copy: 'Ưu tiên vật liệu tự nhiên và tái chế, lựa chọn theo công năng thực tế.' },
+const collections = [
+  { label: 'Nam', href: '/men', image: '/prototype/category-men.jpg' },
+  { label: 'Nữ', href: '/women', image: '/prototype/category-women.jpg' },
+  { label: 'Unisex', href: '/unisex', image: '/prototype/story-city.jpg' },
 ]
 
 const revealDelay = (index: number) => ({ '--reveal-index': index } as CSSProperties)
 
 export function HomePage() {
-  const [heroCopy, setHeroCopy] = useState({ eyebrow: 'HORIZ / NEW SEASON', title: 'Nhẹ bước theo cách của bạn', description: 'Thiết kế linh hoạt, thoáng nhẹ cho mọi chuyển động thường ngày.' })
+  const [heroCopy, setHeroCopy] = useState({
+    eyebrow: 'HORIZ / BỘ SƯU TẬP MỚI',
+    title: 'Thiết kế vượt thời gian.',
+    titleAccent: 'Nhịp sống hiện đại.',
+    description: 'Những thiết kế được chăm chút cho một cuộc sống luôn chuyển động. Tinh tế một cách tự nhiên.',
+  })
   const homeRef = useRef<HTMLElement>(null)
   const productTrackRef = useRef<HTMLDivElement>(null)
   const [canScrollPrev, setCanScrollPrev] = useState(false)
@@ -48,7 +53,7 @@ export function HomePage() {
     const track = productTrackRef.current
     if (!track) return
     const card = track.querySelector<HTMLElement>('.ab-product-card')
-    const amount = (card?.offsetWidth ?? track.clientWidth * 0.8) + 16
+    const amount = (card?.offsetWidth ?? track.clientWidth * 0.8) + 18
     track.scrollBy({ left: amount * direction, behavior: 'smooth' })
   }
 
@@ -57,7 +62,12 @@ export function HomePage() {
     void supabase.from('content_sections').select('payload').eq('page_key', 'home').eq('type', 'hero').eq('active', true).order('position').limit(1).maybeSingle().then(({ data }) => {
       const payload = data?.payload
       if (!payload || Array.isArray(payload) || typeof payload !== 'object') return
-      setHeroCopy((current) => ({ eyebrow: typeof payload.eyebrow === 'string' ? payload.eyebrow : current.eyebrow, title: typeof payload.title === 'string' ? payload.title : current.title, description: typeof payload.description === 'string' ? payload.description : current.description }))
+      setHeroCopy((current) => ({
+        eyebrow: typeof payload.eyebrow === 'string' ? payload.eyebrow : current.eyebrow,
+        title: typeof payload.title === 'string' ? payload.title : current.title,
+        titleAccent: typeof payload.titleAccent === 'string' ? payload.titleAccent : current.titleAccent,
+        description: typeof payload.description === 'string' ? payload.description : current.description,
+      }))
     })
   }, [])
 
@@ -66,33 +76,21 @@ export function HomePage() {
       <section className="ab-hero">
         <picture><source media="(max-width: 760px)" srcSet="/prototype/hero-mobile.jpg" /><img alt="HORIZ — những bước chân nhẹ cho ngày dài" fetchPriority="high" src="/prototype/hero-desktop.jpg" /></picture>
         <div className="ab-hero__shade" />
-        <div className="ab-hero__content" data-reveal="hero"><p>{heroCopy.eyebrow}</p><h1>{heroCopy.title}</h1><span>{heroCopy.description}</span><div className="ab-actions"><Link className="ab-button ab-button--light" to="/women">Khám phá đồ nữ</Link><Link className="ab-button ab-button--light" to="/men">Khám phá đồ nam</Link></div></div>
-      </section>
-      <section className="ab-section ab-intro" data-reveal>
-        <p className="ab-kicker">Vừa ra mắt</p>
-        <h2>Những bước chân mới</h2>
-        <p>Thoáng hơn, nhẹ hơn và sẵn sàng cho những ngày dài ngoài phố.</p>
-        <div className="ab-actions">
-          <Link className="ab-button ab-button--dark" to="/men">Mua đồ nam</Link>
-          <Link className="ab-button ab-button--dark" to="/women">Mua đồ nữ</Link>
+        <div className="ab-hero__content" data-reveal="hero">
+          <p className="ab-kicker">{heroCopy.eyebrow}</p>
+          <h1>{heroCopy.title}<br /><em className="editorial">{heroCopy.titleAccent}</em></h1>
+          <p>{heroCopy.description}</p>
+          <div className="ab-actions">
+            <Link className="button button--primary" to="/men">Mua đồ nam</Link>
+            <Link className="button button--light" to="/women">Mua đồ nữ</Link>
+          </div>
         </div>
       </section>
 
-      <section aria-label="Mua theo danh mục" className="ab-category-grid">
-        <Link className="ab-category-card" data-reveal style={revealDelay(0)} to="/men">
-          <img alt="Bộ sưu tập giày nam HORIZ" src="/prototype/category-men.jpg" />
-          <span>Giày nam <ArrowRight aria-hidden="true" /></span>
-        </Link>
-        <Link className="ab-category-card" data-reveal style={revealDelay(1)} to="/women">
-          <img alt="Bộ sưu tập giày nữ HORIZ" src="/prototype/category-women.jpg" />
-          <span>Giày nữ <ArrowRight aria-hidden="true" /></span>
-        </Link>
-      </section>
-
-      <section className="ab-section ab-products">
+      <section className="ab-section ab-new-arrivals">
         <div className="ab-section-heading" data-reveal>
-          <div><p className="ab-kicker">Được yêu thích nhất</p><h2>Best Sellers</h2></div>
-          <Link className="ab-inline-link" to="/collections/best-sellers">Xem tất cả <MoveRight aria-hidden="true" /></Link>
+          <h2>Sản phẩm mới</h2>
+          <Link className="ab-inline-link" to="/collections/new">Xem tất cả <MoveRight aria-hidden="true" /></Link>
         </div>
         <div className="ab-product-carousel">
           <button
@@ -111,6 +109,7 @@ export function HomePage() {
                   <div className="ab-product-card__image">
                     <img alt={product.name} src={product.image} />
                     {index === 0 ? <span>Mới</span> : null}
+                    <span aria-hidden="true" className="quick-add"><Plus /></span>
                   </div>
                   <h3>{product.name}</h3><p>{product.note}</p><strong>{formatVnd(product.price)}</strong>
                 </Link>
@@ -129,28 +128,38 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="ab-campaign">
-        <div className="ab-campaign__visual" data-reveal><img alt="Dép HORIZ trên bãi cát" src="/prototype/campaign-sand.jpg" /></div>
-        <div className="ab-campaign__content" data-reveal>
-          <p className="ab-kicker">Summer Travel Essentials</p><h2>Đi đâu cũng nhẹ tênh</h2>
-          <p>Những thiết kế dễ xỏ, dễ mang cho ngày nghỉ và mọi chuyến đi ngẫu hứng.</p>
-          <div className="ab-actions"><Link className="ab-button ab-button--dark" to="/men">Mua đồ nam</Link><Link className="ab-button ab-button--dark" to="/women">Mua đồ nữ</Link></div>
+      <section className="ab-editorial">
+        <div className="ab-editorial__inner">
+          <div className="ab-editorial__visual" data-reveal>
+            <img alt="Chất liệu tự nhiên của HORIZ" src="/prototype/campaign-sand.jpg" />
+          </div>
+          <div className="ab-editorial__content" data-reveal>
+            <p className="ab-kicker">Chất liệu &amp; triết lý</p>
+            <h2 className="editorial">Bắt nguồn từ tự nhiên.<br /><em>Bền bỉ theo thời gian.</em></h2>
+            <p>HORIZ tạo nên những sản phẩm thiết yếu tinh tế — tập trung vào chất liệu tự nhiên, thiết kế chỉn chu và chất lượng bền lâu.</p>
+            <Link className="ab-inline-link" to="/materials">Triết lý của chúng tôi <MoveRight aria-hidden="true" /></Link>
+          </div>
         </div>
       </section>
 
-      <section className="ab-story-grid">
-        <article className="ab-story-card" data-reveal style={revealDelay(0)}>
-          <img alt="Người mang giày HORIZ trong khu vườn" src="/prototype/story-garden.jpg" />
-          <div><p className="ab-kicker">Màu mới mùa hè</p><h2>Tự nhiên, nhưng không mờ nhạt</h2><Link className="ab-inline-link" to="/collections/new">Khám phá bộ sưu tập <MoveRight aria-hidden="true" /></Link></div>
-        </article>
-        <article className="ab-story-card" data-reveal style={revealDelay(1)}>
-          <img alt="Giày HORIZ trong nhịp sống thành phố" src="/prototype/story-city.jpg" />
-          <div><p className="ab-kicker">Everyday comfort</p><h2>Một đôi cho cả ngày dài</h2><Link className="ab-inline-link" to="/collections/new">Xem sản phẩm mới <MoveRight aria-hidden="true" /></Link></div>
-        </article>
+      <section className="ab-section ab-collection">
+        <div className="ab-section-heading" data-reveal>
+          <h2>Khám phá bộ sưu tập</h2>
+        </div>
+        <div className="ab-collection-grid">
+          {collections.map((collection, index) => (
+            <Link className="ab-collection-card" data-reveal key={collection.href} style={revealDelay(index)} to={collection.href}>
+              <img alt={`Bộ sưu tập ${collection.label} HORIZ`} src={collection.image} />
+              <span>{collection.label} <ArrowRight aria-hidden="true" /></span>
+            </Link>
+          ))}
+        </div>
       </section>
 
-      <section className="ab-benefits">
-        {benefits.map(({ icon: Icon, title, copy }, index) => <article data-reveal key={title} style={revealDelay(index)}><Icon aria-hidden="true" strokeWidth={0.8} /><h3>{title}</h3><p>{copy}</p></article>)}
+      <section className="ab-section ab-philosophy">
+        <div className="ab-philosophy__lines" data-reveal>
+          <p>Được tạo nên có chủ đích.<br />Dành cho những bước chuyển động mỗi ngày.<br />Bền bỉ vượt qua từng mùa.</p>
+        </div>
       </section>
     </main>
   )
