@@ -44,7 +44,7 @@ export function CataloguePage() {
       <p className="catalogue-count">{visibleProducts.length} sản phẩm</p>
       <section aria-label={content.title} className="catalogue-grid">
         {visibleProducts.map((product) => (
-          <article className="ab-product-card" key={product.id}>
+          <article className="ab-product-card" data-category={product.category} key={product.id}>
             <Link to={`/products/${product.id}`}>
               <div className="ab-product-card__image"><img alt={product.name} loading="lazy" src={product.image} /></div>
               <h3>{product.name}</h3>

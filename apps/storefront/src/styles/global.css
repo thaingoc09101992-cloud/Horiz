@@ -454,14 +454,14 @@ td small { margin-top: .25rem; color: var(--muted); }
 .empty-state p, .empty-copy { color: var(--muted); }
 
 .content-page { padding-bottom: 7rem; }
-.content-page > header > p:last-child { max-width: 760px; color: var(--muted); font-size: 1.05rem; line-height: 1.7; }
+.content-page > header > p:last-child { max-width: 760px; margin-top: 1.5rem; color: var(--muted); font-size: 1.05rem; line-height: 1.7; }
 .content-page__sections { display: grid; max-width: 1200px; overflow: hidden; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin: 2rem auto 3rem; background: var(--border); }
 .content-page__sections section { min-height: 230px; padding: 2.5rem; background: var(--surface); }
 .content-page__sections h2 { margin: 0 0 1rem; font-size: 1.3rem; }
 .content-page__sections p { margin: 0; color: var(--muted); line-height: 1.75; }
 .content-page > .button { margin-left: max(2rem, calc((100vw - 1200px) / 2)); }
 
-.account-page > header > p:last-child { color: var(--muted); }
+.account-page > header > p:last-child { margin-top: 1.5rem; color: var(--muted); }
 .account-layout { display: grid; max-width: 1300px; grid-template-columns: 220px 1fr; gap: 2rem; margin: auto; padding: 0 2rem 7rem; }
 .account-layout > nav { display: flex; align-self: start; flex-direction: column; padding: .6rem; border: 1px solid var(--border); border-radius: var(--radius-md); }
 .account-layout > nav a { display: flex; align-items: center; gap: .7rem; padding: .85rem; border-radius: var(--radius-sm); color: var(--muted); font-size: .78rem; font-weight: 600; }
@@ -626,9 +626,16 @@ td small { margin-top: .25rem; color: var(--muted); }
 .ab-carousel-nav svg { width: 1.15rem; height: 1.15rem; }
 .ab-product-card { scroll-snap-align: start; transition: transform .24s cubic-bezier(.22, 1, .36, 1); }
 .ab-product-card:hover { transform: translateY(-4px); }
-.ab-product-card__image { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: #f5f4f1; }
-.ab-product-card__image img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.16, 1, .3, 1); }
-.ab-product-card:hover img { transform: scale(1.02); }
+/* Shoes, socks, underwear are flat product-only shots — contain them with
+   padding so nothing gets cropped. Apparel is shot on a model full-bleed;
+   containing it just shrinks the person into a small floating cutout, so
+   apparel keeps the original full-frame cover treatment. */
+.ab-product-card__image { position: relative; aspect-ratio: 4 / 5; overflow: hidden; padding: 9%; background: #f5f4f1; }
+.ab-product-card__image img { width: 100%; height: 100%; object-fit: contain; transition: transform .7s cubic-bezier(.16, 1, .3, 1); }
+.ab-product-card:hover img { transform: scale(1.05); }
+.ab-product-card[data-category="Apparel"] .ab-product-card__image { padding: 0; }
+.ab-product-card[data-category="Apparel"] .ab-product-card__image img { object-fit: cover; }
+.ab-product-card[data-category="Apparel"]:hover img { transform: scale(1.02); }
 .ab-product-card__image span { position: absolute; top: .8rem; left: .8rem; padding: .35rem .6rem; background: #fff; color: var(--color-black); font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; }
 .ab-product-card h3 { margin: 1rem 0 .3rem; font-size: 13px; font-weight: 500; letter-spacing: .05em; }
 .ab-product-card p { margin: 0 0 .5rem; color: var(--muted); font-size: 12px; }

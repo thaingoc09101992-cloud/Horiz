@@ -111,7 +111,7 @@ export function HomePage() {
           </button>
           <div className="ab-product-grid" onScroll={updateProductScrollState} ref={productTrackRef}>
             {products.map((product, index) => (
-              <article className="ab-product-card" data-reveal key={product.id} style={revealDelay(index)}>
+              <article className="ab-product-card" data-category={product.category} data-reveal key={product.id} style={revealDelay(index)}>
                 <Link to={`/products/${product.id}`}>
                   <div className="ab-product-card__image">
                     <img alt={product.name} src={product.image} />
