@@ -16,6 +16,15 @@ const sourceHeaders = lines.shift().split(',')
 const sourceRows = lines.map((line) => Object.fromEntries(line.split(',').map((value, index) => [sourceHeaders[index], value])))
   .filter((row) => row.Danh_muc_chinh && row.Danh_muc_chinh !== 'Homepage')
 
+// productKey (→ id further down, via safeId) bakes in Danh_muc_phu
+// (category). That means editing a row's category here and re-running this
+// script changes that product's id — which breaks the link to whatever
+// source_key is already seeded in Supabase (products.source_key,
+// product_variants.sku), since checkout matches on that id. Re-keying id off
+// audience+San_pham alone would fix this, but it would change every
+// product's id at once (a much bigger migration) — so if you do reclassify
+// a product's category, update its source_key/sku in Supabase to match the
+// new id in the same change, don't just regenerate and redeploy.
 const productGroups = new Map()
 for (const row of sourceRows) {
   const productKey = `${row.Danh_muc_chinh}/${row.Danh_muc_phu}/${row.San_pham}`
