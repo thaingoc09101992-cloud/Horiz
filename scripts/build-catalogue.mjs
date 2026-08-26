@@ -8,7 +8,8 @@ const trackingPath = join(sourceDir, 'Danh_muc_san_pham_dung_web.csv')
 const imageSourceRoot = join(sourceDir, 'Hinh anh', 'Allbirds_Images')
 const imageOutputRoot = join(root, 'apps', 'storefront', 'public', 'catalogue')
 const dataOutputPath = join(root, 'apps', 'storefront', 'src', 'data', 'catalogue.generated.json')
-const productsPerGroup = 12
+// No per-category cap — every product in the manifest ships to the site.
+const productsPerGroup = Infinity
 
 const lines = readFileSync(manifestPath, 'utf8').replace(/^\uFEFF/, '').trim().split(/\r?\n/)
 const sourceHeaders = lines.shift().split(',')
