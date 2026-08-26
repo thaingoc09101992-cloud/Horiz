@@ -1,16 +1,23 @@
-import { ArrowRight, ChevronLeft, ChevronRight, MoveRight, Plus } from 'lucide-react'
+import { ArrowRight, ChevronLeft, ChevronRight, MoveRight } from 'lucide-react'
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { Link } from 'react-router'
+import catalogue from '../data/catalogue.generated.json'
 import { useHeroParallax, useRevealMotion, useTextParallax } from '../features/motion/useMotion'
 import { formatVnd } from '../lib/format'
 import { supabase } from '../lib/supabase'
 
-const products = [
-  { name: 'HORIZ Drift', note: 'Mist Grey', price: 2499000, image: '/prototype/product-drift.png' },
-  { name: 'HORIZ Vale', note: 'Natural White', price: 2899000, image: '/prototype/product-vale.png' },
-  { name: 'HORIZ Roam', note: 'Charcoal', price: 3199000, image: '/prototype/product-roam.png' },
-  { name: 'HORIZ Tide', note: 'Soft Blue', price: 2699000, image: '/prototype/product-tide.jpg' },
+// A curated pick of real catalogue products — using catalogue ids (rather than
+// hand-written demo data) keeps every card linking to a product page that
+// actually exists.
+const newArrivalIds = [
+  'men-shoes-mens-cruiser-natural-white',
+  'women-shoes-womens-breezer-point-warm-white',
+  'men-shoes-mens-couriers-dark-grey-natural-black',
+  'unisex-shoes-mens-cruiser-shadow-blue-natural-white-sole',
 ]
+const products = newArrivalIds
+  .map((id) => catalogue.find((product) => product.id === id))
+  .filter((product): product is (typeof catalogue)[number] => Boolean(product))
 
 const collections = [
   { label: 'Nam', href: '/men', image: '/prototype/category-men.jpg' },
@@ -104,14 +111,13 @@ export function HomePage() {
           </button>
           <div className="ab-product-grid" onScroll={updateProductScrollState} ref={productTrackRef}>
             {products.map((product, index) => (
-              <article className="ab-product-card" data-reveal key={product.name} style={revealDelay(index)}>
-                <Link to={`/products/${product.name.toLowerCase().replace(' ', '-')}`}>
+              <article className="ab-product-card" data-reveal key={product.id} style={revealDelay(index)}>
+                <Link to={`/products/${product.id}`}>
                   <div className="ab-product-card__image">
                     <img alt={product.name} src={product.image} />
                     {index === 0 ? <span>Mới</span> : null}
-                    <span aria-hidden="true" className="quick-add"><Plus /></span>
                   </div>
-                  <h3>{product.name}</h3><p>{product.note}</p><strong>{formatVnd(product.price)}</strong>
+                  <h3>{product.name}</h3><p>{product.category}</p><strong>{formatVnd(product.price)}</strong>
                 </Link>
               </article>
             ))}
