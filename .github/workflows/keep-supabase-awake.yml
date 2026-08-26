@@ -1,0 +1,34 @@
+name: Keep Supabase awake
+
+# Supabase free tier auto-pauses a project after 7 days with no API
+# requests. Ping the REST API once a day so it never gets close to that
+# threshold — avoids the "Paused" state silently breaking login/checkout
+# on the live site until someone notices and resumes it by hand.
+on:
+  schedule:
+    - cron: '23 4 * * *' # daily, off the hour to dodge GitHub's peak-time queueing
+  workflow_dispatch: {} # lets you trigger a run manually from the Actions tab to test
+
+permissions:
+  contents: read
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Ping Supabase REST API
+        run: |
+          # Not the bare /rest/v1/ root — Supabase now requires a secret key
+          # for that endpoint (401s on the publishable key). A real table
+          # read is what actually needs to reach the database anyway, which
+          # is the thing the 7-day pause clock cares about.
+          curl --fail --silent --show-error --max-time 20 \
+            -H "apikey: ${SUPABASE_APIKEY}" \
+            "${SUPABASE_URL}/rest/v1/products?select=id&limit=1"
+        env:
+          # Publishable key — this is the public/browser-safe key by design
+          # (it's already shipped in the site's own JS bundle), not a
+          # secret, so it's fine committed here in plain text.
+          SUPABASE_APIKEY: sb_publishable_FlzYIIkRyksmBRlDzJ15Jg_u_ddfaaU
+          SUPABASE_URL: https://tlxtdtfrqmaxmzazwhhq.supabase.co
