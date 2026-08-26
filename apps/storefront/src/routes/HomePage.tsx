@@ -25,6 +25,37 @@ const collections = [
   { label: 'Unisex', href: '/unisex', image: '/prototype/story-city.jpg' },
 ]
 
+// Hero slideshow — slide 0 keeps the original (CMS-overridable) copy; slides 1–2
+// carry their own copy around HORIZ's other two pillars: natural materials and
+// all-day comfort. Auto-advances every 3s (paused for reduced-motion users).
+const HERO_SLIDE_INTERVAL_MS = 3000
+const heroSlides = [
+  {
+    image: '/prototype/hero-1.png',
+    alt: 'HORIZ — thiết kế vượt thời gian cho nhịp sống hiện đại',
+    eyebrow: 'HORIZ / BỘ SƯU TẬP MỚI',
+    title: 'Thiết kế vượt thời gian.',
+    titleAccent: 'Nhịp sống hiện đại.',
+    description: 'Những thiết kế được chăm chút cho một cuộc sống luôn chuyển động. Tinh tế một cách tự nhiên.',
+  },
+  {
+    image: '/prototype/hero-2.png',
+    alt: 'HORIZ — chất liệu tự nhiên có nguồn gốc rõ ràng',
+    eyebrow: 'HORIZ / CHẤT LIỆU TỰ NHIÊN',
+    title: 'Chạm vào thiên nhiên.',
+    titleAccent: 'Bền bỉ mỗi ngày.',
+    description: 'Sợi tự nhiên có nguồn gốc rõ ràng, xử lý tối giản để giữ trọn sự thoáng nhẹ và độ bền theo năm tháng.',
+  },
+  {
+    image: '/prototype/hero-3.png',
+    alt: 'HORIZ — form dáng ôm chân, đế êm cho cả ngày dài',
+    eyebrow: 'HORIZ / THOẢI MÁI CẢ NGÀY',
+    title: 'Nhẹ như không mang.',
+    titleAccent: 'Đi hết ngày dài.',
+    description: 'Form dáng ôm chân, đế êm nâng niu từng bước — đồng hành từ sáng sớm đến tối muộn mà không mỏi.',
+  },
+]
+
 const revealDelay = (index: number) => ({ '--reveal-index': index } as CSSProperties)
 
 export function HomePage() {
@@ -38,6 +69,7 @@ export function HomePage() {
   const productTrackRef = useRef<HTMLDivElement>(null)
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(false)
+  const [activeHeroSlide, setActiveHeroSlide] = useState(0)
 
   useRevealMotion(homeRef)
   useHeroParallax(homeRef)
@@ -55,6 +87,16 @@ export function HomePage() {
     window.addEventListener('resize', updateProductScrollState)
     return () => window.removeEventListener('resize', updateProductScrollState)
   }, [])
+
+  // Auto-advance the hero slideshow. The slide/copy transitions are opacity-only
+  // and are already reduced to instant swaps for prefers-reduced-motion users by
+  // the global motion rule, so the rotation itself can stay on for everyone.
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      setActiveHeroSlide((current) => (current + 1) % heroSlides.length)
+    }, HERO_SLIDE_INTERVAL_MS)
+    return () => window.clearTimeout(timeoutId)
+  }, [activeHeroSlide])
 
   const scrollProducts = (direction: 1 | -1) => {
     const track = productTrackRef.current
@@ -78,19 +120,51 @@ export function HomePage() {
     })
   }, [])
 
+  const heroContent = activeHeroSlide === 0 ? heroCopy : heroSlides[activeHeroSlide] ?? heroCopy
+
   return (
     <main id="main-content" className="ab-home" ref={homeRef}>
       <section className="ab-hero">
-        <picture><source media="(max-width: 760px)" srcSet="/prototype/hero-mobile.jpg" /><img alt="HORIZ — những bước chân nhẹ cho ngày dài" fetchPriority="high" src="/prototype/hero-desktop.jpg" /></picture>
+        {heroSlides.map((slide, index) => (
+          <picture
+            className="ab-hero__slide"
+            data-active={index === activeHeroSlide}
+            key={slide.image}
+            style={{ opacity: index === activeHeroSlide ? 1 : 0 }}
+          >
+            <img
+              alt={slide.alt}
+              aria-hidden={index === activeHeroSlide ? undefined : true}
+              fetchPriority={index === 0 ? 'high' : undefined}
+              src={slide.image}
+            />
+          </picture>
+        ))}
         <div className="ab-hero__shade" />
         <div className="ab-hero__content" data-reveal="hero">
-          <p className="ab-kicker">{heroCopy.eyebrow}</p>
-          <h1>{heroCopy.title}<br /><em className="editorial">{heroCopy.titleAccent}</em></h1>
-          <p>{heroCopy.description}</p>
-          <div className="ab-actions">
-            <Link className="button button--primary" to="/men">Mua đồ nam</Link>
-            <Link className="button button--light" to="/women">Mua đồ nữ</Link>
+          <div className="ab-hero__copy" key={activeHeroSlide}>
+            <p className="ab-kicker">{heroContent.eyebrow}</p>
+            <h1>{heroContent.title}<br /><em className="editorial">{heroContent.titleAccent}</em></h1>
+            <p>{heroContent.description}</p>
+            <div className="ab-actions">
+              <Link className="button button--primary" to="/men">Mua đồ nam</Link>
+              <Link className="button button--light" to="/women">Mua đồ nữ</Link>
+            </div>
           </div>
+        </div>
+        <div className="ab-hero__dots" role="tablist" aria-label="Chọn ảnh giới thiệu">
+          {heroSlides.map((slide, index) => (
+            <button
+              aria-label={`Xem ảnh giới thiệu ${index + 1}`}
+              aria-selected={index === activeHeroSlide}
+              className="ab-hero__dot"
+              data-active={index === activeHeroSlide}
+              key={slide.image}
+              onClick={() => setActiveHeroSlide(index)}
+              role="tab"
+              type="button"
+            />
+          ))}
         </div>
       </section>
 
