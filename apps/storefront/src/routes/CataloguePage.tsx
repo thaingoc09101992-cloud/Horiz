@@ -47,7 +47,7 @@ export function CataloguePage() {
           <article className="ab-product-card" key={product.id}>
             <Link to={`/products/${product.id}`}>
               <div className="ab-product-card__image"><img alt={product.name} loading="lazy" src={product.image} /></div>
-              <h3>{product.name}</h3><p>{product.category} · {product.imageCount} ảnh</p>
+              <h3>{product.name}</h3>
             </Link>
             <strong>{formatVnd(product.price)}</strong>
           </article>

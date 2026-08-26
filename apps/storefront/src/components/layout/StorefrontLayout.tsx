@@ -1,5 +1,5 @@
 import { ChevronDown, LogOut, Menu, Search, ShieldCheck, ShoppingBag, UserRound, X } from 'lucide-react'
-import { lazy, useEffect, useState, type FormEvent } from 'react'
+import { lazy, useEffect, useRef, useState, type FormEvent } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router'
 import { useAuth } from '../../features/auth/AuthProvider'
 import { useCart } from '../../features/cart/CartProvider'
@@ -29,6 +29,10 @@ export function StorefrontLayout() {
   const [accountOpen, setAccountOpen] = useState(false)
   const [newsletterEmail, setNewsletterEmail] = useState('')
   const [newsletterMessage, setNewsletterMessage] = useState('')
+  const [scrolled, setScrolled] = useState(false)
+  const navRef = useRef<HTMLElement>(null)
+  const megaMenuRef = useRef<HTMLDivElement>(null)
+  const accountMenuRef = useRef<HTMLDivElement>(null)
   const location = useLocation()
   const { role, signOut, user } = useAuth()
   const { itemCount } = useCart()
@@ -43,6 +47,34 @@ export function StorefrontLayout() {
       setAccountOpen(false)
     })
   }, [location.pathname])
+
+  useEffect(() => {
+    const updateScrolled = () => setScrolled(window.scrollY > 4)
+    updateScrolled()
+    window.addEventListener('scroll', updateScrolled, { passive: true })
+    return () => window.removeEventListener('scroll', updateScrolled)
+  }, [])
+
+  useEffect(() => {
+    if (!megaOpen) return
+    const closeOnOutsideClick = (event: PointerEvent) => {
+      const target = event.target as Node
+      if (navRef.current?.contains(target) || megaMenuRef.current?.contains(target)) return
+      setMegaOpen(false)
+    }
+    document.addEventListener('pointerdown', closeOnOutsideClick)
+    return () => document.removeEventListener('pointerdown', closeOnOutsideClick)
+  }, [megaOpen])
+
+  useEffect(() => {
+    if (!accountOpen) return
+    const closeOnOutsideClick = (event: PointerEvent) => {
+      if (accountMenuRef.current?.contains(event.target as Node)) return
+      setAccountOpen(false)
+    }
+    document.addEventListener('pointerdown', closeOnOutsideClick)
+    return () => document.removeEventListener('pointerdown', closeOnOutsideClick)
+  }, [accountOpen])
 
   const subscribe = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -60,19 +92,19 @@ export function StorefrontLayout() {
 
   return (
     <div className="storefront-shell">
-      <header className="storefront-header">
+      <header className={`storefront-header${scrolled ? ' is-scrolled' : ''}`}>
         <div className="storefront-header__inner">
           <button aria-expanded={menuOpen} aria-label={menuOpen ? 'Đóng menu' : 'Mở menu'} className="icon-button mobile-menu-button" onClick={() => setMenuOpen((open) => !open)} type="button">
             {menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
           </button>
           <Wordmark />
-          <nav aria-label="Điều hướng chính" className="desktop-nav">
+          <nav aria-label="Điều hướng chính" className="desktop-nav" ref={navRef}>
             {navItems.map((item) => <NavLink key={item.href} to={item.href}>{item.label}</NavLink>)}
             <button aria-expanded={megaOpen} onClick={() => setMegaOpen((open) => !open)} type="button">Khám phá <ChevronDown aria-hidden="true" /></button>
           </nav>
           <div className="header-actions">
             <button aria-label="Tìm kiếm" className="icon-button" onClick={() => setSearchOpen(true)} type="button"><Search aria-hidden="true" strokeWidth={1.65} /></button>
-            <div className="account-menu">
+            <div className="account-menu" ref={accountMenuRef}>
               <button aria-expanded={accountOpen} aria-label="Tài khoản" className="icon-button" onClick={() => setAccountOpen((open) => !open)} type="button"><UserRound aria-hidden="true" strokeWidth={1.65} /></button>
               {accountMounted ? (
                 <div aria-hidden={!accountOpen} className={`account-popover ${accountOpen ? 'is-open' : 'is-closing'}`} inert={!accountOpen}>
@@ -90,7 +122,7 @@ export function StorefrontLayout() {
             ) : null}
           </div>
         </div>
-        {megaMounted ? <div aria-hidden={!megaOpen} className={`mega-menu ${megaOpen ? 'is-open' : 'is-closing'}`} inert={!megaOpen}><div className="mega-menu__inner">{megaColumns.map((column) => <section key={column.title}><strong>{column.title}</strong>{column.links.map(([label, href]) => <Link key={href} to={href}>{label}</Link>)}</section>)}<Link className="mega-menu__feature" to="/collections/new"><img alt="Bộ sưu tập HORIZ mới" src="/prototype/story-city.jpg" /><span><small>HORIZ EDIT</small><strong>Nhẹ nhàng qua từng chuyển động</strong></span></Link></div></div> : null}
+        {megaMounted ? <div aria-hidden={!megaOpen} className={`mega-menu ${megaOpen ? 'is-open' : 'is-closing'}`} inert={!megaOpen} ref={megaMenuRef}><div className="mega-menu__inner">{megaColumns.map((column) => <section key={column.title}><strong>{column.title}</strong>{column.links.map(([label, href]) => <Link key={href} to={href}>{label}</Link>)}</section>)}<Link className="mega-menu__feature" to="/collections/new"><img alt="Bộ sưu tập HORIZ mới" src="/prototype/story-city.jpg" /><span><small>HORIZ EDIT</small><strong>Nhẹ nhàng qua từng chuyển động</strong></span></Link></div></div> : null}
         {menuMounted ? <nav aria-hidden={!menuOpen} aria-label="Điều hướng di động" className={`mobile-nav ${menuOpen ? 'is-open' : 'is-closing'}`} inert={!menuOpen}>{navItems.map((item) => <NavLink key={item.href} to={item.href}>{item.label}</NavLink>)}<NavLink to="/search">Khám phá</NavLink><NavLink to={user ? '/account' : '/login'}>{user ? 'Tài khoản của tôi' : 'Đăng nhập'}</NavLink>{role === 'admin' ? <NavLink to="/admin/dashboard">Administrator</NavLink> : null}</nav> : null}
       </header>
 
@@ -109,9 +141,9 @@ export function StorefrontLayout() {
             {newsletterMessage ? <p aria-live="polite" className="newsletter-message">{newsletterMessage}</p> : null}
           </section>
           <nav aria-label="Liên kết cuối trang" className="footer-links">
-            <div><strong>Khám phá</strong><Link to="/women">Nữ</Link><Link to="/men">Nam</Link><Link to="/materials">Chất liệu</Link><Link to="/about">Về chúng tôi</Link></div>
-            <div><strong>Hỗ trợ</strong><Link to="/help">Liên hệ</Link><Link to="/returns">Đổi trả</Link><Link to="/privacy">Quyền riêng tư</Link><Link to="/terms">Điều khoản</Link></div>
-            <div><strong>Tài khoản</strong><Link to={user ? '/account' : '/login'}>{user ? 'Tài khoản của tôi' : 'Đăng nhập'}</Link><Link to="/register">Đăng ký thành viên</Link>{role === 'admin' ? <Link to="/admin/dashboard">Administrator</Link> : null}</div>
+            <div><strong>Mua sắm</strong><Link to="/men">Nam</Link><Link to="/women">Nữ</Link><Link to="/collections/new">Sản phẩm mới</Link></div>
+            <div><strong>Về HORIZ</strong><Link to="/about">Câu chuyện</Link><Link to="/materials">Chất liệu</Link></div>
+            <div><strong>Chăm sóc khách hàng</strong><Link to="/help">Liên hệ</Link><Link to="/returns">Đổi trả</Link><Link to="/privacy">Quyền riêng tư</Link><Link to="/terms">Điều khoản</Link><Link to={user ? '/account' : '/login'}>{user ? 'Tài khoản của tôi' : 'Đăng nhập'}</Link>{user ? null : <Link to="/register">Đăng ký thành viên</Link>}{role === 'admin' ? <Link to="/admin/dashboard">Administrator</Link> : null}</div>
           </nav>
         </div>
         <p className="footer-legal">© 2026 HORIZ. Thiết kế cho chuyển động tự nhiên.</p>

@@ -48,6 +48,45 @@ export function useRevealMotion(scopeRef: RefObject<HTMLElement | null>) {
   }, [scopeRef])
 }
 
+const TEXT_PARALLAX_SELECTOR =
+  '.ab-section-heading, .ab-editorial__content, .ab-philosophy__lines'
+
+export function useTextParallax(scopeRef: RefObject<HTMLElement | null>) {
+  useEffect(() => {
+    const scope = scopeRef.current
+    if (!scope || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    const elements = Array.from(scope.querySelectorAll<HTMLElement>(TEXT_PARALLAX_SELECTOR))
+    if (!elements.length) return
+
+    let frameId = 0
+    const update = () => {
+      frameId = 0
+      const viewportMid = window.innerHeight / 2
+      elements.forEach((element) => {
+        const rect = element.getBoundingClientRect()
+        const offset = (rect.top + rect.height / 2 - viewportMid) / viewportMid
+        const clamped = Math.min(1, Math.max(-1, offset))
+        element.style.setProperty('--parallax-y', `${(clamped * -18).toFixed(2)}px`)
+      })
+    }
+    const requestUpdate = () => {
+      if (frameId) return
+      frameId = window.requestAnimationFrame(update)
+    }
+
+    update()
+    window.addEventListener('scroll', requestUpdate, { passive: true })
+    window.addEventListener('resize', requestUpdate)
+    return () => {
+      window.removeEventListener('scroll', requestUpdate)
+      window.removeEventListener('resize', requestUpdate)
+      if (frameId) window.cancelAnimationFrame(frameId)
+      elements.forEach((element) => element.style.removeProperty('--parallax-y'))
+    }
+  }, [scopeRef])
+}
+
 export function useHeroParallax(scopeRef: RefObject<HTMLElement | null>) {
   useEffect(() => {
     const scope = scopeRef.current
