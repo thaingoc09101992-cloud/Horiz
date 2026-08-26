@@ -1,6 +1,7 @@
 import { Check, ChevronDown, Heart, Minus, Plus, X } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router'
+import { Portal } from '../components/feedback/Portal'
 import products from '../data/catalogue.generated.json'
 import { useAuth } from '../features/auth/AuthProvider'
 import { useCart } from '../features/cart/CartProvider'
@@ -118,8 +119,8 @@ export function ProductDetailPage() {
           <details><summary>Chất liệu &amp; chăm sóc <ChevronDown aria-hidden="true" /></summary><p>Vệ sinh nhẹ bằng tay, không dùng chất tẩy mạnh và để khô tự nhiên ở nơi thoáng mát.</p></details>
         </section>
       </div>
-      <section className="pdp-related"><div className="ab-section-heading"><div><p className="ab-kicker">Có thể bạn sẽ thích</p><h2>Sản phẩm liên quan</h2></div></div><div className="ab-product-grid">{related.map((item) => <article className="ab-product-card" data-category={item.category} key={item.id}><Link to={'/products/' + item.id}><div className="ab-product-card__image"><img alt={item.name} loading="lazy" src={item.image} /></div><h3>{item.name}</h3><p>{item.category}</p><strong>{formatVnd(item.price)}</strong></Link></article>)}</div></section>
-      {sizeGuideOpen ? <div aria-modal="true" className="dialog-backdrop" role="dialog"><section className="size-dialog"><button aria-label="Đóng" className="icon-button" onClick={() => setSizeGuideOpen(false)} type="button"><X aria-hidden="true" /></button><p className="ab-kicker">Hướng dẫn kích thước</p><h2>Chọn size HORIZ</h2><p>Đo chiều dài bàn chân từ gót đến đầu ngón dài nhất. Nếu nằm giữa hai size, ưu tiên size lớn hơn.</p><div className="size-table"><span>Chiều dài chân</span><strong>22–23 cm</strong><strong>23–24 cm</strong><strong>24–25 cm</strong><span>Size gợi ý</span><strong>35–36</strong><strong>37–38</strong><strong>39–40</strong></div></section></div> : null}
+      <section className="pdp-related"><div className="ab-section-heading"><div><p className="ab-kicker">Có thể bạn sẽ thích</p><h2>Sản phẩm liên quan</h2></div></div><div className="ab-product-grid">{related.map((item) => <article className="ab-product-card" data-category={item.category} key={item.id}><Link to={'/products/' + item.id}><div className="ab-product-card__image"><img alt={item.name} loading="lazy" src={item.image} /></div><h3>{item.name}</h3><strong>{formatVnd(item.price)}</strong></Link></article>)}</div></section>
+      {sizeGuideOpen ? <Portal><div aria-modal="true" className="dialog-backdrop" role="dialog"><section className="size-dialog"><button aria-label="Đóng" className="icon-button" onClick={() => setSizeGuideOpen(false)} type="button"><X aria-hidden="true" /></button><p className="ab-kicker">Hướng dẫn kích thước</p><h2>Chọn size HORIZ</h2><p>Đo chiều dài bàn chân từ gót đến đầu ngón dài nhất. Nếu nằm giữa hai size, ưu tiên size lớn hơn.</p><div className="size-table"><span>Chiều dài chân</span><strong>22–23 cm</strong><strong>23–24 cm</strong><strong>24–25 cm</strong><span>Size gợi ý</span><strong>35–36</strong><strong>37–38</strong><strong>39–40</strong></div></section></div></Portal> : null}
     </main>
   )
 }

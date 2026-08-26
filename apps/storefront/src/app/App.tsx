@@ -1,10 +1,11 @@
 import { lazy, Suspense } from 'react'
-import { Navigate, Route, Routes } from 'react-router'
+import { Navigate, Route, Routes, useLocation } from 'react-router'
 import { ErrorBoundary } from '../components/feedback/ErrorBoundary'
 import { PageLoader } from '../components/feedback/PageLoader'
 import { StorefrontLayout } from '../components/layout/StorefrontLayout'
 import { AdminGuard } from '../features/auth/AdminGuard'
 import { AccountGuard } from '../features/auth/AccountGuard'
+import { useScrollToTop } from '../features/motion/useMotion'
 import { ForgotPasswordPage } from '../routes/auth/ForgotPasswordPage'
 import { LoginPage } from '../routes/auth/LoginPage'
 import { RegisterPage } from '../routes/auth/RegisterPage'
@@ -35,6 +36,8 @@ const AdminPlaceholderPage = lazy(() =>
 )
 
 export function App() {
+  useScrollToTop(useLocation().pathname)
+
   return (
     <ErrorBoundary>
       <a className="skip-link" href="#main-content">

@@ -1,6 +1,16 @@
-import { useEffect, useState, type RefObject } from 'react'
+import { useEffect, useLayoutEffect, useState, type RefObject } from 'react'
 
 const EXIT_DURATION_MS = 240
+
+// react-router's <ScrollRestoration> only works with a data router
+// (createBrowserRouter/RouterProvider); this app uses <BrowserRouter>, which
+// doesn't reset scroll on navigation by itself — so every route change (menu
+// click, link, programmatic navigate) does it manually here instead.
+export function useScrollToTop(pathname: string) {
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+}
 
 export function useDelayedUnmount(open: boolean) {
   const [mounted, setMounted] = useState(open)

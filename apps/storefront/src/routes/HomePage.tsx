@@ -117,7 +117,7 @@ export function HomePage() {
                     <img alt={product.name} src={product.image} />
                     {index === 0 ? <span>Mới</span> : null}
                   </div>
-                  <h3>{product.name}</h3><p>{product.category}</p><strong>{formatVnd(product.price)}</strong>
+                  <h3>{product.name}</h3><strong>{formatVnd(product.price)}</strong>
                 </Link>
               </article>
             ))}
