@@ -1,4 +1,4 @@
-import { AlertTriangle, ArrowUpRight, Clock3, PackageX, WalletCards } from 'lucide-react'
+import { ArrowUpRight, Clock3, PackageMinus, PackageOpen, WalletCards } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router'
 import { formatVnd } from '../../lib/format'
@@ -119,8 +119,8 @@ export function AdminDashboardPage() {
         {[['Doanh thu', formatVnd(revenue)], ['Đơn hàng', String(paidOrders.length)], ['Giá trị đơn TB', formatVnd(average)]].map(([label, value]) => <article className="stat-card" key={label}><div className="stat-card__label"><span>{label}</span><WalletCards aria-hidden="true" /></div><strong>{value}</strong><p className="trend trend--up"><ArrowUpRight aria-hidden="true" /><span>Trong kỳ đã chọn</span></p></article>)}
       </section>
       <section aria-label="Cảnh báo tồn kho" className="stock-alert-grid">
-        <article className="stock-alert stock-alert--danger"><PackageX aria-hidden="true" /><div><span>SKU hết hàng</span><strong>{outOfStock}</strong></div><Link to="/admin/inventory">Xử lý</Link></article>
-        <article className="stock-alert stock-alert--warning"><AlertTriangle aria-hidden="true" /><div><span>SKU sắp hết</span><strong>{lowStock}</strong></div><Link to="/admin/inventory">Xử lý</Link></article>
+        <article className="stock-alert stock-alert--danger"><PackageOpen aria-hidden="true" /><div><span>SKU hết hàng</span><strong>{outOfStock}</strong></div><Link to="/admin/inventory">Xử lý</Link></article>
+        <article className="stock-alert stock-alert--warning"><PackageMinus aria-hidden="true" /><div><span>SKU sắp hết</span><strong>{lowStock}</strong></div><Link to="/admin/inventory">Xử lý</Link></article>
         <article className="stock-alert stock-alert--neutral"><Clock3 aria-hidden="true" /><div><span>Đang giữ chỗ</span><strong>{reserved}</strong></div><Link to="/admin/inventory">Xử lý</Link></article>
       </section>
       <div className="dashboard-grid">

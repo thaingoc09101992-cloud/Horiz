@@ -44,16 +44,17 @@
   --section-pad-y: clamp(80px, 9vw, 120px);
   --grid-gap: 20px;
 
-  --radius-xs: 2px;
-  --radius-sm: 2px;
-  --radius-md: 2px;
-  --radius-lg: 4px;
-  --radius-pill: 999px;
-  --radius-round: 50%;
-  --radius-hero-shoe: 64% 22% 23% 42% / 64% 55% 23% 33%;
-  --radius-product-shoe: 65% 25% 30% 40%;
-  --radius-sole: 0 0 50% 50%;
-  --radius-chart-bar: 1px 1px 0 0;
+  /* Locked to the square shape language — no rounded variant. */
+  --radius-xs: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-pill: 0px;
+  --radius-round: 0px;
+  --radius-hero-shoe: 0px;
+  --radius-product-shoe: 0px;
+  --radius-sole: 0px;
+  --radius-chart-bar: 0px;
   --shadow-card: 0 18px 55px rgb(17 17 17 / 0.06);
   color: var(--text);
   background: var(--bg);
@@ -67,19 +68,6 @@
    statements — get the serif. Everything else (90%) stays Instrument Sans. */
 .editorial { font-family: var(--font-editorial); }
 strong, b { font-weight: 500; }
-
-html[data-shape-theme='square'] {
-  --radius-xs: 0px;
-  --radius-sm: 0px;
-  --radius-md: 0px;
-  --radius-lg: 0px;
-  --radius-pill: 0px;
-  --radius-round: 0px;
-  --radius-hero-shoe: 0px;
-  --radius-product-shoe: 0px;
-  --radius-sole: 0px;
-  --radius-chart-bar: 0px;
-}
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -185,6 +173,9 @@ svg { width: 1.15rem; height: 1.15rem; }
 .admin-shell { display: grid; min-height: 100svh; grid-template-columns: 260px minmax(0, 1fr); background: var(--bg); }
 .admin-sidebar { position: sticky; top: 0; display: flex; height: 100svh; flex-direction: column; border-right: 1px solid var(--border); background: var(--surface); }
 .admin-sidebar__brand { position: relative; display: flex; height: 86px; align-items: flex-start; justify-content: center; flex-direction: column; gap: .25rem; padding: .75rem 1.5rem; border-bottom: 1px solid var(--border); }
+/* The wordmark artwork carries a small built-in margin around the glyph, so
+   nudge it left to line up with the flush-left "Administrator" line below it. */
+.admin-sidebar__brand > .wordmark { margin-left: -.3rem; }
 .admin-sidebar__brand > span { color: var(--muted); font-size: .58rem; font-weight: 700; letter-spacing: .12em; line-height: 1.2; text-transform: uppercase; }
 .admin-sidebar__close { position: absolute; top: 1rem; right: .8rem; display: none; }
 .admin-nav { display: flex; flex: 1; flex-direction: column; gap: .25rem; padding: 1.5rem .8rem; }
@@ -375,40 +366,9 @@ td small { margin-top: .25rem; color: var(--muted); }
 .dashboard-actions strong { font-size: 1.8rem; }
 .dashboard-actions span { color: var(--muted); font-size: .72rem; }
 
-.admin-theme-page form { display: grid; gap: 1rem; }
-.theme-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin: 0; padding: 0; border: 0; }
-.theme-choice { position: relative; display: flex; min-width: 0; overflow: hidden; flex-direction: column; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface); box-shadow: 0 8px 35px rgb(24 32 27 / .035); cursor: pointer; transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease; }
-.theme-choice:hover { transform: translateY(-2px); }
-.theme-choice:has(input:checked) { border-color: var(--brand); box-shadow: 0 0 0 2px color-mix(in srgb, var(--brand), transparent 75%), var(--shadow-card); }
-.theme-choice:has(input:focus-visible) { outline: 3px solid var(--accent); outline-offset: 3px; }
-.theme-choice > input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
-.theme-preview { display: grid; min-height: 260px; align-content: center; gap: 1.2rem; padding: 2rem; background: var(--surface-subtle); }
-.theme-preview--rounded { --preview-radius-sm: 12px; --preview-radius-md: 18px; --preview-radius-pill: 999px; }
-.theme-preview--square { --preview-radius-sm: 0px; --preview-radius-md: 0px; --preview-radius-pill: 0px; }
-.theme-preview__top, .theme-preview__cards { display: flex; gap: .7rem; }
-.theme-preview__top i { display: block; height: 14px; border-radius: var(--preview-radius-pill); background: var(--muted); }
-.theme-preview__top i:first-child { width: 38%; }
-.theme-preview__top i:last-child { width: 18%; margin-left: auto; }
-.theme-preview__cards i { display: block; height: 86px; flex: 1; border: 1px solid var(--border); border-radius: var(--preview-radius-md); background: var(--surface-raised); box-shadow: 0 8px 24px rgb(24 32 27 / .06); }
-.theme-preview__button { display: grid; width: 44%; min-height: 38px; place-items: center; border-radius: var(--preview-radius-pill); background: var(--brand); color: var(--brand-contrast); font-size: .65rem; font-weight: 700; }
-.theme-choice__copy { display: flex; flex-direction: column; gap: .55rem; padding: 1.25rem; color: var(--muted); font-size: .75rem; line-height: 1.6; }
-.theme-choice__title { display: flex; align-items: center; gap: .55rem; color: var(--text); }
-.theme-choice__title strong { font-size: 1rem; }
-.theme-choice__title small { display: inline-flex; align-items: center; gap: .3rem; margin-left: auto; color: var(--success); font-size: .65rem; font-weight: 700; }
-.theme-choice__title small svg { width: 14px; height: 14px; }
-.theme-save-bar { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: 1.2rem; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface); }
-.theme-save-bar > div { display: flex; flex-direction: column; gap: .3rem; }
-.theme-save-bar strong { font-size: .8rem; }
-.theme-save-bar span { color: var(--muted); font-size: .7rem; }
-.theme-save-bar .button { min-width: 150px; }
-
 @media (max-width: 700px) {
   .dashboard-actions { grid-template-columns: 1fr; }
   .dashboard-actions a { min-height: 90px; }
-  .theme-choices { grid-template-columns: 1fr; }
-  .theme-preview { min-height: 210px; }
-  .theme-save-bar { align-items: stretch; flex-direction: column; }
-  .theme-save-bar .button { width: 100%; }
 }
 
 /* Unified navigation, overlays and product/account surfaces */
@@ -647,10 +607,17 @@ td small { margin-top: .25rem; color: var(--muted); }
 .ab-inline-link svg, .ab-collection-card > span svg { transition: transform .24s cubic-bezier(.22, 1, .36, 1); }
 .ab-inline-link:hover svg, .ab-collection-card:hover > span svg { transform: translateX(6px); }
 
-/* New Arrivals — product grid with a carousel */
+/* Plain product grid — used anywhere a row of cards is shown without scroll
+   affordance (PDP related products, etc). Columns just shrink to fit, so a
+   product can never end up clipped or hidden off-screen. */
+.ab-product-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+
+/* New Arrivals / Best Sellers — the one place this grid becomes a scrollable
+   carousel, gated to this wrapper because it's the only place with the arrow
+   buttons that make the hidden overflow discoverable. */
 .ab-product-carousel { position: relative; }
-.ab-product-grid { display: grid; grid-template-columns: repeat(4, minmax(240px, 1fr)); gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
-.ab-product-grid::-webkit-scrollbar { display: none; }
+.ab-product-carousel .ab-product-grid { grid-template-columns: repeat(4, minmax(240px, 1fr)); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.ab-product-carousel .ab-product-grid::-webkit-scrollbar { display: none; }
 .ab-carousel-nav { position: absolute; top: 38%; z-index: 2; display: flex; width: 44px; height: 44px; align-items: center; justify-content: center; border: 1px solid var(--border); border-radius: var(--radius-round); background: var(--surface-raised); color: var(--text); box-shadow: 0 12px 30px rgb(17 17 17 / .1); cursor: pointer; transform: translateY(-50%); transition: opacity .18s ease, transform .18s ease, box-shadow .18s ease; }
 .ab-carousel-nav:hover { transform: translateY(-50%) scale(1.06); box-shadow: 0 16px 36px rgb(17 17 17 / .16); }
 .ab-carousel-nav:disabled { opacity: 0; pointer-events: none; }

@@ -5,11 +5,9 @@ import {
   ChevronLeft,
   CircleDollarSign,
   ClipboardList,
-  FileText,
   LayoutDashboard,
   Menu,
   PackageSearch,
-  Palette,
   Search,
   ShieldCheck,
   UsersRound,
@@ -40,8 +38,6 @@ const adminNav = [
   { label: 'Chiết khấu', href: '/admin/discounts', icon: BadgePercent },
   { label: 'Đơn hàng', href: '/admin/orders', icon: ClipboardList },
   { label: 'Thành viên', href: '/admin/members', icon: UsersRound },
-  { label: 'Nội dung', href: '/admin/content', icon: FileText },
-  { label: 'Giao diện', href: '/admin/theme', icon: Palette },
   { label: 'Nhật ký', href: '/admin/audit-logs', icon: ShieldCheck },
 ]
 
