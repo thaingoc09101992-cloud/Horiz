@@ -27,8 +27,15 @@ const collections = [
 
 // Hero slideshow — slide 0 keeps the original (CMS-overridable) copy; slides 1–2
 // carry their own copy around HORIZ's other two pillars: natural materials and
-// all-day comfort. Auto-advances every 3s (paused for reduced-motion users).
+// all-day comfort. Auto-advances every 3s; each change picks a random 0.75s
+// transition (wipe / cover / fade), never repeating the previous one.
 const HERO_SLIDE_INTERVAL_MS = 3000
+const HERO_TRANSITIONS = ['wipe', 'cover', 'fade'] as const
+type HeroTransition = (typeof HERO_TRANSITIONS)[number]
+const pickHeroTransition = (previous: HeroTransition): HeroTransition => {
+  const pool = HERO_TRANSITIONS.filter((name) => name !== previous)
+  return pool[Math.floor(Math.random() * pool.length)] ?? 'fade'
+}
 const heroSlides = [
   {
     image: '/prototype/hero-1.png',
@@ -69,7 +76,13 @@ export function HomePage() {
   const productTrackRef = useRef<HTMLDivElement>(null)
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(false)
-  const [activeHeroSlide, setActiveHeroSlide] = useState(0)
+  // active = slide shown now, prev = slide held underneath during the transition,
+  // transition = which of wipe/cover/fade the incoming slide is playing.
+  const [hero, setHero] = useState<{ active: number; prev: number | null; transition: HeroTransition }>({
+    active: 0,
+    prev: null,
+    transition: 'fade',
+  })
 
   useRevealMotion(homeRef)
   useHeroParallax(homeRef)
@@ -88,15 +101,28 @@ export function HomePage() {
     return () => window.removeEventListener('resize', updateProductScrollState)
   }, [])
 
-  // Auto-advance the hero slideshow. The slide/copy transitions are opacity-only
-  // and are already reduced to instant swaps for prefers-reduced-motion users by
-  // the global motion rule, so the rotation itself can stay on for everyone.
+  const goToHeroSlide = (next: number) => {
+    setHero((current) =>
+      next === current.active
+        ? current
+        : { active: next, prev: current.active, transition: pickHeroTransition(current.transition) },
+    )
+  }
+
+  // Auto-advance the hero slideshow. The wipe/cover/fade transitions are reduced
+  // to instant swaps for prefers-reduced-motion users by the global motion rule,
+  // so the rotation itself can stay on for everyone. Re-armed on each change.
   useEffect(() => {
+    const next = (hero.active + 1) % heroSlides.length
     const timeoutId = window.setTimeout(() => {
-      setActiveHeroSlide((current) => (current + 1) % heroSlides.length)
+      setHero((current) => ({
+        active: next,
+        prev: current.active,
+        transition: pickHeroTransition(current.transition),
+      }))
     }, HERO_SLIDE_INTERVAL_MS)
     return () => window.clearTimeout(timeoutId)
-  }, [activeHeroSlide])
+  }, [hero.active])
 
   const scrollProducts = (direction: 1 | -1) => {
     const track = productTrackRef.current
@@ -120,29 +146,34 @@ export function HomePage() {
     })
   }, [])
 
-  const heroContent = activeHeroSlide === 0 ? heroCopy : heroSlides[activeHeroSlide] ?? heroCopy
+  const heroContent = hero.active === 0 ? heroCopy : heroSlides[hero.active] ?? heroCopy
 
   return (
     <main id="main-content" className="ab-home" ref={homeRef}>
       <section className="ab-hero">
-        {heroSlides.map((slide, index) => (
-          <picture
-            className="ab-hero__slide"
-            data-active={index === activeHeroSlide}
-            key={slide.image}
-            style={{ opacity: index === activeHeroSlide ? 1 : 0 }}
-          >
-            <img
-              alt={slide.alt}
-              aria-hidden={index === activeHeroSlide ? undefined : true}
-              fetchPriority={index === 0 ? 'high' : undefined}
-              src={slide.image}
-            />
-          </picture>
-        ))}
+        <div className="ab-hero__stage" aria-hidden="true">
+          {heroSlides.map((slide, index) => {
+            const state =
+              index === hero.active ? 'active' : index === hero.prev ? 'leaving' : 'idle'
+            return (
+              <picture
+                className="ab-hero__slide"
+                data-state={state}
+                data-transition={state === 'active' && hero.prev !== null ? hero.transition : undefined}
+                key={slide.image}
+              >
+                <img
+                  alt={slide.alt}
+                  fetchPriority={index === 0 ? 'high' : undefined}
+                  src={slide.image}
+                />
+              </picture>
+            )
+          })}
+        </div>
         <div className="ab-hero__shade" />
         <div className="ab-hero__content" data-reveal="hero">
-          <div className="ab-hero__copy" key={activeHeroSlide}>
+          <div className="ab-hero__copy" key={hero.active}>
             <p className="ab-kicker">{heroContent.eyebrow}</p>
             <h1>{heroContent.title}<br /><em className="editorial">{heroContent.titleAccent}</em></h1>
             <p>{heroContent.description}</p>
@@ -156,11 +187,11 @@ export function HomePage() {
           {heroSlides.map((slide, index) => (
             <button
               aria-label={`Xem ảnh giới thiệu ${index + 1}`}
-              aria-selected={index === activeHeroSlide}
+              aria-selected={index === hero.active}
               className="ab-hero__dot"
-              data-active={index === activeHeroSlide}
+              data-active={index === hero.active}
               key={slide.image}
-              onClick={() => setActiveHeroSlide(index)}
+              onClick={() => goToHeroSlide(index)}
               role="tab"
               type="button"
             />
