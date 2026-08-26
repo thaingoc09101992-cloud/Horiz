@@ -19,9 +19,14 @@ Không để preview trỏ vào database production có quyền ghi.
 
 ## 3. Cloudflare
 
-- Kết nối repository GitHub với Pages hoặc Workers Builds.
-- Build từ repository root bằng `npm run build`; thư mục output Cloudflare Pages là `apps/storefront/dist`.
-- SPA fallback được khai báo tại `apps/storefront/public/_redirects`; security/cache headers tại `apps/storefront/public/_headers`.
+Project này deploy qua **Workers Builds** (không phải Pages cổ điển) — build command chạy `npm run build` ở gốc repo như bình thường, nhưng bước deploy chạy `npx wrangler deploy`. Repo là npm workspaces monorepo (`apps/*`, `packages/*`, `workers/*`), nên cả 2 bước đều có thể tự dò-nhầm ở root repo và báo lỗi "application detection logic has been run in the root of a workspace":
+
+- **Dashboard:** set **Root directory = `apps/storefront`** khi tạo project (không để trống/`/`).
+- **Bắt buộc phải có** [`apps/storefront/wrangler.jsonc`](../apps/storefront/wrangler.jsonc) — nếu không, `wrangler deploy` không biết deploy gì và tự dò ở root repo, lỗi y hệt bước build dù Root directory đã set đúng. File này khai báo `assets.directory: "./dist"` + `not_found_handling: "single-page-application"` (tương đương `_redirects` cho SPA), không có `main` vì không có Worker script nào chạy server-side.
+- `name` trong `wrangler.jsonc` **phải khớp chính xác** tên project Workers đã tạo trên dashboard — lệch tên sẽ deploy nhầm/tạo Worker mới.
+- Build command vẫn để `npm run build` (chạy từ gốc repo, ra `apps/storefront/dist`) — không cần đổi thành build riêng cho `apps/storefront` dù Root directory đã trỏ vào đó.
+- `npm run build` **không** chạy lại `scripts/build-sitemap.mjs` mỗi lần deploy. `sitemap.xml` là file tĩnh đã commit sẵn — nhớ chạy `node scripts/build-sitemap.mjs` ở local rồi commit lại mỗi khi catalogue đổi.
+- SPA fallback còn dự phòng thêm ở `apps/storefront/public/_redirects`; security/cache headers tại `apps/storefront/public/_headers` (cả 2 file này vẫn được Workers Assets đọc, hoạt động y hệt Pages).
 - Secrets đặt trong Cloudflare dashboard/secret store, không dùng biến `VITE_*` cho secret.
 - Custom domain, TLS, cache rules, compression và security headers.
 - Production deploy chỉ từ `main`; preview từ PR.
