@@ -115,7 +115,7 @@ export function ProductDetailPage() {
           <div className="pdp-quantity-row"><strong>Số lượng</strong><div className="quantity-control"><button aria-label="Giảm số lượng" disabled={quantity === 1} onClick={() => setQuantity((value) => Math.max(1, value - 1))} type="button"><Minus aria-hidden="true" /></button><output aria-live="polite">{quantity}</output><button aria-label="Tăng số lượng" disabled={quantity >= maxQuantity} onClick={() => setQuantity((value) => Math.min(maxQuantity, value + 1))} type="button"><Plus aria-hidden="true" /></button></div></div>
           <button className="pdp-add-button" disabled={!selectedSize || maxQuantity < 1} onClick={handleAdd} type="button">{added ? <><Check aria-hidden="true" /> Đã thêm vào giỏ</> : 'Thêm vào giỏ hàng'}</button>
           <ul className="pdp-highlights"><li><Check aria-hidden="true" /> Miễn phí giao hàng cho đơn từ 1.500.000₫</li><li><Check aria-hidden="true" /> Đổi trả trong 30 ngày</li><li><Check aria-hidden="true" /> COD, thanh toán khi nhận hàng</li></ul>
-          <details open><summary>Thông tin sản phẩm <ChevronDown aria-hidden="true" /></summary><p>Mã: {product.id}<br />Danh mục: {product.category}<br />Đối tượng: {product.audience}<br />Gallery: {product.imageCount} ảnh.</p></details>
+          <details open><summary>Thông tin sản phẩm <ChevronDown aria-hidden="true" /></summary><p>Mã: {product.sku}<br />Danh mục: {product.category}<br />Đối tượng: {product.audience}<br />Gallery: {product.imageCount} ảnh.</p></details>
           <details><summary>Chất liệu &amp; chăm sóc <ChevronDown aria-hidden="true" /></summary><p>Vệ sinh nhẹ bằng tay, không dùng chất tẩy mạnh và để khô tự nhiên ở nơi thoáng mát.</p></details>
         </section>
       </div>

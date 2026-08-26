@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto'
 import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, unlinkSync, writeFileSync } from 'node:fs'
 import { basename, dirname, join } from 'node:path'
 
@@ -56,6 +57,17 @@ const titleCase = (slug) => slug
 const safeId = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
 const csvCell = (value) => `"${String(value ?? '').replaceAll('"', '""')}"`
 
+// Short, customer-facing product code — shown on the PDP, never used for
+// routing/checkout/Supabase (that's still `id`, see the note above about
+// why it must stay untouched). Hashed off audience+San_pham only (not
+// category), so unlike `id` it never changes if a product gets
+// reclassified into a different category later.
+const audienceCodes = { Men: 'MEN', Women: 'WOM', Unisex: 'UNI', Toddler: 'TOD' }
+const skuFor = (audience, slug) => {
+  const hash = createHash('md5').update(`${audience}/${slug}`).digest('hex').slice(0, 5).toUpperCase()
+  return `HRZ-${audienceCodes[audience] ?? 'GEN'}-${hash}`
+}
+
 mkdirSync(imageOutputRoot, { recursive: true })
 mkdirSync(dirname(dataOutputPath), { recursive: true })
 
@@ -76,6 +88,7 @@ for (const product of productGroups.values()) {
 
   products.push({
     id,
+    sku: skuFor(first.Danh_muc_chinh, first.San_pham),
     slug: first.San_pham,
     name: titleCase(first.San_pham),
     audience: first.Danh_muc_chinh,

@@ -1,6 +1,7 @@
 [
   {
     "id": "men-apparel-mens-merino-blend-sweatpant",
+    "sku": "HRZ-MEN-4109B",
     "slug": "mens-merino-blend-sweatpant",
     "name": "Merino Blend Sweatpant",
     "audience": "Men",
@@ -17,6 +18,7 @@
   },
   {
     "id": "men-apparel-mens-merino-blend-sweatpant-natural-grey-heather",
+    "sku": "HRZ-MEN-4A02B",
     "slug": "mens-merino-blend-sweatpant-natural-grey-heather",
     "name": "Merino Blend Sweatpant Natural Grey Heather",
     "audience": "Men",
@@ -33,6 +35,7 @@
   },
   {
     "id": "men-apparel-mens-soft-merino-long-sleeve-tee-medium-grey",
+    "sku": "HRZ-MEN-F49FE",
     "slug": "mens-soft-merino-long-sleeve-tee-medium-grey",
     "name": "Soft Merino Long Sleeve Tee Medium Grey",
     "audience": "Men",
@@ -49,6 +52,7 @@
   },
   {
     "id": "men-apparel-mens-soft-merino-long-sleeve-tee-true-black",
+    "sku": "HRZ-MEN-93B49",
     "slug": "mens-soft-merino-long-sleeve-tee-true-black",
     "name": "Soft Merino Long Sleeve Tee True Black",
     "audience": "Men",
@@ -65,6 +69,7 @@
   },
   {
     "id": "men-apparel-mens-soft-merino-tee",
+    "sku": "HRZ-MEN-BD2FB",
     "slug": "mens-soft-merino-tee",
     "name": "Soft Merino Tee",
     "audience": "Men",
@@ -81,6 +86,7 @@
   },
   {
     "id": "men-apparel-mens-soft-merino-tee-medium-grey",
+    "sku": "HRZ-MEN-A2E53",
     "slug": "mens-soft-merino-tee-medium-grey",
     "name": "Soft Merino Tee Medium Grey",
     "audience": "Men",
@@ -97,6 +103,7 @@
   },
   {
     "id": "men-shoes-mens-allbirds-flip-flop",
+    "sku": "HRZ-MEN-6445F",
     "slug": "mens-allbirds-flip-flop",
     "name": "HORIZ Flip Flop",
     "audience": "Men",
@@ -114,6 +121,7 @@
   },
   {
     "id": "men-shoes-mens-allbirds-flip-flop-anthracite",
+    "sku": "HRZ-MEN-56105",
     "slug": "mens-allbirds-flip-flop-anthracite",
     "name": "HORIZ Flip Flop Anthracite",
     "audience": "Men",
@@ -131,6 +139,7 @@
   },
   {
     "id": "men-shoes-mens-allbirds-slide-anthracite",
+    "sku": "HRZ-MEN-428F7",
     "slug": "mens-allbirds-slide-anthracite",
     "name": "HORIZ Slide Anthracite",
     "audience": "Men",
@@ -148,6 +157,7 @@
   },
   {
     "id": "men-shoes-mens-allbirds-slide-mushroom",
+    "sku": "HRZ-MEN-4B689",
     "slug": "mens-allbirds-slide-mushroom",
     "name": "HORIZ Slide Mushroom",
     "audience": "Men",
@@ -165,6 +175,7 @@
   },
   {
     "id": "men-shoes-mens-allbirds-slide-natural-black",
+    "sku": "HRZ-MEN-5375B",
     "slug": "mens-allbirds-slide-natural-black",
     "name": "HORIZ Slide Natural Black",
     "audience": "Men",
@@ -182,6 +193,7 @@
   },
   {
     "id": "men-shoes-mens-couriers",
+    "sku": "HRZ-MEN-BFDF1",
     "slug": "mens-couriers",
     "name": "Couriers",
     "audience": "Men",
@@ -199,6 +211,7 @@
   },
   {
     "id": "men-shoes-mens-couriers-blizzard-light-grey",
+    "sku": "HRZ-MEN-D4836",
     "slug": "mens-couriers-blizzard-light-grey",
     "name": "Couriers Blizzard Light Grey",
     "audience": "Men",
@@ -213,6 +226,7 @@
   },
   {
     "id": "men-shoes-mens-couriers-dark-grey-natural-black",
+    "sku": "HRZ-MEN-BB4AA",
     "slug": "mens-couriers-dark-grey-natural-black",
     "name": "Couriers Dark Grey Natural Black",
     "audience": "Men",
@@ -227,6 +241,7 @@
   },
   {
     "id": "men-shoes-mens-cruiser-corduroy-stony-cream",
+    "sku": "HRZ-MEN-F9532",
     "slug": "mens-cruiser-corduroy-stony-cream",
     "name": "Cruiser Corduroy Stony Cream",
     "audience": "Men",
@@ -244,6 +259,7 @@
   },
   {
     "id": "men-shoes-mens-cruiser-dark-navy",
+    "sku": "HRZ-MEN-F5849",
     "slug": "mens-cruiser-dark-navy",
     "name": "Cruiser Dark Navy",
     "audience": "Men",
@@ -261,6 +277,7 @@
   },
   {
     "id": "men-shoes-mens-cruiser-medium-grey",
+    "sku": "HRZ-MEN-28F54",
     "slug": "mens-cruiser-medium-grey",
     "name": "Cruiser Medium Grey",
     "audience": "Men",
@@ -278,6 +295,7 @@
   },
   {
     "id": "men-shoes-mens-cruiser-natural-white",
+    "sku": "HRZ-MEN-241DC",
     "slug": "mens-cruiser-natural-white",
     "name": "Cruiser Natural White",
     "audience": "Men",
@@ -295,6 +313,7 @@
   },
   {
     "id": "men-shoes-mens-cruiser-remix",
+    "sku": "HRZ-MEN-DF6A9",
     "slug": "mens-cruiser-remix",
     "name": "Cruiser Remix",
     "audience": "Men",
@@ -312,6 +331,7 @@
   },
   {
     "id": "men-shoes-mens-cruiser-slip-on-corduroy",
+    "sku": "HRZ-MEN-53242",
     "slug": "mens-cruiser-slip-on-corduroy",
     "name": "Cruiser Slip On Corduroy",
     "audience": "Men",
@@ -329,6 +349,7 @@
   },
   {
     "id": "men-shoes-mens-cruiser-slip-on-corduroy-stony-cream",
+    "sku": "HRZ-MEN-9A5DD",
     "slug": "mens-cruiser-slip-on-corduroy-stony-cream",
     "name": "Cruiser Slip On Corduroy Stony Cream",
     "audience": "Men",
@@ -346,6 +367,7 @@
   },
   {
     "id": "men-shoes-mens-cruiser-slip-on-tweed-dark-grey",
+    "sku": "HRZ-MEN-9D4B2",
     "slug": "mens-cruiser-slip-on-tweed-dark-grey",
     "name": "Cruiser Slip On Tweed Dark Grey",
     "audience": "Men",
@@ -363,6 +385,7 @@
   },
   {
     "id": "men-shoes-mens-cruiser-slip-on-tweed-weathered-brown",
+    "sku": "HRZ-MEN-0AB5C",
     "slug": "mens-cruiser-slip-on-tweed-weathered-brown",
     "name": "Cruiser Slip On Tweed Weathered Brown",
     "audience": "Men",
@@ -380,6 +403,7 @@
   },
   {
     "id": "men-shoes-mens-cruiser-terralux-anthracite",
+    "sku": "HRZ-MEN-AE93F",
     "slug": "mens-cruiser-terralux-anthracite",
     "name": "Cruiser Terralux Anthracite",
     "audience": "Men",
@@ -397,6 +421,7 @@
   },
   {
     "id": "men-shoes-mens-cruiser-tweed-weathered-brown",
+    "sku": "HRZ-MEN-B96E9",
     "slug": "mens-cruiser-tweed-weathered-brown",
     "name": "Cruiser Tweed Weathered Brown",
     "audience": "Men",
@@ -414,6 +439,7 @@
   },
   {
     "id": "men-shoes-mens-dasher-nz-natural-black-blizzard",
+    "sku": "HRZ-MEN-37720",
     "slug": "mens-dasher-nz-natural-black-blizzard",
     "name": "Dasher Nz Natural Black Blizzard",
     "audience": "Men",
@@ -431,6 +457,7 @@
   },
   {
     "id": "men-shoes-mens-dasher-nz-relay-natural-black-blizzard",
+    "sku": "HRZ-MEN-3F5C4",
     "slug": "mens-dasher-nz-relay-natural-black-blizzard",
     "name": "Dasher Nz Relay Natural Black Blizzard",
     "audience": "Men",
@@ -448,6 +475,7 @@
   },
   {
     "id": "men-shoes-mens-runner-go-luxe",
+    "sku": "HRZ-MEN-D80EA",
     "slug": "mens-runner-go-luxe",
     "name": "Runner Go Luxe",
     "audience": "Men",
@@ -465,6 +493,7 @@
   },
   {
     "id": "men-shoes-mens-runner-nz-remix",
+    "sku": "HRZ-MEN-A1868",
     "slug": "mens-runner-nz-remix",
     "name": "Runner Nz Remix",
     "audience": "Men",
@@ -482,6 +511,7 @@
   },
   {
     "id": "men-shoes-mens-runner-nz-slip-on",
+    "sku": "HRZ-MEN-9B541",
     "slug": "mens-runner-nz-slip-on",
     "name": "Runner Nz Slip On",
     "audience": "Men",
@@ -499,6 +529,7 @@
   },
   {
     "id": "men-shoes-mens-runner-nz-slip-on-dark-navy",
+    "sku": "HRZ-MEN-6FE1F",
     "slug": "mens-runner-nz-slip-on-dark-navy",
     "name": "Runner Nz Slip On Dark Navy",
     "audience": "Men",
@@ -516,6 +547,7 @@
   },
   {
     "id": "men-shoes-mens-runner-nz-slip-on-light-grey",
+    "sku": "HRZ-MEN-1D9A0",
     "slug": "mens-runner-nz-slip-on-light-grey",
     "name": "Runner Nz Slip On Light Grey",
     "audience": "Men",
@@ -533,6 +565,7 @@
   },
   {
     "id": "men-shoes-mens-runner-nz-slip-on-mushroom",
+    "sku": "HRZ-MEN-7D4A3",
     "slug": "mens-runner-nz-slip-on-mushroom",
     "name": "Runner Nz Slip On Mushroom",
     "audience": "Men",
@@ -550,6 +583,7 @@
   },
   {
     "id": "men-shoes-mens-runner-nz-terralux-light-grey",
+    "sku": "HRZ-MEN-70926",
     "slug": "mens-runner-nz-terralux-light-grey",
     "name": "Runner Nz Terralux Light Grey",
     "audience": "Men",
@@ -567,6 +601,7 @@
   },
   {
     "id": "men-shoes-mens-runner-nz-tweed-hazy-indigo",
+    "sku": "HRZ-MEN-60205",
     "slug": "mens-runner-nz-tweed-hazy-indigo",
     "name": "Runner Nz Tweed Hazy Indigo",
     "audience": "Men",
@@ -584,6 +619,7 @@
   },
   {
     "id": "men-shoes-mens-runner-nz-tweed-weathered-brown",
+    "sku": "HRZ-MEN-07E31",
     "slug": "mens-runner-nz-tweed-weathered-brown",
     "name": "Runner Nz Tweed Weathered Brown",
     "audience": "Men",
@@ -601,6 +637,7 @@
   },
   {
     "id": "men-shoes-mens-runner-protect-dark-grey",
+    "sku": "HRZ-MEN-6D64B",
     "slug": "mens-runner-protect-dark-grey",
     "name": "Runner Protect Dark Grey",
     "audience": "Men",
@@ -617,6 +654,7 @@
   },
   {
     "id": "men-shoes-mens-runner-protect-natural-black-natural-white",
+    "sku": "HRZ-MEN-8F960",
     "slug": "mens-runner-protect-natural-black-natural-white",
     "name": "Runner Protect Natural Black Natural White",
     "audience": "Men",
@@ -633,6 +671,7 @@
   },
   {
     "id": "men-shoes-mens-strider",
+    "sku": "HRZ-MEN-BC109",
     "slug": "mens-strider",
     "name": "Strider",
     "audience": "Men",
@@ -650,6 +689,7 @@
   },
   {
     "id": "men-shoes-mens-strider-blizzard-dark-navy",
+    "sku": "HRZ-MEN-F8AE4",
     "slug": "mens-strider-blizzard-dark-navy",
     "name": "Strider Blizzard Dark Navy",
     "audience": "Men",
@@ -667,6 +707,7 @@
   },
   {
     "id": "men-shoes-mens-strider-dark-navy",
+    "sku": "HRZ-MEN-FDD65",
     "slug": "mens-strider-dark-navy",
     "name": "Strider Dark Navy",
     "audience": "Men",
@@ -684,6 +725,7 @@
   },
   {
     "id": "men-shoes-mens-strider-explore",
+    "sku": "HRZ-MEN-90804",
     "slug": "mens-strider-explore",
     "name": "Strider Explore",
     "audience": "Men",
@@ -701,6 +743,7 @@
   },
   {
     "id": "men-shoes-mens-strider-explore-rustic-green",
+    "sku": "HRZ-MEN-7AA64",
     "slug": "mens-strider-explore-rustic-green",
     "name": "Strider Explore Rustic Green",
     "audience": "Men",
@@ -718,6 +761,7 @@
   },
   {
     "id": "men-shoes-mens-strider-medium-grey",
+    "sku": "HRZ-MEN-7303A",
     "slug": "mens-strider-medium-grey",
     "name": "Strider Medium Grey",
     "audience": "Men",
@@ -735,6 +779,7 @@
   },
   {
     "id": "men-shoes-mens-strider-natural-black",
+    "sku": "HRZ-MEN-62940",
     "slug": "mens-strider-natural-black",
     "name": "Strider Natural Black",
     "audience": "Men",
@@ -752,6 +797,7 @@
   },
   {
     "id": "men-shoes-mens-strider-natural-black-blizzard",
+    "sku": "HRZ-MEN-4394C",
     "slug": "mens-strider-natural-black-blizzard",
     "name": "Strider Natural Black Blizzard",
     "audience": "Men",
@@ -769,6 +815,7 @@
   },
   {
     "id": "men-shoes-mens-strider-rugged-beige",
+    "sku": "HRZ-MEN-DC155",
     "slug": "mens-strider-rugged-beige",
     "name": "Strider Rugged Beige",
     "audience": "Men",
@@ -786,6 +833,7 @@
   },
   {
     "id": "men-shoes-mens-trail-runners-swt",
+    "sku": "HRZ-MEN-4FEA1",
     "slug": "mens-trail-runners-swt",
     "name": "Trail Runners Swt",
     "audience": "Men",
@@ -803,6 +851,7 @@
   },
   {
     "id": "men-shoes-mens-tree-dasher-relay-blizzard",
+    "sku": "HRZ-MEN-EE79A",
     "slug": "mens-tree-dasher-relay-blizzard",
     "name": "Tree Dasher Relay Blizzard",
     "audience": "Men",
@@ -820,6 +869,7 @@
   },
   {
     "id": "men-shoes-mens-tree-dasher-relay-hanami-blue",
+    "sku": "HRZ-MEN-E5CC3",
     "slug": "mens-tree-dasher-relay-hanami-blue",
     "name": "Tree Dasher Relay Hanami Blue",
     "audience": "Men",
@@ -837,6 +887,7 @@
   },
   {
     "id": "men-shoes-mens-tree-dashers",
+    "sku": "HRZ-MEN-360DA",
     "slug": "mens-tree-dashers",
     "name": "Tree Dashers",
     "audience": "Men",
@@ -853,6 +904,7 @@
   },
   {
     "id": "men-shoes-mens-tree-dashers-blizzard",
+    "sku": "HRZ-MEN-FFD5D",
     "slug": "mens-tree-dashers-blizzard",
     "name": "Tree Dashers Blizzard",
     "audience": "Men",
@@ -870,6 +922,7 @@
   },
   {
     "id": "men-shoes-mens-tree-dashers-blizzard-black",
+    "sku": "HRZ-MEN-94C7A",
     "slug": "mens-tree-dashers-blizzard-black",
     "name": "Tree Dashers Blizzard Black",
     "audience": "Men",
@@ -886,6 +939,7 @@
   },
   {
     "id": "men-shoes-mens-tree-dashers-blizzard-hazy-cobalt",
+    "sku": "HRZ-MEN-2FBA1",
     "slug": "mens-tree-dashers-blizzard-hazy-cobalt",
     "name": "Tree Dashers Blizzard Hazy Cobalt",
     "audience": "Men",
@@ -903,6 +957,7 @@
   },
   {
     "id": "men-shoes-mens-tree-dashers-deep-navy",
+    "sku": "HRZ-MEN-E251F",
     "slug": "mens-tree-dashers-deep-navy",
     "name": "Tree Dashers Deep Navy",
     "audience": "Men",
@@ -920,6 +975,7 @@
   },
   {
     "id": "men-shoes-mens-tree-dashers-rugged-beige-stony-cream",
+    "sku": "HRZ-MEN-6DE8B",
     "slug": "mens-tree-dashers-rugged-beige-stony-cream",
     "name": "Tree Dashers Rugged Beige Stony Cream",
     "audience": "Men",
@@ -937,6 +993,7 @@
   },
   {
     "id": "men-shoes-mens-tree-dashers-twilight-white-twilight-teal",
+    "sku": "HRZ-MEN-07CA1",
     "slug": "mens-tree-dashers-twilight-white-twilight-teal",
     "name": "Tree Dashers Twilight White Twilight Teal",
     "audience": "Men",
@@ -954,6 +1011,7 @@
   },
   {
     "id": "men-shoes-mens-tree-dashers-utility-blizzard-deep-navy",
+    "sku": "HRZ-MEN-34FE3",
     "slug": "mens-tree-dashers-utility-blizzard-deep-navy",
     "name": "Tree Dashers Utility Blizzard Deep Navy",
     "audience": "Men",
@@ -971,6 +1029,7 @@
   },
   {
     "id": "men-shoes-mens-tree-dashers-utility-natural-white-rustic-brown",
+    "sku": "HRZ-MEN-A1A4E",
     "slug": "mens-tree-dashers-utility-natural-white-rustic-brown",
     "name": "Tree Dashers Utility Natural White Rustic Brown",
     "audience": "Men",
@@ -988,6 +1047,7 @@
   },
   {
     "id": "men-shoes-mens-tree-gliders",
+    "sku": "HRZ-MEN-48B50",
     "slug": "mens-tree-gliders",
     "name": "Tree Gliders",
     "audience": "Men",
@@ -1005,6 +1065,7 @@
   },
   {
     "id": "men-shoes-mens-tree-gliders-blizzard",
+    "sku": "HRZ-MEN-07BFE",
     "slug": "mens-tree-gliders-blizzard",
     "name": "Tree Gliders Blizzard",
     "audience": "Men",
@@ -1022,6 +1083,7 @@
   },
   {
     "id": "men-shoes-mens-tree-gliders-deep-navy",
+    "sku": "HRZ-MEN-EAABB",
     "slug": "mens-tree-gliders-deep-navy",
     "name": "Tree Gliders Deep Navy",
     "audience": "Men",
@@ -1039,6 +1101,7 @@
   },
   {
     "id": "men-shoes-mens-tree-gliders-natural-black-blizzard",
+    "sku": "HRZ-MEN-2F79A",
     "slug": "mens-tree-gliders-natural-black-blizzard",
     "name": "Tree Gliders Natural Black Blizzard",
     "audience": "Men",
@@ -1056,6 +1119,7 @@
   },
   {
     "id": "men-shoes-mens-tree-gliders-natural-white",
+    "sku": "HRZ-MEN-1B59B",
     "slug": "mens-tree-gliders-natural-white",
     "name": "Tree Gliders Natural White",
     "audience": "Men",
@@ -1073,6 +1137,7 @@
   },
   {
     "id": "men-shoes-mens-tree-gliders-twilight-white",
+    "sku": "HRZ-MEN-16B54",
     "slug": "mens-tree-gliders-twilight-white",
     "name": "Tree Gliders Twilight White",
     "audience": "Men",
@@ -1090,6 +1155,7 @@
   },
   {
     "id": "men-shoes-mens-tree-runner-go",
+    "sku": "HRZ-MEN-A8C09",
     "slug": "mens-tree-runner-go",
     "name": "Tree Runner Go",
     "audience": "Men",
@@ -1107,6 +1173,7 @@
   },
   {
     "id": "men-shoes-mens-tree-runner-go-deep-navy-true-navy",
+    "sku": "HRZ-MEN-2FD2E",
     "slug": "mens-tree-runner-go-deep-navy-true-navy",
     "name": "Tree Runner Go Deep Navy True Navy",
     "audience": "Men",
@@ -1124,6 +1191,7 @@
   },
   {
     "id": "men-shoes-mens-tree-runner-go-natural-black-blizzard-sole",
+    "sku": "HRZ-MEN-F7E91",
     "slug": "mens-tree-runner-go-natural-black-blizzard-sole",
     "name": "Tree Runner Go Natural Black Blizzard Sole",
     "audience": "Men",
@@ -1141,6 +1209,7 @@
   },
   {
     "id": "men-shoes-mens-tree-runner-go-utility",
+    "sku": "HRZ-MEN-672BF",
     "slug": "mens-tree-runner-go-utility",
     "name": "Tree Runner Go Utility",
     "audience": "Men",
@@ -1158,6 +1227,7 @@
   },
   {
     "id": "men-shoes-mens-tree-runner-go-utility-blizzard-hazy-pine",
+    "sku": "HRZ-MEN-C3369",
     "slug": "mens-tree-runner-go-utility-blizzard-hazy-pine",
     "name": "Tree Runner Go Utility Blizzard Hazy Pine",
     "audience": "Men",
@@ -1175,6 +1245,7 @@
   },
   {
     "id": "men-shoes-mens-tree-runner-nz-blizzard-verdant-green",
+    "sku": "HRZ-MEN-29A73",
     "slug": "mens-tree-runner-nz-blizzard-verdant-green",
     "name": "Tree Runner Nz Blizzard Verdant Green",
     "audience": "Men",
@@ -1192,6 +1263,7 @@
   },
   {
     "id": "men-shoes-mens-tree-runner-nz-medium-grey",
+    "sku": "HRZ-MEN-73D9F",
     "slug": "mens-tree-runner-nz-medium-grey",
     "name": "Tree Runner Nz Medium Grey",
     "audience": "Men",
@@ -1209,6 +1281,7 @@
   },
   {
     "id": "men-shoes-mens-tree-runner-nz-mushroom",
+    "sku": "HRZ-MEN-507CD",
     "slug": "mens-tree-runner-nz-mushroom",
     "name": "Tree Runner Nz Mushroom",
     "audience": "Men",
@@ -1226,6 +1299,7 @@
   },
   {
     "id": "men-shoes-mens-tree-runner-nz-natural-white",
+    "sku": "HRZ-MEN-D3076",
     "slug": "mens-tree-runner-nz-natural-white",
     "name": "Tree Runner Nz Natural White",
     "audience": "Men",
@@ -1243,6 +1317,7 @@
   },
   {
     "id": "men-shoes-mens-tree-runner-nz-ochre",
+    "sku": "HRZ-MEN-AC701",
     "slug": "mens-tree-runner-nz-ochre",
     "name": "Tree Runner Nz Ochre",
     "audience": "Men",
@@ -1260,6 +1335,7 @@
   },
   {
     "id": "men-shoes-mens-tree-runner-nz-thunder-green",
+    "sku": "HRZ-MEN-02553",
     "slug": "mens-tree-runner-nz-thunder-green",
     "name": "Tree Runner Nz Thunder Green",
     "audience": "Men",
@@ -1277,6 +1353,7 @@
   },
   {
     "id": "men-shoes-mens-tree-runners-blizzard-hanami-night",
+    "sku": "HRZ-MEN-AD524",
     "slug": "mens-tree-runners-blizzard-hanami-night",
     "name": "Tree Runners Blizzard Hanami Night",
     "audience": "Men",
@@ -1294,6 +1371,7 @@
   },
   {
     "id": "men-shoes-mens-tree-runners-kaikoura-white",
+    "sku": "HRZ-MEN-26AFF",
     "slug": "mens-tree-runners-kaikoura-white",
     "name": "Tree Runners Kaikoura White",
     "audience": "Men",
@@ -1310,6 +1388,7 @@
   },
   {
     "id": "men-shoes-mens-tree-runners-mist",
+    "sku": "HRZ-MEN-394E1",
     "slug": "mens-tree-runners-mist",
     "name": "Tree Runners Mist",
     "audience": "Men",
@@ -1326,6 +1405,7 @@
   },
   {
     "id": "men-shoes-mens-tree-runners-wheat-dark-beige",
+    "sku": "HRZ-MEN-B7E8A",
     "slug": "mens-tree-runners-wheat-dark-beige",
     "name": "Tree Runners Wheat Dark Beige",
     "audience": "Men",
@@ -1342,6 +1422,7 @@
   },
   {
     "id": "men-shoes-mens-tree-skippers-jet-black",
+    "sku": "HRZ-MEN-74B62",
     "slug": "mens-tree-skippers-jet-black",
     "name": "Tree Skippers Jet Black",
     "audience": "Men",
@@ -1358,6 +1439,7 @@
   },
   {
     "id": "men-shoes-mens-tree-skippers-natural-black",
+    "sku": "HRZ-MEN-AE174",
     "slug": "mens-tree-skippers-natural-black",
     "name": "Tree Skippers Natural Black",
     "audience": "Men",
@@ -1375,6 +1457,7 @@
   },
   {
     "id": "men-shoes-mens-tree-toppers",
+    "sku": "HRZ-MEN-E7AE1",
     "slug": "mens-tree-toppers",
     "name": "Tree Toppers",
     "audience": "Men",
@@ -1392,6 +1475,7 @@
   },
   {
     "id": "men-shoes-mens-tree-toppers-hazy-pine",
+    "sku": "HRZ-MEN-77FF5",
     "slug": "mens-tree-toppers-hazy-pine",
     "name": "Tree Toppers Hazy Pine",
     "audience": "Men",
@@ -1409,6 +1493,7 @@
   },
   {
     "id": "men-shoes-mens-tree-toppers-natural-black",
+    "sku": "HRZ-MEN-ACE8B",
     "slug": "mens-tree-toppers-natural-black",
     "name": "Tree Toppers Natural Black",
     "audience": "Men",
@@ -1426,6 +1511,7 @@
   },
   {
     "id": "men-shoes-mens-tree-toppers-natural-black-blizzard",
+    "sku": "HRZ-MEN-44A48",
     "slug": "mens-tree-toppers-natural-black-blizzard",
     "name": "Tree Toppers Natural Black Blizzard",
     "audience": "Men",
@@ -1443,6 +1529,7 @@
   },
   {
     "id": "men-shoes-mens-tree-toppers-stormy-grey-barely-grey",
+    "sku": "HRZ-MEN-24849",
     "slug": "mens-tree-toppers-stormy-grey-barely-grey",
     "name": "Tree Toppers Stormy Grey Barely Grey",
     "audience": "Men",
@@ -1460,6 +1547,7 @@
   },
   {
     "id": "men-shoes-mens-varsity-mushroom",
+    "sku": "HRZ-MEN-48B34",
     "slug": "mens-varsity-mushroom",
     "name": "Varsity Mushroom",
     "audience": "Men",
@@ -1477,6 +1565,7 @@
   },
   {
     "id": "men-shoes-mens-wool-cruiser-dark-navy",
+    "sku": "HRZ-MEN-7AA10",
     "slug": "mens-wool-cruiser-dark-navy",
     "name": "Wool Cruiser Dark Navy",
     "audience": "Men",
@@ -1494,6 +1583,7 @@
   },
   {
     "id": "men-shoes-mens-wool-dasher-mizzles-medium-grey-natural-black",
+    "sku": "HRZ-MEN-86B58",
     "slug": "mens-wool-dasher-mizzles-medium-grey-natural-black",
     "name": "Wool Dasher Mizzles Medium Grey Natural Black",
     "audience": "Men",
@@ -1511,6 +1601,7 @@
   },
   {
     "id": "men-shoes-mens-wool-runner-nz-mid-waterproof",
+    "sku": "HRZ-MEN-7EDE0",
     "slug": "mens-wool-runner-nz-mid-waterproof",
     "name": "Wool Runner Nz Mid Waterproof",
     "audience": "Men",
@@ -1528,6 +1619,7 @@
   },
   {
     "id": "men-shoes-mens-wool-runner-nz-mid-waterproof-natural-black",
+    "sku": "HRZ-MEN-EE990",
     "slug": "mens-wool-runner-nz-mid-waterproof-natural-black",
     "name": "Wool Runner Nz Mid Waterproof Natural Black",
     "audience": "Men",
@@ -1545,6 +1637,7 @@
   },
   {
     "id": "men-shoes-mens-wool-runner-nz-rugged-beige",
+    "sku": "HRZ-MEN-33D34",
     "slug": "mens-wool-runner-nz-rugged-beige",
     "name": "Wool Runner Nz Rugged Beige",
     "audience": "Men",
@@ -1562,6 +1655,7 @@
   },
   {
     "id": "men-shoes-mens-wool-runner-nz-waterproof",
+    "sku": "HRZ-MEN-D4134",
     "slug": "mens-wool-runner-nz-waterproof",
     "name": "Wool Runner Nz Waterproof",
     "audience": "Men",
@@ -1579,6 +1673,7 @@
   },
   {
     "id": "men-shoes-mens-wool-runner-nz-waterproof-natural-black",
+    "sku": "HRZ-MEN-DF4AA",
     "slug": "mens-wool-runner-nz-waterproof-natural-black",
     "name": "Wool Runner Nz Waterproof Natural Black",
     "audience": "Men",
@@ -1596,6 +1691,7 @@
   },
   {
     "id": "men-shoes-mens-wool-runner-nz-waterproof-weathered-brown",
+    "sku": "HRZ-MEN-DF8D0",
     "slug": "mens-wool-runner-nz-waterproof-weathered-brown",
     "name": "Wool Runner Nz Waterproof Weathered Brown",
     "audience": "Men",
@@ -1613,6 +1709,7 @@
   },
   {
     "id": "men-shoes-mens-wool-runner-nz-weathered-brown",
+    "sku": "HRZ-MEN-AE2AD",
     "slug": "mens-wool-runner-nz-weathered-brown",
     "name": "Wool Runner Nz Weathered Brown",
     "audience": "Men",
@@ -1630,6 +1727,7 @@
   },
   {
     "id": "men-shoes-mens-wool-runners-hazy-indigo",
+    "sku": "HRZ-MEN-6A57A",
     "slug": "mens-wool-runners-hazy-indigo",
     "name": "Wool Runners Hazy Indigo",
     "audience": "Men",
@@ -1646,6 +1744,7 @@
   },
   {
     "id": "men-shoes-mens-wool-runners-natural-white",
+    "sku": "HRZ-MEN-7926B",
     "slug": "mens-wool-runners-natural-white",
     "name": "Wool Runners Natural White",
     "audience": "Men",
@@ -1662,6 +1761,7 @@
   },
   {
     "id": "men-shoes-mens-wool-runners-savanna-night-navy",
+    "sku": "HRZ-MEN-6A70E",
     "slug": "mens-wool-runners-savanna-night-navy",
     "name": "Wool Runners Savanna Night Navy",
     "audience": "Men",
@@ -1679,6 +1779,7 @@
   },
   {
     "id": "men-shoes-mens-wool-runners-true-black",
+    "sku": "HRZ-MEN-75B0C",
     "slug": "mens-wool-runners-true-black",
     "name": "Wool Runners True Black",
     "audience": "Men",
@@ -1695,6 +1796,7 @@
   },
   {
     "id": "men-shoes-mens-wool-strider-rugged-beige",
+    "sku": "HRZ-MEN-31FED",
     "slug": "mens-wool-strider-rugged-beige",
     "name": "Wool Strider Rugged Beige",
     "audience": "Men",
@@ -1712,6 +1814,7 @@
   },
   {
     "id": "toddler-shoes-smallbirds-wool-loungers-big-kids-natural-white-fluffs",
+    "sku": "HRZ-TOD-CE2A6",
     "slug": "smallbirds-wool-loungers-big-kids-natural-white-fluffs",
     "name": "SmHORIZ Wool Loungers Big Kids Natural White Fluffs",
     "audience": "Toddler",
@@ -1729,6 +1832,7 @@
   },
   {
     "id": "unisex-socks-anytime-no-show-heel-grip",
+    "sku": "HRZ-UNI-A9387",
     "slug": "anytime-no-show-heel-grip",
     "name": "Anytime No Show Heel Grip",
     "audience": "Unisex",
@@ -1744,6 +1848,7 @@
   },
   {
     "id": "unisex-socks-anytime-no-show-heel-grip-deep-navy",
+    "sku": "HRZ-UNI-9496C",
     "slug": "anytime-no-show-heel-grip-deep-navy",
     "name": "Anytime No Show Heel Grip Deep Navy",
     "audience": "Unisex",
@@ -1759,6 +1864,7 @@
   },
   {
     "id": "unisex-socks-anytime-no-show-heel-grip-heathered-ochre",
+    "sku": "HRZ-UNI-02A8D",
     "slug": "anytime-no-show-heel-grip-heathered-ochre",
     "name": "Anytime No Show Heel Grip Heathered Ochre",
     "audience": "Unisex",
@@ -1773,6 +1879,7 @@
   },
   {
     "id": "unisex-socks-anytime-no-show-heel-grip-heathered-spice",
+    "sku": "HRZ-UNI-51F4D",
     "slug": "anytime-no-show-heel-grip-heathered-spice",
     "name": "Anytime No Show Heel Grip Heathered Spice",
     "audience": "Unisex",
@@ -1787,6 +1894,7 @@
   },
   {
     "id": "unisex-socks-anytime-no-show-heel-grip-natural-black",
+    "sku": "HRZ-UNI-0B109",
     "slug": "anytime-no-show-heel-grip-natural-black",
     "name": "Anytime No Show Heel Grip Natural Black",
     "audience": "Unisex",
@@ -1802,6 +1910,7 @@
   },
   {
     "id": "unisex-socks-anytime-no-show-heel-grip-natural-grey-heather",
+    "sku": "HRZ-UNI-131CC",
     "slug": "anytime-no-show-heel-grip-natural-grey-heather",
     "name": "Anytime No Show Heel Grip Natural Grey Heather",
     "audience": "Unisex",
@@ -1817,6 +1926,7 @@
   },
   {
     "id": "unisex-shoes-allbirds-slipper-dark-grey-tweed",
+    "sku": "HRZ-UNI-CC05F",
     "slug": "allbirds-slipper-dark-grey-tweed",
     "name": "HORIZ Slipper Dark Grey Tweed",
     "audience": "Unisex",
@@ -1834,6 +1944,7 @@
   },
   {
     "id": "unisex-shoes-mens-cruiser-shadow-blue-natural-white-sole",
+    "sku": "HRZ-UNI-5D902",
     "slug": "mens-cruiser-shadow-blue-natural-white-sole",
     "name": "Cruiser Shadow Blue Natural White Sole",
     "audience": "Unisex",
@@ -1851,6 +1962,7 @@
   },
   {
     "id": "unisex-shoes-womens-cruiser-slip-on-canvas-sea-spray-natural-white-sole",
+    "sku": "HRZ-UNI-4F0C7",
     "slug": "womens-cruiser-slip-on-canvas-sea-spray-natural-white-sole",
     "name": "Cruiser Slip On Canvas Sea Spray Natural White Sole",
     "audience": "Unisex",
@@ -1868,6 +1980,7 @@
   },
   {
     "id": "unisex-socks-anytime-ankle-sock",
+    "sku": "HRZ-UNI-E2FAD",
     "slug": "anytime-ankle-sock",
     "name": "Anytime Ankle Sock",
     "audience": "Unisex",
@@ -1884,6 +1997,7 @@
   },
   {
     "id": "unisex-socks-anytime-ankle-sock-3-pack-blizzard",
+    "sku": "HRZ-UNI-7A5F2",
     "slug": "anytime-ankle-sock-3-pack-blizzard",
     "name": "Anytime Ankle Sock 3 Pack Blizzard",
     "audience": "Unisex",
@@ -1897,6 +2011,7 @@
   },
   {
     "id": "unisex-socks-anytime-ankle-sock-3-pack-natural-black",
+    "sku": "HRZ-UNI-2B589",
     "slug": "anytime-ankle-sock-3-pack-natural-black",
     "name": "Anytime Ankle Sock 3 Pack Natural Black",
     "audience": "Unisex",
@@ -1910,6 +2025,7 @@
   },
   {
     "id": "unisex-socks-anytime-ankle-sock-basin-blue",
+    "sku": "HRZ-UNI-25DC5",
     "slug": "anytime-ankle-sock-basin-blue",
     "name": "Anytime Ankle Sock Basin Blue",
     "audience": "Unisex",
@@ -1924,6 +2040,7 @@
   },
   {
     "id": "unisex-socks-anytime-ankle-sock-blizzard",
+    "sku": "HRZ-UNI-4DE9F",
     "slug": "anytime-ankle-sock-blizzard",
     "name": "Anytime Ankle Sock Blizzard",
     "audience": "Unisex",
@@ -1938,6 +2055,7 @@
   },
   {
     "id": "unisex-socks-anytime-ankle-sock-blizzard-royal-blue",
+    "sku": "HRZ-UNI-C3909",
     "slug": "anytime-ankle-sock-blizzard-royal-blue",
     "name": "Anytime Ankle Sock Blizzard Royal Blue",
     "audience": "Unisex",
@@ -1952,6 +2070,7 @@
   },
   {
     "id": "unisex-socks-anytime-ankle-sock-blizzard-sienna-blush",
+    "sku": "HRZ-UNI-DFF11",
     "slug": "anytime-ankle-sock-blizzard-sienna-blush",
     "name": "Anytime Ankle Sock Blizzard Sienna Blush",
     "audience": "Unisex",
@@ -1966,6 +2085,7 @@
   },
   {
     "id": "unisex-socks-anytime-ankle-sock-blizzard-thunder-green",
+    "sku": "HRZ-UNI-6C948",
     "slug": "anytime-ankle-sock-blizzard-thunder-green",
     "name": "Anytime Ankle Sock Blizzard Thunder Green",
     "audience": "Unisex",
@@ -1980,6 +2100,7 @@
   },
   {
     "id": "unisex-socks-anytime-ankle-sock-calm-teal",
+    "sku": "HRZ-UNI-1D151",
     "slug": "anytime-ankle-sock-calm-teal",
     "name": "Anytime Ankle Sock Calm Teal",
     "audience": "Unisex",
@@ -1994,6 +2115,7 @@
   },
   {
     "id": "unisex-socks-anytime-ankle-sock-deep-navy",
+    "sku": "HRZ-UNI-63B78",
     "slug": "anytime-ankle-sock-deep-navy",
     "name": "Anytime Ankle Sock Deep Navy",
     "audience": "Unisex",
@@ -2008,6 +2130,7 @@
   },
   {
     "id": "unisex-socks-anytime-ankle-sock-heathered-blizzard-spice",
+    "sku": "HRZ-UNI-18C70",
     "slug": "anytime-ankle-sock-heathered-blizzard-spice",
     "name": "Anytime Ankle Sock Heathered Blizzard Spice",
     "audience": "Unisex",
@@ -2022,6 +2145,7 @@
   },
   {
     "id": "unisex-socks-anytime-ankle-sock-medium-grey",
+    "sku": "HRZ-UNI-055D2",
     "slug": "anytime-ankle-sock-medium-grey",
     "name": "Anytime Ankle Sock Medium Grey",
     "audience": "Unisex",
@@ -2036,6 +2160,7 @@
   },
   {
     "id": "unisex-socks-anytime-ankle-sock-natural-grey-heather",
+    "sku": "HRZ-UNI-9BACF",
     "slug": "anytime-ankle-sock-natural-grey-heather",
     "name": "Anytime Ankle Sock Natural Grey Heather",
     "audience": "Unisex",
@@ -2050,6 +2175,7 @@
   },
   {
     "id": "unisex-socks-anytime-ankle-sock-rugged-beige",
+    "sku": "HRZ-UNI-FAFB0",
     "slug": "anytime-ankle-sock-rugged-beige",
     "name": "Anytime Ankle Sock Rugged Beige",
     "audience": "Unisex",
@@ -2064,6 +2190,7 @@
   },
   {
     "id": "unisex-socks-anytime-ankle-sock-sunny-marigold",
+    "sku": "HRZ-UNI-FDB5E",
     "slug": "anytime-ankle-sock-sunny-marigold",
     "name": "Anytime Ankle Sock Sunny Marigold",
     "audience": "Unisex",
@@ -2078,6 +2205,7 @@
   },
   {
     "id": "unisex-socks-anytime-crew-sock",
+    "sku": "HRZ-UNI-D2602",
     "slug": "anytime-crew-sock",
     "name": "Anytime Crew Sock",
     "audience": "Unisex",
@@ -2094,6 +2222,7 @@
   },
   {
     "id": "unisex-socks-anytime-crew-sock-blizzard-kiwi-bird",
+    "sku": "HRZ-UNI-77F9A",
     "slug": "anytime-crew-sock-blizzard-kiwi-bird",
     "name": "Anytime Crew Sock Blizzard Kiwi Bird",
     "audience": "Unisex",
@@ -2108,6 +2237,7 @@
   },
   {
     "id": "unisex-socks-anytime-crew-sock-blizzard-verdant-green",
+    "sku": "HRZ-UNI-0E9EA",
     "slug": "anytime-crew-sock-blizzard-verdant-green",
     "name": "Anytime Crew Sock Blizzard Verdant Green",
     "audience": "Unisex",
@@ -2122,6 +2252,7 @@
   },
   {
     "id": "unisex-socks-anytime-crew-sock-calm-teal",
+    "sku": "HRZ-UNI-BC901",
     "slug": "anytime-crew-sock-calm-teal",
     "name": "Anytime Crew Sock Calm Teal",
     "audience": "Unisex",
@@ -2136,6 +2267,7 @@
   },
   {
     "id": "unisex-socks-anytime-crew-sock-cloudstripe",
+    "sku": "HRZ-UNI-40219",
     "slug": "anytime-crew-sock-cloudstripe",
     "name": "Anytime Crew Sock Cloudstripe",
     "audience": "Unisex",
@@ -2150,6 +2282,7 @@
   },
   {
     "id": "unisex-socks-anytime-crew-sock-deep-navy",
+    "sku": "HRZ-UNI-5E3F7",
     "slug": "anytime-crew-sock-deep-navy",
     "name": "Anytime Crew Sock Deep Navy",
     "audience": "Unisex",
@@ -2164,6 +2297,7 @@
   },
   {
     "id": "unisex-socks-anytime-crew-sock-heathered-ochre",
+    "sku": "HRZ-UNI-3D73C",
     "slug": "anytime-crew-sock-heathered-ochre",
     "name": "Anytime Crew Sock Heathered Ochre",
     "audience": "Unisex",
@@ -2178,6 +2312,7 @@
   },
   {
     "id": "unisex-socks-anytime-crew-sock-heathered-spice",
+    "sku": "HRZ-UNI-F6E96",
     "slug": "anytime-crew-sock-heathered-spice",
     "name": "Anytime Crew Sock Heathered Spice",
     "audience": "Unisex",
@@ -2192,6 +2327,7 @@
   },
   {
     "id": "unisex-socks-anytime-crew-sock-medium-grey",
+    "sku": "HRZ-UNI-2BF54",
     "slug": "anytime-crew-sock-medium-grey",
     "name": "Anytime Crew Sock Medium Grey",
     "audience": "Unisex",
@@ -2206,6 +2342,7 @@
   },
   {
     "id": "unisex-socks-anytime-crew-sock-natural-black",
+    "sku": "HRZ-UNI-0D58C",
     "slug": "anytime-crew-sock-natural-black",
     "name": "Anytime Crew Sock Natural Black",
     "audience": "Unisex",
@@ -2222,6 +2359,7 @@
   },
   {
     "id": "unisex-socks-anytime-crew-sock-natural-black-dark-grey-stripe",
+    "sku": "HRZ-UNI-87DFF",
     "slug": "anytime-crew-sock-natural-black-dark-grey-stripe",
     "name": "Anytime Crew Sock Natural Black Dark Grey Stripe",
     "audience": "Unisex",
@@ -2236,6 +2374,7 @@
   },
   {
     "id": "unisex-socks-anytime-crew-sock-natural-grey-heather",
+    "sku": "HRZ-UNI-77C34",
     "slug": "anytime-crew-sock-natural-grey-heather",
     "name": "Anytime Crew Sock Natural Grey Heather",
     "audience": "Unisex",
@@ -2250,6 +2389,7 @@
   },
   {
     "id": "unisex-socks-anytime-crew-sock-natural-grey-heather-deep-navy",
+    "sku": "HRZ-UNI-94106",
     "slug": "anytime-crew-sock-natural-grey-heather-deep-navy",
     "name": "Anytime Crew Sock Natural Grey Heather Deep Navy",
     "audience": "Unisex",
@@ -2264,6 +2404,7 @@
   },
   {
     "id": "unisex-socks-anytime-crew-sock-natural-grey-heather-light-grey",
+    "sku": "HRZ-UNI-EEB88",
     "slug": "anytime-crew-sock-natural-grey-heather-light-grey",
     "name": "Anytime Crew Sock Natural Grey Heather Light Grey",
     "audience": "Unisex",
@@ -2278,6 +2419,7 @@
   },
   {
     "id": "unisex-socks-anytime-crew-sock-nz-map",
+    "sku": "HRZ-UNI-04F87",
     "slug": "anytime-crew-sock-nz-map",
     "name": "Anytime Crew Sock Nz Map",
     "audience": "Unisex",
@@ -2292,6 +2434,7 @@
   },
   {
     "id": "unisex-socks-anytime-crew-sock-rugged-beige",
+    "sku": "HRZ-UNI-1BD66",
     "slug": "anytime-crew-sock-rugged-beige",
     "name": "Anytime Crew Sock Rugged Beige",
     "audience": "Unisex",
@@ -2306,6 +2449,7 @@
   },
   {
     "id": "unisex-socks-anytime-crew-sock-sheep",
+    "sku": "HRZ-UNI-A4251",
     "slug": "anytime-crew-sock-sheep",
     "name": "Anytime Crew Sock Sheep",
     "audience": "Unisex",
@@ -2320,6 +2464,7 @@
   },
   {
     "id": "unisex-socks-anytime-no-show-sock",
+    "sku": "HRZ-UNI-8870F",
     "slug": "anytime-no-show-sock",
     "name": "Anytime No Show Sock",
     "audience": "Unisex",
@@ -2334,6 +2479,7 @@
   },
   {
     "id": "unisex-socks-anytime-no-show-sock-3-pack-blizzard",
+    "sku": "HRZ-UNI-AABDC",
     "slug": "anytime-no-show-sock-3-pack-blizzard",
     "name": "Anytime No Show Sock 3 Pack Blizzard",
     "audience": "Unisex",
@@ -2347,6 +2493,7 @@
   },
   {
     "id": "unisex-socks-anytime-no-show-sock-3-pack-natural-black",
+    "sku": "HRZ-UNI-A4557",
     "slug": "anytime-no-show-sock-3-pack-natural-black",
     "name": "Anytime No Show Sock 3 Pack Natural Black",
     "audience": "Unisex",
@@ -2360,6 +2507,7 @@
   },
   {
     "id": "unisex-socks-anytime-no-show-sock-blizzard",
+    "sku": "HRZ-UNI-05BBF",
     "slug": "anytime-no-show-sock-blizzard",
     "name": "Anytime No Show Sock Blizzard",
     "audience": "Unisex",
@@ -2374,6 +2522,7 @@
   },
   {
     "id": "unisex-socks-anytime-no-show-sock-blizzard-royal-blue",
+    "sku": "HRZ-UNI-FC26A",
     "slug": "anytime-no-show-sock-blizzard-royal-blue",
     "name": "Anytime No Show Sock Blizzard Royal Blue",
     "audience": "Unisex",
@@ -2388,6 +2537,7 @@
   },
   {
     "id": "unisex-socks-anytime-no-show-sock-blizzard-sienna",
+    "sku": "HRZ-UNI-C6A2D",
     "slug": "anytime-no-show-sock-blizzard-sienna",
     "name": "Anytime No Show Sock Blizzard Sienna",
     "audience": "Unisex",
@@ -2402,6 +2552,7 @@
   },
   {
     "id": "unisex-socks-anytime-no-show-sock-blizzard-thunder-green",
+    "sku": "HRZ-UNI-7CE92",
     "slug": "anytime-no-show-sock-blizzard-thunder-green",
     "name": "Anytime No Show Sock Blizzard Thunder Green",
     "audience": "Unisex",
@@ -2416,6 +2567,7 @@
   },
   {
     "id": "unisex-socks-anytime-no-show-sock-medium-grey",
+    "sku": "HRZ-UNI-44D9B",
     "slug": "anytime-no-show-sock-medium-grey",
     "name": "Anytime No Show Sock Medium Grey",
     "audience": "Unisex",
@@ -2430,6 +2582,7 @@
   },
   {
     "id": "unisex-socks-anytime-no-show-sock-natural-black",
+    "sku": "HRZ-UNI-88E4E",
     "slug": "anytime-no-show-sock-natural-black",
     "name": "Anytime No Show Sock Natural Black",
     "audience": "Unisex",
@@ -2446,6 +2599,7 @@
   },
   {
     "id": "unisex-socks-anytime-no-show-sock-natural-grey-heather-deep-navy",
+    "sku": "HRZ-UNI-5E3BB",
     "slug": "anytime-no-show-sock-natural-grey-heather-deep-navy",
     "name": "Anytime No Show Sock Natural Grey Heather Deep Navy",
     "audience": "Unisex",
@@ -2460,6 +2614,7 @@
   },
   {
     "id": "unisex-socks-anytime-no-show-sock-natural-grey-heather-light-grey",
+    "sku": "HRZ-UNI-1CF8D",
     "slug": "anytime-no-show-sock-natural-grey-heather-light-grey",
     "name": "Anytime No Show Sock Natural Grey Heather Light Grey",
     "audience": "Unisex",
@@ -2474,6 +2629,7 @@
   },
   {
     "id": "unisex-socks-anytime-no-show-sock-rugged-beige",
+    "sku": "HRZ-UNI-4EDF6",
     "slug": "anytime-no-show-sock-rugged-beige",
     "name": "Anytime No Show Sock Rugged Beige",
     "audience": "Unisex",
@@ -2488,6 +2644,7 @@
   },
   {
     "id": "unisex-socks-trino-quarters-onyx",
+    "sku": "HRZ-UNI-1875D",
     "slug": "trino-quarters-onyx",
     "name": "Trino Quarters Onyx",
     "audience": "Unisex",
@@ -2502,6 +2659,7 @@
   },
   {
     "id": "unisex-socks-trino-sprinters-cushioned-navy-night",
+    "sku": "HRZ-UNI-C3E71",
     "slug": "trino-sprinters-cushioned-navy-night",
     "name": "Trino Sprinters Cushioned Navy Night",
     "audience": "Unisex",
@@ -2516,6 +2674,7 @@
   },
   {
     "id": "unisex-socks-trino-sprinters-cushioned-onyx-new-edition",
+    "sku": "HRZ-UNI-156CB",
     "slug": "trino-sprinters-cushioned-onyx-new-edition",
     "name": "Trino Sprinters Cushioned Onyx New Edition",
     "audience": "Unisex",
@@ -2531,6 +2690,7 @@
   },
   {
     "id": "unisex-socks-trino-sprinters-low-buoyant-pink",
+    "sku": "HRZ-UNI-61E50",
     "slug": "trino-sprinters-low-buoyant-pink",
     "name": "Trino Sprinters Low Buoyant Pink",
     "audience": "Unisex",
@@ -2546,6 +2706,7 @@
   },
   {
     "id": "unisex-socks-trino-sprinters-low-navy-night",
+    "sku": "HRZ-UNI-5CAF4",
     "slug": "trino-sprinters-low-navy-night",
     "name": "Trino Sprinters Low Navy Night",
     "audience": "Unisex",
@@ -2561,6 +2722,7 @@
   },
   {
     "id": "unisex-socks-trino-sprinters-low-onyx",
+    "sku": "HRZ-UNI-0F905",
     "slug": "trino-sprinters-low-onyx",
     "name": "Trino Sprinters Low Onyx",
     "audience": "Unisex",
@@ -2574,6 +2736,7 @@
   },
   {
     "id": "unisex-socks-trino-sprinters-no-show-lux-purple",
+    "sku": "HRZ-UNI-44EF1",
     "slug": "trino-sprinters-no-show-lux-purple",
     "name": "Trino Sprinters No Show Lux Purple",
     "audience": "Unisex",
@@ -2588,6 +2751,7 @@
   },
   {
     "id": "unisex-socks-trino-sprinters-no-show-onyx",
+    "sku": "HRZ-UNI-BD644",
     "slug": "trino-sprinters-no-show-onyx",
     "name": "Trino Sprinters No Show Onyx",
     "audience": "Unisex",
@@ -2603,6 +2767,7 @@
   },
   {
     "id": "unisex-socks-trino-sprinters-no-show-summertime-white",
+    "sku": "HRZ-UNI-D16AC",
     "slug": "trino-sprinters-no-show-summertime-white",
     "name": "Trino Sprinters No Show Summertime White",
     "audience": "Unisex",
@@ -2618,6 +2783,7 @@
   },
   {
     "id": "unisex-socks-trino-sprinters-summertime-white",
+    "sku": "HRZ-UNI-21738",
     "slug": "trino-sprinters-summertime-white",
     "name": "Trino Sprinters Summertime White",
     "audience": "Unisex",
@@ -2631,6 +2797,7 @@
   },
   {
     "id": "unisex-socks-trino-tubers-navy-night",
+    "sku": "HRZ-UNI-BB8E7",
     "slug": "trino-tubers-navy-night",
     "name": "Trino Tubers Navy Night",
     "audience": "Unisex",
@@ -2648,6 +2815,7 @@
   },
   {
     "id": "unisex-socks-trino-tubers-onyx",
+    "sku": "HRZ-UNI-5F42C",
     "slug": "trino-tubers-onyx",
     "name": "Trino Tubers Onyx",
     "audience": "Unisex",
@@ -2665,6 +2833,7 @@
   },
   {
     "id": "women-apparel-womens-merino-blend-sweatpant",
+    "sku": "HRZ-WOM-A687F",
     "slug": "womens-merino-blend-sweatpant",
     "name": "Merino Blend Sweatpant",
     "audience": "Women",
@@ -2681,6 +2850,7 @@
   },
   {
     "id": "women-apparel-womens-merino-blend-sweatpant-natural-grey-heather",
+    "sku": "HRZ-WOM-19E55",
     "slug": "womens-merino-blend-sweatpant-natural-grey-heather",
     "name": "Merino Blend Sweatpant Natural Grey Heather",
     "audience": "Women",
@@ -2697,6 +2867,7 @@
   },
   {
     "id": "women-apparel-womens-merino-blend-sweatshirt-natural-grey-heather",
+    "sku": "HRZ-WOM-F0819",
     "slug": "womens-merino-blend-sweatshirt-natural-grey-heather",
     "name": "Merino Blend Sweatshirt Natural Grey Heather",
     "audience": "Women",
@@ -2714,6 +2885,7 @@
   },
   {
     "id": "women-apparel-womens-soft-merino-tee",
+    "sku": "HRZ-WOM-B17E0",
     "slug": "womens-soft-merino-tee",
     "name": "Soft Merino Tee",
     "audience": "Women",
@@ -2730,6 +2902,7 @@
   },
   {
     "id": "women-shoes-womens-allbirds-flip-flop",
+    "sku": "HRZ-WOM-DAF37",
     "slug": "womens-allbirds-flip-flop",
     "name": "HORIZ Flip Flop",
     "audience": "Women",
@@ -2747,6 +2920,7 @@
   },
   {
     "id": "women-shoes-womens-allbirds-flip-flop-anthracite",
+    "sku": "HRZ-WOM-A606A",
     "slug": "womens-allbirds-flip-flop-anthracite",
     "name": "HORIZ Flip Flop Anthracite",
     "audience": "Women",
@@ -2764,6 +2938,7 @@
   },
   {
     "id": "women-shoes-womens-allbirds-flip-flop-natural-black",
+    "sku": "HRZ-WOM-A297F",
     "slug": "womens-allbirds-flip-flop-natural-black",
     "name": "HORIZ Flip Flop Natural Black",
     "audience": "Women",
@@ -2781,6 +2956,7 @@
   },
   {
     "id": "women-shoes-womens-allbirds-slide-anthracite",
+    "sku": "HRZ-WOM-0FDBD",
     "slug": "womens-allbirds-slide-anthracite",
     "name": "HORIZ Slide Anthracite",
     "audience": "Women",
@@ -2798,6 +2974,7 @@
   },
   {
     "id": "women-shoes-womens-allbirds-slide-mushroom",
+    "sku": "HRZ-WOM-C4A58",
     "slug": "womens-allbirds-slide-mushroom",
     "name": "HORIZ Slide Mushroom",
     "audience": "Women",
@@ -2815,6 +2992,7 @@
   },
   {
     "id": "women-shoes-womens-allbirds-slide-natural-black",
+    "sku": "HRZ-WOM-FF9D7",
     "slug": "womens-allbirds-slide-natural-black",
     "name": "HORIZ Slide Natural Black",
     "audience": "Women",
@@ -2832,6 +3010,7 @@
   },
   {
     "id": "women-shoes-womens-breezer-mary-jane-anthracite",
+    "sku": "HRZ-WOM-DD4EE",
     "slug": "womens-breezer-mary-jane-anthracite",
     "name": "Breezer Mary Jane Anthracite",
     "audience": "Women",
@@ -2849,6 +3028,7 @@
   },
   {
     "id": "women-shoes-womens-breezer-point-warm-red",
+    "sku": "HRZ-WOM-69C77",
     "slug": "womens-breezer-point-warm-red",
     "name": "Breezer Point Warm Red",
     "audience": "Women",
@@ -2866,6 +3046,7 @@
   },
   {
     "id": "women-shoes-womens-breezer-point-warm-white",
+    "sku": "HRZ-WOM-11913",
     "slug": "womens-breezer-point-warm-white",
     "name": "Breezer Point Warm White",
     "audience": "Women",
@@ -2883,6 +3064,7 @@
   },
   {
     "id": "women-shoes-womens-canvas-pipers-blizzard-bark-brown",
+    "sku": "HRZ-WOM-1D519",
     "slug": "womens-canvas-pipers-blizzard-bark-brown",
     "name": "Canvas Pipers Blizzard Bark Brown",
     "audience": "Women",
@@ -2900,6 +3082,7 @@
   },
   {
     "id": "women-shoes-womens-couriers",
+    "sku": "HRZ-WOM-53822",
     "slug": "womens-couriers",
     "name": "Couriers",
     "audience": "Women",
@@ -2916,6 +3099,7 @@
   },
   {
     "id": "women-shoes-womens-cruiser-canvas",
+    "sku": "HRZ-WOM-FE4DE",
     "slug": "womens-cruiser-canvas",
     "name": "Cruiser Canvas",
     "audience": "Women",
@@ -2933,6 +3117,7 @@
   },
   {
     "id": "women-shoes-womens-cruiser-canvas-port",
+    "sku": "HRZ-WOM-DB66A",
     "slug": "womens-cruiser-canvas-port",
     "name": "Cruiser Canvas Port",
     "audience": "Women",
@@ -2950,6 +3135,7 @@
   },
   {
     "id": "women-shoes-womens-cruiser-canvas-sea-spray",
+    "sku": "HRZ-WOM-1C87D",
     "slug": "womens-cruiser-canvas-sea-spray",
     "name": "Cruiser Canvas Sea Spray",
     "audience": "Women",
@@ -2967,6 +3153,7 @@
   },
   {
     "id": "women-shoes-womens-cruiser-dark-navy",
+    "sku": "HRZ-WOM-60629",
     "slug": "womens-cruiser-dark-navy",
     "name": "Cruiser Dark Navy",
     "audience": "Women",
@@ -2984,6 +3171,7 @@
   },
   {
     "id": "women-shoes-womens-cruiser-mid-explore-natural-black",
+    "sku": "HRZ-WOM-61127",
     "slug": "womens-cruiser-mid-explore-natural-black",
     "name": "Cruiser Mid Explore Natural Black",
     "audience": "Women",
@@ -3001,6 +3189,7 @@
   },
   {
     "id": "women-shoes-womens-cruiser-natural-black-blizzard",
+    "sku": "HRZ-WOM-30A3D",
     "slug": "womens-cruiser-natural-black-blizzard",
     "name": "Cruiser Natural Black Blizzard",
     "audience": "Women",
@@ -3018,6 +3207,7 @@
   },
   {
     "id": "women-shoes-womens-cruiser-natural-white",
+    "sku": "HRZ-WOM-9D8B9",
     "slug": "womens-cruiser-natural-white",
     "name": "Cruiser Natural White",
     "audience": "Women",
@@ -3035,6 +3225,7 @@
   },
   {
     "id": "women-shoes-womens-cruiser-rugged-beige",
+    "sku": "HRZ-WOM-3DFF9",
     "slug": "womens-cruiser-rugged-beige",
     "name": "Cruiser Rugged Beige",
     "audience": "Women",
@@ -3052,6 +3243,7 @@
   },
   {
     "id": "women-shoes-womens-cruiser-slip-on-blizzard",
+    "sku": "HRZ-WOM-E6F6E",
     "slug": "womens-cruiser-slip-on-blizzard",
     "name": "Cruiser Slip On Blizzard",
     "audience": "Women",
@@ -3069,6 +3261,7 @@
   },
   {
     "id": "women-shoes-womens-cruiser-slip-on-canvas",
+    "sku": "HRZ-WOM-F4D68",
     "slug": "womens-cruiser-slip-on-canvas",
     "name": "Cruiser Slip On Canvas",
     "audience": "Women",
@@ -3086,6 +3279,7 @@
   },
   {
     "id": "women-shoes-womens-cruiser-slip-on-canvas-deep-navy-stripes",
+    "sku": "HRZ-WOM-B0710",
     "slug": "womens-cruiser-slip-on-canvas-deep-navy-stripes",
     "name": "Cruiser Slip On Canvas Deep Navy Stripes",
     "audience": "Women",
@@ -3103,6 +3297,7 @@
   },
   {
     "id": "women-shoes-womens-dasher-nz-blizzard",
+    "sku": "HRZ-WOM-25704",
     "slug": "womens-dasher-nz-blizzard",
     "name": "Dasher Nz Blizzard",
     "audience": "Women",
@@ -3120,6 +3315,7 @@
   },
   {
     "id": "women-shoes-womens-lounger-lift-deep-navy",
+    "sku": "HRZ-WOM-7A6BF",
     "slug": "womens-lounger-lift-deep-navy",
     "name": "Lounger Lift Deep Navy",
     "audience": "Women",
@@ -3137,6 +3333,7 @@
   },
   {
     "id": "women-shoes-womens-lounger-lift-rugged-beige-stony-cream",
+    "sku": "HRZ-WOM-76489",
     "slug": "womens-lounger-lift-rugged-beige-stony-cream",
     "name": "Lounger Lift Rugged Beige Stony Cream",
     "audience": "Women",
@@ -3154,6 +3351,7 @@
   },
   {
     "id": "women-shoes-womens-plant-pacers",
+    "sku": "HRZ-WOM-FD4B1",
     "slug": "womens-plant-pacers",
     "name": "Plant Pacers",
     "audience": "Women",
@@ -3170,6 +3368,7 @@
   },
   {
     "id": "women-shoes-womens-runner-go-corduroy-natural-black",
+    "sku": "HRZ-WOM-F99A8",
     "slug": "womens-runner-go-corduroy-natural-black",
     "name": "Runner Go Corduroy Natural Black",
     "audience": "Women",
@@ -3186,6 +3385,7 @@
   },
   {
     "id": "women-shoes-womens-runner-go-luxe",
+    "sku": "HRZ-WOM-59752",
     "slug": "womens-runner-go-luxe",
     "name": "Runner Go Luxe",
     "audience": "Women",
@@ -3203,6 +3403,7 @@
   },
   {
     "id": "women-shoes-womens-runner-go-luxe-blizzard",
+    "sku": "HRZ-WOM-381C0",
     "slug": "womens-runner-go-luxe-blizzard",
     "name": "Runner Go Luxe Blizzard",
     "audience": "Women",
@@ -3220,6 +3421,7 @@
   },
   {
     "id": "women-shoes-womens-runner-nz-jersey-light-grey-anthracite",
+    "sku": "HRZ-WOM-B6780",
     "slug": "womens-runner-nz-jersey-light-grey-anthracite",
     "name": "Runner Nz Jersey Light Grey Anthracite",
     "audience": "Women",
@@ -3237,6 +3439,7 @@
   },
   {
     "id": "women-shoes-womens-runner-nz-slip-on",
+    "sku": "HRZ-WOM-3ABD9",
     "slug": "womens-runner-nz-slip-on",
     "name": "Runner Nz Slip On",
     "audience": "Women",
@@ -3254,6 +3457,7 @@
   },
   {
     "id": "women-shoes-womens-runner-nz-slip-on-dark-navy",
+    "sku": "HRZ-WOM-02EEC",
     "slug": "womens-runner-nz-slip-on-dark-navy",
     "name": "Runner Nz Slip On Dark Navy",
     "audience": "Women",
@@ -3271,6 +3475,7 @@
   },
   {
     "id": "women-shoes-womens-runner-nz-slip-on-mushroom",
+    "sku": "HRZ-WOM-8A207",
     "slug": "womens-runner-nz-slip-on-mushroom",
     "name": "Runner Nz Slip On Mushroom",
     "audience": "Women",
@@ -3288,6 +3493,7 @@
   },
   {
     "id": "women-shoes-womens-runner-protect-natural-black-chasm-teal",
+    "sku": "HRZ-WOM-C2DB3",
     "slug": "womens-runner-protect-natural-black-chasm-teal",
     "name": "Runner Protect Natural Black Chasm Teal",
     "audience": "Women",
@@ -3306,6 +3512,7 @@
   },
   {
     "id": "women-shoes-womens-runner-up-protect",
+    "sku": "HRZ-WOM-CD9DC",
     "slug": "womens-runner-up-protect",
     "name": "Runner Up Protect",
     "audience": "Women",
@@ -3321,6 +3528,7 @@
   },
   {
     "id": "women-shoes-womens-strider",
+    "sku": "HRZ-WOM-A65E1",
     "slug": "womens-strider",
     "name": "Strider",
     "audience": "Women",
@@ -3338,6 +3546,7 @@
   },
   {
     "id": "women-shoes-womens-strider-blizzard-dark-navy",
+    "sku": "HRZ-WOM-82683",
     "slug": "womens-strider-blizzard-dark-navy",
     "name": "Strider Blizzard Dark Navy",
     "audience": "Women",
@@ -3355,6 +3564,7 @@
   },
   {
     "id": "women-shoes-womens-strider-explore-hazy-burgundy",
+    "sku": "HRZ-WOM-0C76B",
     "slug": "womens-strider-explore-hazy-burgundy",
     "name": "Strider Explore Hazy Burgundy",
     "audience": "Women",
@@ -3372,6 +3582,7 @@
   },
   {
     "id": "women-shoes-womens-strider-medium-grey",
+    "sku": "HRZ-WOM-D05E9",
     "slug": "womens-strider-medium-grey",
     "name": "Strider Medium Grey",
     "audience": "Women",
@@ -3389,6 +3600,7 @@
   },
   {
     "id": "women-shoes-womens-strider-natural-black-blizzard",
+    "sku": "HRZ-WOM-6859E",
     "slug": "womens-strider-natural-black-blizzard",
     "name": "Strider Natural Black Blizzard",
     "audience": "Women",
@@ -3406,6 +3618,7 @@
   },
   {
     "id": "women-shoes-womens-strider-rugged-beige",
+    "sku": "HRZ-WOM-5C6E0",
     "slug": "womens-strider-rugged-beige",
     "name": "Strider Rugged Beige",
     "audience": "Women",
@@ -3423,6 +3636,7 @@
   },
   {
     "id": "women-shoes-womens-superlight-tree-runners-blizzard-bloom-coral",
+    "sku": "HRZ-WOM-11D06",
     "slug": "womens-superlight-tree-runners-blizzard-bloom-coral",
     "name": "Superlight Tree Runners Blizzard Bloom Coral",
     "audience": "Women",
@@ -3436,6 +3650,7 @@
   },
   {
     "id": "women-shoes-womens-superlight-tree-runners-light-grey",
+    "sku": "HRZ-WOM-D0299",
     "slug": "womens-superlight-tree-runners-light-grey",
     "name": "Superlight Tree Runners Light Grey",
     "audience": "Women",
@@ -3452,6 +3667,7 @@
   },
   {
     "id": "women-shoes-womens-superlight-tree-runners-natural-black-dark-grey",
+    "sku": "HRZ-WOM-13D8D",
     "slug": "womens-superlight-tree-runners-natural-black-dark-grey",
     "name": "Superlight Tree Runners Natural Black Dark Grey",
     "audience": "Women",
@@ -3469,6 +3685,7 @@
   },
   {
     "id": "women-shoes-womens-trail-runners-swt-true-navy-hazy-indigo",
+    "sku": "HRZ-WOM-B4128",
     "slug": "womens-trail-runners-swt-true-navy-hazy-indigo",
     "name": "Trail Runners Swt True Navy Hazy Indigo",
     "audience": "Women",
@@ -3486,6 +3703,7 @@
   },
   {
     "id": "women-shoes-womens-tree-breezer-bow",
+    "sku": "HRZ-WOM-3BBAF",
     "slug": "womens-tree-breezer-bow",
     "name": "Tree Breezer Bow",
     "audience": "Women",
@@ -3503,6 +3721,7 @@
   },
   {
     "id": "women-shoes-womens-tree-breezers-forage-tan",
+    "sku": "HRZ-WOM-8BDAF",
     "slug": "womens-tree-breezers-forage-tan",
     "name": "Tree Breezers Forage Tan",
     "audience": "Women",
@@ -3522,6 +3741,7 @@
   },
   {
     "id": "women-shoes-womens-tree-breezers-light-khaki",
+    "sku": "HRZ-WOM-CE713",
     "slug": "womens-tree-breezers-light-khaki",
     "name": "Tree Breezers Light Khaki",
     "audience": "Women",
@@ -3539,6 +3759,7 @@
   },
   {
     "id": "women-shoes-womens-tree-breezers-mist",
+    "sku": "HRZ-WOM-BF00D",
     "slug": "womens-tree-breezers-mist",
     "name": "Tree Breezers Mist",
     "audience": "Women",
@@ -3555,6 +3776,7 @@
   },
   {
     "id": "women-shoes-womens-tree-breezers-natural-black-stormy-grey",
+    "sku": "HRZ-WOM-1BE14",
     "slug": "womens-tree-breezers-natural-black-stormy-grey",
     "name": "Tree Breezers Natural Black Stormy Grey",
     "audience": "Women",
@@ -3572,6 +3794,7 @@
   },
   {
     "id": "women-shoes-womens-tree-dasher-relay",
+    "sku": "HRZ-WOM-26476",
     "slug": "womens-tree-dasher-relay",
     "name": "Tree Dasher Relay",
     "audience": "Women",
@@ -3587,6 +3810,7 @@
   },
   {
     "id": "women-shoes-womens-tree-dasher-relay-blizzard",
+    "sku": "HRZ-WOM-529C6",
     "slug": "womens-tree-dasher-relay-blizzard",
     "name": "Tree Dasher Relay Blizzard",
     "audience": "Women",
@@ -3604,6 +3828,7 @@
   },
   {
     "id": "women-shoes-womens-tree-dasher-relay-deep-navy",
+    "sku": "HRZ-WOM-286AB",
     "slug": "womens-tree-dasher-relay-deep-navy",
     "name": "Tree Dasher Relay Deep Navy",
     "audience": "Women",
@@ -3621,6 +3846,7 @@
   },
   {
     "id": "women-shoes-womens-tree-dasher-relay-natural-black",
+    "sku": "HRZ-WOM-7E3F7",
     "slug": "womens-tree-dasher-relay-natural-black",
     "name": "Tree Dasher Relay Natural Black",
     "audience": "Women",
@@ -3638,6 +3864,7 @@
   },
   {
     "id": "women-shoes-womens-tree-dashers",
+    "sku": "HRZ-WOM-A0849",
     "slug": "womens-tree-dashers",
     "name": "Tree Dashers",
     "audience": "Women",
@@ -3654,6 +3881,7 @@
   },
   {
     "id": "women-shoes-womens-tree-dashers-blizzard",
+    "sku": "HRZ-WOM-B7088",
     "slug": "womens-tree-dashers-blizzard",
     "name": "Tree Dashers Blizzard",
     "audience": "Women",
@@ -3671,6 +3899,7 @@
   },
   {
     "id": "women-shoes-womens-tree-dashers-blizzard-hazy-cobalt",
+    "sku": "HRZ-WOM-2A150",
     "slug": "womens-tree-dashers-blizzard-hazy-cobalt",
     "name": "Tree Dashers Blizzard Hazy Cobalt",
     "audience": "Women",
@@ -3688,6 +3917,7 @@
   },
   {
     "id": "women-shoes-womens-tree-dashers-blizzard-natural-black",
+    "sku": "HRZ-WOM-EE82E",
     "slug": "womens-tree-dashers-blizzard-natural-black",
     "name": "Tree Dashers Blizzard Natural Black",
     "audience": "Women",
@@ -3705,6 +3935,7 @@
   },
   {
     "id": "women-shoes-womens-tree-dashers-deep-navy",
+    "sku": "HRZ-WOM-B01F0",
     "slug": "womens-tree-dashers-deep-navy",
     "name": "Tree Dashers Deep Navy",
     "audience": "Women",
@@ -3722,6 +3953,7 @@
   },
   {
     "id": "women-shoes-womens-tree-dashers-medium-grey",
+    "sku": "HRZ-WOM-F3C6F",
     "slug": "womens-tree-dashers-medium-grey",
     "name": "Tree Dashers Medium Grey",
     "audience": "Women",
@@ -3737,6 +3969,7 @@
   },
   {
     "id": "women-shoes-womens-tree-dashers-natural-black",
+    "sku": "HRZ-WOM-6F445",
     "slug": "womens-tree-dashers-natural-black",
     "name": "Tree Dashers Natural Black",
     "audience": "Women",
@@ -3753,6 +3986,7 @@
   },
   {
     "id": "women-shoes-womens-tree-dashers-rustic-brown",
+    "sku": "HRZ-WOM-B9C6D",
     "slug": "womens-tree-dashers-rustic-brown",
     "name": "Tree Dashers Rustic Brown",
     "audience": "Women",
@@ -3770,6 +4004,7 @@
   },
   {
     "id": "women-shoes-womens-tree-dashers-utility",
+    "sku": "HRZ-WOM-4DB01",
     "slug": "womens-tree-dashers-utility",
     "name": "Tree Dashers Utility",
     "audience": "Women",
@@ -3787,6 +4022,7 @@
   },
   {
     "id": "women-shoes-womens-tree-dashers-utility-blizzard-hazy-pine",
+    "sku": "HRZ-WOM-9F128",
     "slug": "womens-tree-dashers-utility-blizzard-hazy-pine",
     "name": "Tree Dashers Utility Blizzard Hazy Pine",
     "audience": "Women",
@@ -3804,6 +4040,7 @@
   },
   {
     "id": "women-shoes-womens-tree-gliders-blizzard",
+    "sku": "HRZ-WOM-7098F",
     "slug": "womens-tree-gliders-blizzard",
     "name": "Tree Gliders Blizzard",
     "audience": "Women",
@@ -3821,6 +4058,7 @@
   },
   {
     "id": "women-shoes-womens-tree-gliders-medium-grey",
+    "sku": "HRZ-WOM-7ADEC",
     "slug": "womens-tree-gliders-medium-grey",
     "name": "Tree Gliders Medium Grey",
     "audience": "Women",
@@ -3838,6 +4076,7 @@
   },
   {
     "id": "women-shoes-womens-tree-gliders-natural-black-blizzard",
+    "sku": "HRZ-WOM-2FE92",
     "slug": "womens-tree-gliders-natural-black-blizzard",
     "name": "Tree Gliders Natural Black Blizzard",
     "audience": "Women",
@@ -3855,6 +4094,7 @@
   },
   {
     "id": "women-shoes-womens-tree-gliders-natural-black-rugged-khaki",
+    "sku": "HRZ-WOM-C5D50",
     "slug": "womens-tree-gliders-natural-black-rugged-khaki",
     "name": "Tree Gliders Natural Black Rugged Khaki",
     "audience": "Women",
@@ -3872,6 +4112,7 @@
   },
   {
     "id": "women-shoes-womens-tree-pipers",
+    "sku": "HRZ-WOM-A65C3",
     "slug": "womens-tree-pipers",
     "name": "Tree Pipers",
     "audience": "Women",
@@ -3888,6 +4129,7 @@
   },
   {
     "id": "women-shoes-womens-tree-pipers-natural-black-natural-black",
+    "sku": "HRZ-WOM-65669",
     "slug": "womens-tree-pipers-natural-black-natural-black",
     "name": "Tree Pipers Natural Black Natural Black",
     "audience": "Women",
@@ -3905,6 +4147,7 @@
   },
   {
     "id": "women-shoes-womens-tree-runner-go-blizzard-lux-liberty",
+    "sku": "HRZ-WOM-F9F42",
     "slug": "womens-tree-runner-go-blizzard-lux-liberty",
     "name": "Tree Runner Go Blizzard Lux Liberty",
     "audience": "Women",
@@ -3922,6 +4165,7 @@
   },
   {
     "id": "women-shoes-womens-tree-runner-go-blizzard-vivid-red",
+    "sku": "HRZ-WOM-44EE4",
     "slug": "womens-tree-runner-go-blizzard-vivid-red",
     "name": "Tree Runner Go Blizzard Vivid Red",
     "audience": "Women",
@@ -3940,6 +4184,7 @@
   },
   {
     "id": "women-shoes-womens-tree-runner-go-deep-navy-true-navy",
+    "sku": "HRZ-WOM-AF203",
     "slug": "womens-tree-runner-go-deep-navy-true-navy",
     "name": "Tree Runner Go Deep Navy True Navy",
     "audience": "Women",
@@ -3957,6 +4202,7 @@
   },
   {
     "id": "women-shoes-womens-tree-runner-go-medium-grey",
+    "sku": "HRZ-WOM-CCE10",
     "slug": "womens-tree-runner-go-medium-grey",
     "name": "Tree Runner Go Medium Grey",
     "audience": "Women",
@@ -3974,6 +4220,7 @@
   },
   {
     "id": "women-shoes-womens-tree-runner-go-rustic-brown",
+    "sku": "HRZ-WOM-69EF8",
     "slug": "womens-tree-runner-go-rustic-brown",
     "name": "Tree Runner Go Rustic Brown",
     "audience": "Women",
@@ -3991,6 +4238,7 @@
   },
   {
     "id": "women-shoes-womens-tree-runner-go-utility",
+    "sku": "HRZ-WOM-3C163",
     "slug": "womens-tree-runner-go-utility",
     "name": "Tree Runner Go Utility",
     "audience": "Women",
@@ -4008,6 +4256,7 @@
   },
   {
     "id": "women-shoes-womens-tree-runner-nz",
+    "sku": "HRZ-WOM-DE1C8",
     "slug": "womens-tree-runner-nz",
     "name": "Tree Runner Nz",
     "audience": "Women",
@@ -4025,6 +4274,7 @@
   },
   {
     "id": "women-shoes-womens-tree-runner-nz-blizzard-dark-navy",
+    "sku": "HRZ-WOM-66228",
     "slug": "womens-tree-runner-nz-blizzard-dark-navy",
     "name": "Tree Runner Nz Blizzard Dark Navy",
     "audience": "Women",
@@ -4042,6 +4292,7 @@
   },
   {
     "id": "women-shoes-womens-tree-runner-nz-burnt-olive",
+    "sku": "HRZ-WOM-5C4FB",
     "slug": "womens-tree-runner-nz-burnt-olive",
     "name": "Tree Runner Nz Burnt Olive",
     "audience": "Women",
@@ -4059,6 +4310,7 @@
   },
   {
     "id": "women-shoes-womens-tree-runner-nz-luxe-gold",
+    "sku": "HRZ-WOM-AE6C5",
     "slug": "womens-tree-runner-nz-luxe-gold",
     "name": "Tree Runner Nz Luxe Gold",
     "audience": "Women",
@@ -4076,6 +4328,7 @@
   },
   {
     "id": "women-shoes-womens-tree-runner-nz-medium-grey",
+    "sku": "HRZ-WOM-BFF09",
     "slug": "womens-tree-runner-nz-medium-grey",
     "name": "Tree Runner Nz Medium Grey",
     "audience": "Women",
@@ -4093,6 +4346,7 @@
   },
   {
     "id": "women-shoes-womens-tree-runner-nz-mushroom",
+    "sku": "HRZ-WOM-42BF6",
     "slug": "womens-tree-runner-nz-mushroom",
     "name": "Tree Runner Nz Mushroom",
     "audience": "Women",
@@ -4110,6 +4364,7 @@
   },
   {
     "id": "women-shoes-womens-tree-runner-nz-natural-white",
+    "sku": "HRZ-WOM-CC016",
     "slug": "womens-tree-runner-nz-natural-white",
     "name": "Tree Runner Nz Natural White",
     "audience": "Women",
@@ -4127,6 +4382,7 @@
   },
   {
     "id": "women-shoes-womens-tree-runner-nz-weathered-brown",
+    "sku": "HRZ-WOM-FA67D",
     "slug": "womens-tree-runner-nz-weathered-brown",
     "name": "Tree Runner Nz Weathered Brown",
     "audience": "Women",
@@ -4144,6 +4400,7 @@
   },
   {
     "id": "women-shoes-womens-tree-runners-blizzard-hanami-plum",
+    "sku": "HRZ-WOM-D977C",
     "slug": "womens-tree-runners-blizzard-hanami-plum",
     "name": "Tree Runners Blizzard Hanami Plum",
     "audience": "Women",
@@ -4161,6 +4418,7 @@
   },
   {
     "id": "women-shoes-womens-tree-runners-hazy-indigo",
+    "sku": "HRZ-WOM-0F0D2",
     "slug": "womens-tree-runners-hazy-indigo",
     "name": "Tree Runners Hazy Indigo",
     "audience": "Women",
@@ -4178,6 +4436,7 @@
   },
   {
     "id": "women-shoes-womens-tree-runners-jet-black-white",
+    "sku": "HRZ-WOM-23BA4",
     "slug": "womens-tree-runners-jet-black-white",
     "name": "Tree Runners Jet Black White",
     "audience": "Women",
@@ -4194,6 +4453,7 @@
   },
   {
     "id": "women-shoes-womens-tree-runners-navy-night",
+    "sku": "HRZ-WOM-81A41",
     "slug": "womens-tree-runners-navy-night",
     "name": "Tree Runners Navy Night",
     "audience": "Women",
@@ -4210,6 +4470,7 @@
   },
   {
     "id": "women-shoes-womens-tree-toppers",
+    "sku": "HRZ-WOM-5F1D9",
     "slug": "womens-tree-toppers",
     "name": "Tree Toppers",
     "audience": "Women",
@@ -4227,6 +4488,7 @@
   },
   {
     "id": "women-shoes-womens-tree-toppers-hazy-pine",
+    "sku": "HRZ-WOM-39D32",
     "slug": "womens-tree-toppers-hazy-pine",
     "name": "Tree Toppers Hazy Pine",
     "audience": "Women",
@@ -4244,6 +4506,7 @@
   },
   {
     "id": "women-shoes-womens-tree-toppers-natural-black",
+    "sku": "HRZ-WOM-F4ECA",
     "slug": "womens-tree-toppers-natural-black",
     "name": "Tree Toppers Natural Black",
     "audience": "Women",
@@ -4261,6 +4524,7 @@
   },
   {
     "id": "women-shoes-womens-tree-toppers-natural-black-blizzard",
+    "sku": "HRZ-WOM-D8B0A",
     "slug": "womens-tree-toppers-natural-black-blizzard",
     "name": "Tree Toppers Natural Black Blizzard",
     "audience": "Women",
@@ -4278,6 +4542,7 @@
   },
   {
     "id": "women-shoes-womens-tree-toppers-rustic-brown",
+    "sku": "HRZ-WOM-2E796",
     "slug": "womens-tree-toppers-rustic-brown",
     "name": "Tree Toppers Rustic Brown",
     "audience": "Women",
@@ -4295,6 +4560,7 @@
   },
   {
     "id": "women-shoes-womens-tree-toppers-stormy-grey-barely-grey",
+    "sku": "HRZ-WOM-2BF5C",
     "slug": "womens-tree-toppers-stormy-grey-barely-grey",
     "name": "Tree Toppers Stormy Grey Barely Grey",
     "audience": "Women",
@@ -4312,6 +4578,7 @@
   },
   {
     "id": "women-shoes-womens-varsity-airy-mid-yellow",
+    "sku": "HRZ-WOM-F6EFC",
     "slug": "womens-varsity-airy-mid-yellow",
     "name": "Varsity Airy Mid Yellow",
     "audience": "Women",
@@ -4329,6 +4596,7 @@
   },
   {
     "id": "women-shoes-womens-wool-cruiser-dark-camel",
+    "sku": "HRZ-WOM-13B38",
     "slug": "womens-wool-cruiser-dark-camel",
     "name": "Wool Cruiser Dark Camel",
     "audience": "Women",
@@ -4346,6 +4614,7 @@
   },
   {
     "id": "women-shoes-womens-wool-cruiser-natural-grey",
+    "sku": "HRZ-WOM-272AD",
     "slug": "womens-wool-cruiser-natural-grey",
     "name": "Wool Cruiser Natural Grey",
     "audience": "Women",
@@ -4363,6 +4632,7 @@
   },
   {
     "id": "women-shoes-womens-wool-dasher-mizzles-deep-navy-hazy-indigo",
+    "sku": "HRZ-WOM-C3999",
     "slug": "womens-wool-dasher-mizzles-deep-navy-hazy-indigo",
     "name": "Wool Dasher Mizzles Deep Navy Hazy Indigo",
     "audience": "Women",
@@ -4380,6 +4650,7 @@
   },
   {
     "id": "women-shoes-womens-wool-dasher-mizzles-medium-grey-natural-black",
+    "sku": "HRZ-WOM-87FE0",
     "slug": "womens-wool-dasher-mizzles-medium-grey-natural-black",
     "name": "Wool Dasher Mizzles Medium Grey Natural Black",
     "audience": "Women",
@@ -4397,6 +4668,7 @@
   },
   {
     "id": "women-shoes-womens-wool-runner-nz-mid-waterproof",
+    "sku": "HRZ-WOM-7FC95",
     "slug": "womens-wool-runner-nz-mid-waterproof",
     "name": "Wool Runner Nz Mid Waterproof",
     "audience": "Women",
@@ -4414,6 +4686,7 @@
   },
   {
     "id": "women-shoes-womens-wool-runner-nz-mid-waterproof-stony-cream-rugged-beige",
+    "sku": "HRZ-WOM-7DA5A",
     "slug": "womens-wool-runner-nz-mid-waterproof-stony-cream-rugged-beige",
     "name": "Wool Runner Nz Mid Waterproof Stony Cream Rugged Beige",
     "audience": "Women",
@@ -4431,6 +4704,7 @@
   },
   {
     "id": "women-shoes-womens-wool-runner-nz-mid-waterproof-weathered-brown",
+    "sku": "HRZ-WOM-20FEC",
     "slug": "womens-wool-runner-nz-mid-waterproof-weathered-brown",
     "name": "Wool Runner Nz Mid Waterproof Weathered Brown",
     "audience": "Women",
@@ -4448,6 +4722,7 @@
   },
   {
     "id": "women-shoes-womens-wool-runner-nz-natural-black",
+    "sku": "HRZ-WOM-D957A",
     "slug": "womens-wool-runner-nz-natural-black",
     "name": "Wool Runner Nz Natural Black",
     "audience": "Women",
@@ -4465,6 +4740,7 @@
   },
   {
     "id": "women-shoes-womens-wool-runner-nz-rugged-beige",
+    "sku": "HRZ-WOM-7D7C4",
     "slug": "womens-wool-runner-nz-rugged-beige",
     "name": "Wool Runner Nz Rugged Beige",
     "audience": "Women",
@@ -4482,6 +4758,7 @@
   },
   {
     "id": "women-shoes-womens-wool-runner-nz-waterproof-dark-navy",
+    "sku": "HRZ-WOM-89F71",
     "slug": "womens-wool-runner-nz-waterproof-dark-navy",
     "name": "Wool Runner Nz Waterproof Dark Navy",
     "audience": "Women",
@@ -4499,6 +4776,7 @@
   },
   {
     "id": "women-shoes-womens-wool-runner-nz-waterproof-medium-grey",
+    "sku": "HRZ-WOM-D4199",
     "slug": "womens-wool-runner-nz-waterproof-medium-grey",
     "name": "Wool Runner Nz Waterproof Medium Grey",
     "audience": "Women",
@@ -4516,6 +4794,7 @@
   },
   {
     "id": "women-shoes-womens-wool-runner-nz-waterproof-stony-cream-rugged-beige",
+    "sku": "HRZ-WOM-C6E2D",
     "slug": "womens-wool-runner-nz-waterproof-stony-cream-rugged-beige",
     "name": "Wool Runner Nz Waterproof Stony Cream Rugged Beige",
     "audience": "Women",
@@ -4533,6 +4812,7 @@
   },
   {
     "id": "women-shoes-womens-wool-runner-nz-waterproof-weathered-brown",
+    "sku": "HRZ-WOM-DEE1B",
     "slug": "womens-wool-runner-nz-waterproof-weathered-brown",
     "name": "Wool Runner Nz Waterproof Weathered Brown",
     "audience": "Women",
@@ -4550,6 +4830,7 @@
   },
   {
     "id": "women-shoes-womens-wool-runner-nz-weathered-brown",
+    "sku": "HRZ-WOM-8B63A",
     "slug": "womens-wool-runner-nz-weathered-brown",
     "name": "Wool Runner Nz Weathered Brown",
     "audience": "Women",
@@ -4567,6 +4848,7 @@
   },
   {
     "id": "women-shoes-womens-wool-runner-up-mizzles-deep-emerald",
+    "sku": "HRZ-WOM-0DF3F",
     "slug": "womens-wool-runner-up-mizzles-deep-emerald",
     "name": "Wool Runner Up Mizzles Deep Emerald",
     "audience": "Women",
@@ -4584,6 +4866,7 @@
   },
   {
     "id": "women-shoes-womens-wool-runner-up-mizzles-hazy-indigo",
+    "sku": "HRZ-WOM-8D1E7",
     "slug": "womens-wool-runner-up-mizzles-hazy-indigo",
     "name": "Wool Runner Up Mizzles Hazy Indigo",
     "audience": "Women",
@@ -4600,6 +4883,7 @@
   },
   {
     "id": "women-shoes-womens-wool-runners-hazy-indigo",
+    "sku": "HRZ-WOM-80384",
     "slug": "womens-wool-runners-hazy-indigo",
     "name": "Wool Runners Hazy Indigo",
     "audience": "Women",
@@ -4616,6 +4900,7 @@
   },
   {
     "id": "women-shoes-womens-wool-runners-natural-black",
+    "sku": "HRZ-WOM-05F00",
     "slug": "womens-wool-runners-natural-black",
     "name": "Wool Runners Natural Black",
     "audience": "Women",
@@ -4632,6 +4917,7 @@
   },
   {
     "id": "women-shoes-womens-wool-runners-natural-white",
+    "sku": "HRZ-WOM-0CBD4",
     "slug": "womens-wool-runners-natural-white",
     "name": "Wool Runners Natural White",
     "audience": "Women",
@@ -4648,6 +4934,7 @@
   },
   {
     "id": "women-shoes-womens-wool-runners-savanna-night-navy",
+    "sku": "HRZ-WOM-ADE7C",
     "slug": "womens-wool-runners-savanna-night-navy",
     "name": "Wool Runners Savanna Night Navy",
     "audience": "Women",
@@ -4664,6 +4951,7 @@
   },
   {
     "id": "women-shoes-womens-wool-runners-true-black",
+    "sku": "HRZ-WOM-6C7BE",
     "slug": "womens-wool-runners-true-black",
     "name": "Wool Runners True Black",
     "audience": "Women",
@@ -4680,6 +4968,7 @@
   },
   {
     "id": "women-shoes-womens-wool-strider",
+    "sku": "HRZ-WOM-7EC0B",
     "slug": "womens-wool-strider",
     "name": "Wool Strider",
     "audience": "Women",
@@ -4697,6 +4986,7 @@
   },
   {
     "id": "women-shoes-womens-wool-strider-rugged-beige",
+    "sku": "HRZ-WOM-06D8D",
     "slug": "womens-wool-strider-rugged-beige",
     "name": "Wool Strider Rugged Beige",
     "audience": "Women",
@@ -4714,6 +5004,7 @@
   },
   {
     "id": "women-underwear-womens-trino-thong-nimbus",
+    "sku": "HRZ-WOM-992CF",
     "slug": "womens-trino-thong-nimbus",
     "name": "Trino Thong Nimbus",
     "audience": "Women",
