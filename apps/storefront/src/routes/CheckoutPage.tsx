@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react'
+import { QRCodeSVG } from 'qrcode.react'
 import { Link } from 'react-router'
 import { useAuth } from '../features/auth/AuthProvider'
 import { useCart } from '../features/cart/CartProvider'
@@ -24,6 +25,28 @@ function readCheckoutResult(value: unknown): CheckoutResult | null {
     && typeof record.payment_method === 'string'
     ? record as CheckoutResult
     : null
+}
+
+export function CheckoutConfirmation({ result }: { result: CheckoutResult }) {
+  return (
+    <main className="permission-page checkout-confirmation" id="main-content">
+      <p className="eyebrow">Đặt hàng thành công</p>
+      <h1>{result.order_number}</h1>
+      <div className="checkout-confirmation__qr">
+        <QRCodeSVG
+          bgColor="transparent"
+          fgColor="currentColor"
+          level="M"
+          marginSize={2}
+          size={176}
+          title={`QR mã đơn hàng ${result.order_number}`}
+          value={result.order_number}
+        />
+      </div>
+      <p>Đơn COD trị giá <strong>{formatVnd(result.grand_total)}</strong> đã được ghi nhận. Bạn thanh toán khi nhận hàng.</p>
+      <Link className="button button--primary" to="/">Tiếp tục mua sắm</Link>
+    </main>
+  )
 }
 
 export function CheckoutPage() {
@@ -84,14 +107,7 @@ export function CheckoutPage() {
   }
 
   if (result) {
-    return (
-      <main className="permission-page" id="main-content">
-        <p className="eyebrow">Đặt hàng thành công</p>
-        <h1>{result.order_number}</h1>
-        <p>Đơn COD trị giá <strong>{formatVnd(result.grand_total)}</strong> đã được ghi nhận. Bạn thanh toán khi nhận hàng.</p>
-        <Link className="button button--primary" to="/">Tiếp tục mua sắm</Link>
-      </main>
-    )
+    return <CheckoutConfirmation result={result} />
   }
 
   if (items.length === 0) {

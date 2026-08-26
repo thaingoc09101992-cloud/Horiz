@@ -33,7 +33,12 @@ export function useRevealMotion(scopeRef: RefObject<HTMLElement | null>) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return
-        entry.target.classList.add('is-visible')
+        const el = entry.target as HTMLElement
+        el.classList.add('is-visible')
+        // After the staggered reveal animation completes, reset transition-delay so
+        // hover interactions respond immediately instead of inheriting the stagger delay.
+        const revealIndex = Number(el.style.getPropertyValue('--reveal-index') || 0)
+        window.setTimeout(() => { el.style.transitionDelay = '0s' }, revealIndex * 70 + 280)
         observer.unobserve(entry.target)
       })
     }, { rootMargin: '0px 0px -8%', threshold: 0.12 })
