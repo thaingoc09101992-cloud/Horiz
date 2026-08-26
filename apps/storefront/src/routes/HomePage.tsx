@@ -25,41 +25,42 @@ const collections = [
   { label: 'Unisex', href: '/unisex', image: '/prototype/story-city.jpg' },
 ]
 
-// Hero slideshow — slide 0 keeps the original (CMS-overridable) copy; slides 1–2
-// carry their own copy around HORIZ's other two pillars: natural materials and
-// all-day comfort. Auto-advances every 3s; each change picks a random 0.75s
-// transition (wipe / cover / fade), never repeating the previous one.
-const HERO_SLIDE_INTERVAL_MS = 3000
-const HERO_TRANSITIONS = ['wipe', 'cover', 'fade'] as const
-type HeroTransition = (typeof HERO_TRANSITIONS)[number]
-const pickHeroTransition = (previous: HeroTransition): HeroTransition => {
-  const pool = HERO_TRANSITIONS.filter((name) => name !== previous)
-  return pool[Math.floor(Math.random() * pool.length)] ?? 'fade'
-}
+// Hero slideshow — slide 0 keeps the original (CMS-overridable) copy; slides 1–3
+// carry their own copy for the women's, footwear and kids stories. Each banner
+// shows for 3.5s, then the next one eases in over 1s (soft fade + settle zoom).
+const HERO_SLIDE_INTERVAL_MS = 3500
 const heroSlides = [
   {
-    image: '/prototype/hero-1.png',
-    alt: 'HORIZ — thiết kế vượt thời gian cho nhịp sống hiện đại',
+    image: '/prototype/hero-1.webp',
+    alt: 'HORIZ — người mặc áo thun trắng và quần linen bên bờ biển lúc hoàng hôn',
     eyebrow: 'HORIZ / BỘ SƯU TẬP MỚI',
     title: 'Thiết kế vượt thời gian.',
     titleAccent: 'Nhịp sống hiện đại.',
     description: 'Những thiết kế được chăm chút cho một cuộc sống luôn chuyển động. Tinh tế một cách tự nhiên.',
   },
   {
-    image: '/prototype/hero-2.png',
-    alt: 'HORIZ — chất liệu tự nhiên có nguồn gốc rõ ràng',
-    eyebrow: 'HORIZ / CHẤT LIỆU TỰ NHIÊN',
-    title: 'Chạm vào thiên nhiên.',
-    titleAccent: 'Bền bỉ mỗi ngày.',
-    description: 'Sợi tự nhiên có nguồn gốc rõ ràng, xử lý tối giản để giữ trọn sự thoáng nhẹ và độ bền theo năm tháng.',
+    image: '/prototype/hero-2.webp',
+    alt: 'HORIZ — người mặc sơ mi và quần linen trắng tựa vào vách đá trên đồi cát',
+    eyebrow: 'HORIZ / BỘ SƯU TẬP NỮ',
+    title: 'Thanh lịch không gắng sức.',
+    titleAccent: 'Đẹp theo cách rất riêng.',
+    description: 'Phom dáng buông nhẹ, sắc trung tính và chất vải tự nhiên — nữ tính bền vững qua từng mùa.',
   },
   {
-    image: '/prototype/hero-3.png',
-    alt: 'HORIZ — form dáng ôm chân, đế êm cho cả ngày dài',
-    eyebrow: 'HORIZ / THOẢI MÁI CẢ NGÀY',
-    title: 'Nhẹ như không mang.',
-    titleAccent: 'Đi hết ngày dài.',
-    description: 'Form dáng ôm chân, đế êm nâng niu từng bước — đồng hành từ sáng sớm đến tối muộn mà không mỏi.',
+    image: '/prototype/hero-3.webp',
+    alt: 'HORIZ — cận cảnh hai đôi giày dệt đứng trên tảng đá nhìn ra biển',
+    eyebrow: 'HORIZ / GIÀY THOẢI MÁI',
+    title: 'Êm từ bước đầu tiên.',
+    titleAccent: 'Đi cùng bạn cả ngày.',
+    description: 'Thân giày dệt liền ôm chân, đế nhẹ đàn hồi — đôi giày khiến bạn quên mất mình đang mang.',
+  },
+  {
+    image: '/prototype/hero-4.webp',
+    alt: 'HORIZ — hai em nhỏ mặc trang phục tông kem đứng bên bức tường nắng',
+    eyebrow: 'HORIZ / BỘ SƯU TẬP TRẺ EM',
+    title: 'Thoải mái để con khám phá.',
+    titleAccent: 'Bền bỉ qua mọi trò chơi.',
+    description: 'Chất vải mềm, lành với làn da bé và đủ chắc cho những ngày chạy nhảy không ngừng.',
   },
 ]
 
@@ -76,13 +77,9 @@ export function HomePage() {
   const productTrackRef = useRef<HTMLDivElement>(null)
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(false)
-  // active = slide shown now, prev = slide held underneath during the transition,
-  // transition = which of wipe/cover/fade the incoming slide is playing.
-  const [hero, setHero] = useState<{ active: number; prev: number | null; transition: HeroTransition }>({
-    active: 0,
-    prev: null,
-    transition: 'fade',
-  })
+  // active = slide shown now, prev = slide held underneath while the incoming one
+  // eases in (so there's no dark flash mid-transition).
+  const [hero, setHero] = useState<{ active: number; prev: number | null }>({ active: 0, prev: null })
 
   useRevealMotion(homeRef)
   useHeroParallax(homeRef)
@@ -102,24 +99,16 @@ export function HomePage() {
   }, [])
 
   const goToHeroSlide = (next: number) => {
-    setHero((current) =>
-      next === current.active
-        ? current
-        : { active: next, prev: current.active, transition: pickHeroTransition(current.transition) },
-    )
+    setHero((current) => (next === current.active ? current : { active: next, prev: current.active }))
   }
 
-  // Auto-advance the hero slideshow. The wipe/cover/fade transitions are reduced
-  // to instant swaps for prefers-reduced-motion users by the global motion rule,
-  // so the rotation itself can stay on for everyone. Re-armed on each change.
+  // Auto-advance the hero slideshow. The 1s ease-in transition is reduced to an
+  // instant swap for prefers-reduced-motion users by the global motion rule, so
+  // the rotation itself can stay on for everyone. Re-armed on each change.
   useEffect(() => {
     const next = (hero.active + 1) % heroSlides.length
     const timeoutId = window.setTimeout(() => {
-      setHero((current) => ({
-        active: next,
-        prev: current.active,
-        transition: pickHeroTransition(current.transition),
-      }))
+      setHero((current) => ({ active: next, prev: current.active }))
     }, HERO_SLIDE_INTERVAL_MS)
     return () => window.clearTimeout(timeoutId)
   }, [hero.active])
@@ -156,12 +145,7 @@ export function HomePage() {
             const state =
               index === hero.active ? 'active' : index === hero.prev ? 'leaving' : 'idle'
             return (
-              <picture
-                className="ab-hero__slide"
-                data-state={state}
-                data-transition={state === 'active' && hero.prev !== null ? hero.transition : undefined}
-                key={slide.image}
-              >
+              <picture className="ab-hero__slide" data-state={state} key={slide.image}>
                 <img
                   alt={slide.alt}
                   fetchPriority={index === 0 ? 'high' : undefined}
@@ -171,7 +155,6 @@ export function HomePage() {
             )
           })}
         </div>
-        <div className="ab-hero__shade" />
         <div className="ab-hero__content" data-reveal="hero">
           <div className="ab-hero__copy" key={hero.active}>
             <p className="ab-kicker">{heroContent.eyebrow}</p>
