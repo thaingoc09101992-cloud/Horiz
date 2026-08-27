@@ -683,10 +683,15 @@ td small { margin-top: .25rem; color: var(--muted); }
 .ab-collection-card > span { position: absolute; z-index: 1; right: 2rem; bottom: 2rem; left: 2rem; display: flex; align-items: center; justify-content: space-between; font-size: 13px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; }
 .ab-collection-card > span svg { width: 1.15rem; height: 1.15rem; }
 
-/* Brand philosophy — text only, quiet, generous whitespace */
+/* Brand philosophy — text only, quiet, generous whitespace. Two columns,
+   English/Vietnamese, sharing one thin rule down the middle — a deliberate
+   nod to the "HORIZ" mark hidden inside "Horizon" in the English line. */
 .ab-philosophy { text-align: center; }
-.ab-philosophy__lines { max-width: 720px; margin: auto; }
-.ab-philosophy__lines p { margin: 0; font-family: var(--font-editorial); font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 400; font-style: italic; line-height: 1.5; color: var(--text); }
+.ab-philosophy__lines { display: grid; max-width: 1040px; margin: auto; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2.5rem, 6vw, 5rem); }
+.ab-philosophy__lines > div { padding: 0 clamp(1rem, 3vw, 2rem); }
+.ab-philosophy__lines > div:first-child { border-right: 1px solid var(--border); }
+.ab-philosophy__lines p { margin: 0; font-family: var(--font-editorial); font-size: clamp(1.3rem, 2.1vw, 1.9rem); font-weight: 400; font-style: italic; line-height: 1.55; color: var(--text); }
+.ab-philosophy__mark { font-style: normal; font-weight: 700; letter-spacing: .03em; }
 
 [data-reveal] { opacity: 0; transform: translateY(calc(24px + var(--parallax-y, 0px))); transition: opacity .24s ease, transform .24s cubic-bezier(.22, 1, .36, 1); transition-delay: calc(var(--reveal-index, 0) * 70ms); }
 [data-reveal].is-visible { opacity: 1; transform: translateY(var(--parallax-y, 0px)); }
@@ -810,6 +815,8 @@ td small { margin-top: .25rem; color: var(--muted); }
   .ab-product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
   .ab-collection-grid { grid-template-columns: 1fr; }
   .ab-collection-card { min-height: 420px; }
+  .ab-philosophy__lines { grid-template-columns: 1fr; gap: 2rem; }
+  .ab-philosophy__lines > div:first-child { border-right: 0; border-bottom: 1px solid var(--border); padding-bottom: 2rem; }
   .ab-philosophy__lines p { font-size: 1.6rem; }
   .catalogue-toolbar { align-items: stretch; flex-direction: column; padding-inline: 1rem; }
   .catalogue-toolbar select { width: 100%; }

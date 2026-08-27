@@ -252,7 +252,12 @@ export function HomePage() {
 
       <section className="ab-section ab-philosophy">
         <div className="ab-philosophy__lines" data-reveal>
-          <p>Được tạo nên có chủ đích.<br />Dành cho những bước chuyển động mỗi ngày.<br />Bền bỉ vượt qua từng mùa.</p>
+          <div>
+            <p>Where light meets the <span className="ab-philosophy__mark">HORIZ</span>on,<br />every step finds its own rhythm.<br />Light as wind, lasting as earth.</p>
+          </div>
+          <div>
+            <p>Nơi ánh sáng chạm đường chân trời,<br />mỗi bước chân cũng tìm được nhịp riêng.<br />Nhẹ như gió, bền như đất.</p>
+          </div>
         </div>
       </section>
     </main>
