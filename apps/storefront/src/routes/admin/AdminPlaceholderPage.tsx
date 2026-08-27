@@ -1,4 +1,4 @@
-import { ArrowRight, ChevronDown, Edit3, Plus, RefreshCw, Trash2, X } from 'lucide-react'
+import { ArrowDown, ArrowRight, ArrowUp, ArrowUpDown, ChevronDown, Edit3, Plus, RefreshCw, Trash2, X } from 'lucide-react'
 import { Fragment, useCallback, useEffect, useMemo, useState, type FormEvent } from 'react'
 import { useParams } from 'react-router'
 import { Portal } from '../../components/feedback/Portal'
@@ -19,7 +19,16 @@ type AdminRow = {
   roleValue?: string
   statusValue?: string
   isNew?: boolean
+  sortValue?: number
 }
+
+type SortKey = 'primary' | 'status' | 'value'
+type SortState = { key: SortKey; dir: 'asc' | 'desc' }
+type ColumnFilters = Partial<Record<SortKey, string>>
+
+// The "Giá trị" column holds a plain string for some sections and a number/date
+// for others; the numeric ones sort on row.sortValue instead of the label text.
+const numericValueSections = new Set(['inventory', 'pricing', 'orders', 'discounts', 'content', 'audit-logs'])
 
 type OrderItemRow = {
   id: string
@@ -73,6 +82,8 @@ export function AdminPlaceholderPage() {
   const label = sectionLabels[section] ?? 'Quản trị'
   const [rows, setRows] = useState<AdminRow[]>([])
   const [query, setQuery] = useState('')
+  const [sort, setSort] = useState<SortState | null>(null)
+  const [columnFilters, setColumnFilters] = useState<ColumnFilters>({})
   const [loading, setLoading] = useState(true)
   const [message, setMessage] = useState('')
   const [editor, setEditor] = useState<AdminRow | 'create' | null>(null)
@@ -100,21 +111,21 @@ export function AdminPlaceholderPage() {
       } else if (section === 'inventory') {
         const { data, error } = await supabase.from('inventory_items').select('variant_id,on_hand,reserved,reorder_level,product_variants(sku,title,products(name,source_key))').order('updated_at', { ascending: false }).limit(250)
         if (error) throw error
-        next = (data ?? []).map((item) => { const variant = nestedRecord(item.product_variants); const product = nestedRecord(variant.products); const available = item.on_hand - item.reserved; const sourceKey = readText(product.source_key); return { id: item.variant_id, primary: readText(product.name, readText(variant.sku, 'SKU')), secondary: readText(variant.sku) + ' · ' + readText(variant.title), status: available <= 0 ? 'Hết hàng' : available <= item.reorder_level ? 'Sắp hết' : 'Ổn định', value: String(available) + ' khả dụng', imageUrl: sourceKey ? '/catalogue/' + sourceKey + '-01.jpg' : undefined, rawValue: item.on_hand } })
+        next = (data ?? []).map((item) => { const variant = nestedRecord(item.product_variants); const product = nestedRecord(variant.products); const available = item.on_hand - item.reserved; const sourceKey = readText(product.source_key); return { id: item.variant_id, primary: readText(product.name, readText(variant.sku, 'SKU')), secondary: readText(variant.sku) + ' · ' + readText(variant.title), status: available <= 0 ? 'Hết hàng' : available <= item.reorder_level ? 'Sắp hết' : 'Ổn định', value: String(available) + ' khả dụng', imageUrl: sourceKey ? '/catalogue/' + sourceKey + '-01.jpg' : undefined, rawValue: item.on_hand, sortValue: available } })
       } else if (section === 'pricing') {
         const { data, error } = await supabase.from('product_variants').select('id,sku,title,price_amount,compare_at_amount,products(name,source_key)').order('updated_at', { ascending: false }).limit(250)
         if (error) throw error
-        next = (data ?? []).map((item) => { const product = nestedRecord(item.products); const sourceKey = readText(product.source_key); return { id: item.id, primary: readText(product.name, item.sku), secondary: item.sku + ' · ' + item.title, status: item.compare_at_amount ? 'Đang giảm' : 'Giá thường', value: formatVnd(item.price_amount), imageUrl: sourceKey ? '/catalogue/' + sourceKey + '-01.jpg' : undefined, rawValue: item.price_amount } })
+        next = (data ?? []).map((item) => { const product = nestedRecord(item.products); const sourceKey = readText(product.source_key); return { id: item.id, primary: readText(product.name, item.sku), secondary: item.sku + ' · ' + item.title, status: item.compare_at_amount ? 'Đang giảm' : 'Giá thường', value: formatVnd(item.price_amount), imageUrl: sourceKey ? '/catalogue/' + sourceKey + '-01.jpg' : undefined, rawValue: item.price_amount, sortValue: item.price_amount } })
       } else if (section === 'discounts') {
         const { data, error } = await supabase.from('promotions').select('id,name,status,discount_type,discount_value,starts_at,ends_at').order('created_at', { ascending: false })
         if (error) throw error
-        next = (data ?? []).map((item) => ({ id: item.id, primary: item.name, secondary: item.discount_type === 'percentage' ? String(item.discount_value / 100) + '%' : formatVnd(item.discount_value), status: item.status, value: item.starts_at ? new Intl.DateTimeFormat('vi-VN').format(new Date(item.starts_at)) : 'Chưa lên lịch' }))
+        next = (data ?? []).map((item) => ({ id: item.id, primary: item.name, secondary: item.discount_type === 'percentage' ? String(item.discount_value / 100) + '%' : formatVnd(item.discount_value), status: item.status, value: item.starts_at ? new Intl.DateTimeFormat('vi-VN').format(new Date(item.starts_at)) : 'Chưa lên lịch', sortValue: item.starts_at ? new Date(item.starts_at).getTime() : 0 }))
       } else if (section === 'orders') {
         const { data, error } = await supabase.from('orders').select('id,order_number,email,status,grand_total,created_at,opened_at').order('created_at', { ascending: false }).limit(200)
         if (error) throw error
         next = (data ?? []).map((item) => {
           const isNew = !item.opened_at && item.status === 'pending_payment'
-          return { id: item.id, primary: item.order_number, secondary: item.email, status: isNew ? 'Đơn mới' : orderStatusLabels[item.status] ?? item.status, statusValue: item.status, value: formatVnd(item.grand_total), rawValue: item.grand_total, isNew }
+          return { id: item.id, primary: item.order_number, secondary: item.email, status: isNew ? 'Đơn mới' : orderStatusLabels[item.status] ?? item.status, statusValue: item.status, value: formatVnd(item.grand_total), rawValue: item.grand_total, sortValue: item.grand_total, isNew }
         })
       } else if (section === 'members') {
         const [profileResult, statusResult, roleResult] = await Promise.all([
@@ -138,11 +149,11 @@ export function AdminPlaceholderPage() {
       } else if (section === 'content') {
         const { data, error } = await supabase.from('content_sections').select('id,page_key,type,active,position,updated_at').order('page_key').order('position')
         if (error) throw error
-        next = (data ?? []).map((item) => ({ id: item.id, primary: item.page_key, secondary: item.type + ' · vị trí ' + String(item.position), status: item.active ? 'Đang hiển thị' : 'Đã ẩn', value: new Intl.DateTimeFormat('vi-VN').format(new Date(item.updated_at)) }))
+        next = (data ?? []).map((item) => ({ id: item.id, primary: item.page_key, secondary: item.type + ' · vị trí ' + String(item.position), status: item.active ? 'Đang hiển thị' : 'Đã ẩn', value: new Intl.DateTimeFormat('vi-VN').format(new Date(item.updated_at)), sortValue: new Date(item.updated_at).getTime() }))
       } else {
         const { data, error } = await supabase.from('audit_logs').select('id,action,entity_type,actor_id,created_at').order('created_at', { ascending: false }).limit(250)
         if (error) throw error
-        next = (data ?? []).map((item) => ({ id: String(item.id), primary: item.action.toUpperCase() + ' · ' + item.entity_type, secondary: item.actor_id ?? 'Hệ thống', status: 'Đã ghi nhận', value: new Intl.DateTimeFormat('vi-VN', { dateStyle: 'short', timeStyle: 'short' }).format(new Date(item.created_at)) }))
+        next = (data ?? []).map((item) => ({ id: String(item.id), primary: item.action.toUpperCase() + ' · ' + item.entity_type, secondary: item.actor_id ?? 'Hệ thống', status: 'Đã ghi nhận', value: new Intl.DateTimeFormat('vi-VN', { dateStyle: 'short', timeStyle: 'short' }).format(new Date(item.created_at)), sortValue: new Date(item.created_at).getTime() }))
       }
       setRows(next)
     } catch (error) {
@@ -155,10 +166,43 @@ export function AdminPlaceholderPage() {
 
   useEffect(() => { const timer = window.setTimeout(() => void load(), 0); return () => window.clearTimeout(timer) }, [load])
 
+  // Sorting / per-column filters are section-specific — drop them on navigation
+  // (state reset during render, per the React "changing state on prop change" pattern).
+  const [sortedSection, setSortedSection] = useState(section)
+  if (section !== sortedSection) {
+    setSortedSection(section)
+    setSort(null)
+    setColumnFilters({})
+  }
+
+  const collator = useMemo(() => new Intl.Collator('vi', { numeric: true, sensitivity: 'base' }), [])
+
   const visibleRows = useMemo(() => {
     const normalized = query.trim().toLocaleLowerCase('vi')
-    return normalized ? rows.filter((row) => (row.primary + ' ' + row.secondary + ' ' + row.status).toLocaleLowerCase('vi').includes(normalized)) : rows
-  }, [query, rows])
+    const fPrimary = (columnFilters.primary ?? '').trim().toLocaleLowerCase('vi')
+    const fStatus = (columnFilters.status ?? '').trim().toLocaleLowerCase('vi')
+    const fValue = (columnFilters.value ?? '').trim().toLocaleLowerCase('vi')
+    const filtered = rows.filter((row) => {
+      if (normalized && !(row.primary + ' ' + row.secondary + ' ' + row.status).toLocaleLowerCase('vi').includes(normalized)) return false
+      if (fPrimary && !(row.primary + ' ' + row.secondary).toLocaleLowerCase('vi').includes(fPrimary)) return false
+      if (fStatus && !row.status.toLocaleLowerCase('vi').includes(fStatus)) return false
+      if (fValue && !row.value.toLocaleLowerCase('vi').includes(fValue)) return false
+      return true
+    })
+    if (!sort) return filtered
+    const factor = sort.dir === 'asc' ? 1 : -1
+    const numericValue = sort.key === 'value' && numericValueSections.has(section)
+    return [...filtered].sort((a, b) => {
+      if (numericValue) return factor * ((a.sortValue ?? 0) - (b.sortValue ?? 0))
+      const av = sort.key === 'primary' ? a.primary : sort.key === 'status' ? a.status : a.value
+      const bv = sort.key === 'primary' ? b.primary : sort.key === 'status' ? b.status : b.value
+      return factor * collator.compare(av, bv)
+    })
+  }, [query, rows, columnFilters, sort, section, collator])
+
+  const handleSort = (key: SortKey) => {
+    setSort((current) => (current?.key !== key ? { key, dir: 'asc' } : current.dir === 'asc' ? { key, dir: 'desc' } : null))
+  }
 
   // First time an admin opens a "Đơn mới" order (detail row or editor), stamp
   // opened_at and move it into "Đang xử lý".
@@ -258,6 +302,8 @@ export function AdminPlaceholderPage() {
   const canEdit = section !== 'audit-logs'
   const showsProductImages = ['products', 'inventory', 'pricing'].includes(section)
   const supportsImport = ['products', 'inventory', 'pricing'].includes(section)
+  const primaryLabel = section === 'orders' ? 'Mã đơn' : label
+  const setColumnFilter = (key: SortKey, value: string) => setColumnFilters((current) => ({ ...current, [key]: value }))
 
   return (
     <main className="admin-main" id="main-content">
@@ -265,10 +311,38 @@ export function AdminPlaceholderPage() {
       <section className="dashboard-panel admin-data-panel">
         <div className="admin-data-toolbar"><label><span className="sr-only">Tìm trong {label}</span><input onChange={(event) => setQuery(event.target.value)} placeholder={'Tìm trong ' + label.toLowerCase() + '…'} type="search" value={query} /></label><button aria-label="Tải lại" className="icon-button" onClick={() => void load()} type="button"><RefreshCw aria-hidden="true" /></button></div>
         {message ? <p className="form-message form-message--neutral" role="status">{message}</p> : null}
-        {loading ? <p className="admin-empty">Đang tải dữ liệu…</p> : visibleRows.length === 0 ? <p className="admin-empty">Chưa có dữ liệu phù hợp.</p> : <div className="table-wrap"><table className={showsProductImages ? 'admin-table admin-table--products' : 'admin-table'}><thead><tr>{showsProductImages ? <th className="admin-image-column">Ảnh</th> : null}<th>{section === 'orders' ? 'Mã đơn' : label}</th><th>Trạng thái</th><th>Giá trị</th><th><span className="sr-only">Thao tác</span></th></tr></thead><tbody>{visibleRows.map((row) => <Fragment key={row.id}><tr>{showsProductImages ? <td className="admin-image-column"><ProductThumbnail name={row.primary} src={row.imageUrl} /></td> : null}<td><strong>{row.primary}</strong></td><td><span className={row.isNew ? 'status-badge status-badge--new' : 'status-badge'}>{row.status}</span></td><td>{row.value}</td><td><div className="row-actions">{section === 'orders' ? <button aria-expanded={expandedOrderId === row.id} className="row-detail-button" onClick={() => void toggleOrderDetails(row.id)} type="button">Chi tiết <ChevronDown aria-hidden="true" /></button> : null}{canEdit ? <button aria-label={'Sửa ' + row.primary} onClick={() => { if (section === 'orders') void markOrderOpened(row.id); setEditor(row) }} type="button"><Edit3 aria-hidden="true" /></button> : null}{canDelete ? <button aria-label={'Xóa ' + row.primary} onClick={() => void remove(row)} type="button"><Trash2 aria-hidden="true" /></button> : null}</div></td></tr>{section === 'orders' && expandedOrderId === row.id ? <tr className="order-detail-row"><td colSpan={4}><OrderDetails items={orderItems[row.id] ?? []} loading={loadingOrderId === row.id} /></td></tr> : null}</Fragment>)}</tbody></table></div>}
+        {loading ? <p className="admin-empty">Đang tải dữ liệu…</p> : <div className="table-wrap"><table className={showsProductImages ? 'admin-table admin-table--products' : 'admin-table'}><thead><tr>{showsProductImages ? <th className="admin-image-column">Ảnh</th> : null}<SortableHeader filter={columnFilters.primary ?? ''} filterLabel={primaryLabel.toLowerCase()} label={primaryLabel} onFilter={(value) => setColumnFilter('primary', value)} onSort={() => handleSort('primary')} sort={sort} sortKey="primary" /><SortableHeader filter={columnFilters.status ?? ''} filterLabel="trạng thái" label="Trạng thái" onFilter={(value) => setColumnFilter('status', value)} onSort={() => handleSort('status')} sort={sort} sortKey="status" /><SortableHeader filter={columnFilters.value ?? ''} filterLabel="giá trị" label="Giá trị" onFilter={(value) => setColumnFilter('value', value)} onSort={() => handleSort('value')} sort={sort} sortKey="value" /><th><span className="sr-only">Thao tác</span></th></tr></thead><tbody>{visibleRows.length === 0 ? <tr><td colSpan={showsProductImages ? 5 : 4}><p className="admin-empty">Chưa có dữ liệu phù hợp.</p></td></tr> : visibleRows.map((row) => <Fragment key={row.id}><tr>{showsProductImages ? <td className="admin-image-column"><ProductThumbnail name={row.primary} src={row.imageUrl} /></td> : null}<td><strong>{row.primary}</strong></td><td><span className={row.isNew ? 'status-badge status-badge--new' : 'status-badge'}>{row.status}</span></td><td>{row.value}</td><td><div className="row-actions">{section === 'orders' ? <button aria-expanded={expandedOrderId === row.id} className="row-detail-button" onClick={() => void toggleOrderDetails(row.id)} type="button">Chi tiết <ChevronDown aria-hidden="true" /></button> : null}{canEdit ? <button aria-label={'Sửa ' + row.primary} onClick={() => { if (section === 'orders') void markOrderOpened(row.id); setEditor(row) }} type="button"><Edit3 aria-hidden="true" /></button> : null}{canDelete ? <button aria-label={'Xóa ' + row.primary} onClick={() => void remove(row)} type="button"><Trash2 aria-hidden="true" /></button> : null}</div></td></tr>{section === 'orders' && expandedOrderId === row.id ? <tr className="order-detail-row"><td colSpan={4}><OrderDetails items={orderItems[row.id] ?? []} loading={loadingOrderId === row.id} /></td></tr> : null}</Fragment>)}</tbody></table></div>}
       </section>
       {editor ? <Portal><div aria-modal="true" className="dialog-backdrop" role="dialog"><form className="admin-editor" onSubmit={(event) => void save(event)}><button aria-label="Đóng" className="icon-button" onClick={() => setEditor(null)} type="button"><X aria-hidden="true" /></button><p className="eyebrow">{editor === 'create' ? 'Tạo bản ghi' : 'Cập nhật'}</p><h2>{editor === 'create' ? 'Thêm ' + label.toLowerCase() : editor.primary}</h2>{editor === 'create' ? <CreateFields section={section} /> : <EditorFields row={editor} section={section} />}<button className="button button--primary button--wide" type="submit">Lưu thay đổi <ArrowRight aria-hidden="true" /></button></form></div></Portal> : null}
     </main>
+  )
+}
+
+function SortableHeader({ label, sortKey, sort, onSort, filter, filterLabel, onFilter }: {
+  label: string
+  sortKey: SortKey
+  sort: SortState | null
+  onSort: () => void
+  filter: string
+  filterLabel: string
+  onFilter: (value: string) => void
+}) {
+  const active = sort?.key === sortKey
+  const SortIcon = !active ? ArrowUpDown : sort.dir === 'asc' ? ArrowUp : ArrowDown
+  return (
+    <th aria-sort={active ? (sort.dir === 'asc' ? 'ascending' : 'descending') : 'none'}>
+      <button className="admin-th-sort" data-active={active || undefined} onClick={onSort} type="button">
+        {label}<SortIcon aria-hidden="true" />
+      </button>
+      <input
+        aria-label={'Lọc theo ' + filterLabel}
+        className="admin-th-filter"
+        onChange={(event) => onFilter(event.target.value)}
+        placeholder="Lọc…"
+        type="search"
+        value={filter}
+      />
+    </th>
   )
 }
 
