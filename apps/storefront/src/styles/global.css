@@ -690,7 +690,7 @@ td small { margin-top: .25rem; color: var(--muted); }
 .ab-philosophy__lines { display: grid; max-width: 1040px; margin: auto; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2.5rem, 6vw, 5rem); }
 .ab-philosophy__lines > div { padding: 0 clamp(1rem, 3vw, 2rem); }
 .ab-philosophy__lines > div:first-child { border-right: 1px solid var(--border); }
-.ab-philosophy__lines p { margin: 0; font-family: var(--font-editorial); font-size: clamp(1.3rem, 2.1vw, 1.9rem); font-weight: 400; font-style: italic; line-height: 1.55; color: var(--text); }
+.ab-philosophy__lines p { margin: 0; font-family: var(--font-editorial); font-size: clamp(1.3rem, 2.1vw, 1.7rem); font-weight: 400; font-style: italic; line-height: 1.55; color: var(--text); }
 .ab-philosophy__mark { font-style: normal; font-weight: 700; letter-spacing: .03em; }
 
 [data-reveal] { opacity: 0; transform: translateY(calc(24px + var(--parallax-y, 0px))); transition: opacity .24s ease, transform .24s cubic-bezier(.22, 1, .36, 1); transition-delay: calc(var(--reveal-index, 0) * 70ms); }
@@ -793,6 +793,11 @@ td small { margin-top: .25rem; color: var(--muted); }
   .ab-editorial__inner { grid-template-columns: 1fr; }
   .ab-editorial__visual { aspect-ratio: 16 / 9; }
   .ab-editorial__content { max-width: 100%; padding: 3rem 0; }
+  /* Below ~1152px each column gets too narrow for the longer Vietnamese
+     line to stay on one line at this font size — stack instead of shrinking
+     the type further (measured: still wraps even at 1050px wide). */
+  .ab-philosophy__lines { grid-template-columns: 1fr; gap: 2rem; max-width: 600px; }
+  .ab-philosophy__lines > div:first-child { border-right: 0; border-bottom: 1px solid var(--border); padding-bottom: 2rem; }
   .catalogue-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .pdp-layout { grid-template-columns: 1fr 1fr; gap: 2rem; }
   .cart-layout { grid-template-columns: 1fr; }
@@ -815,8 +820,6 @@ td small { margin-top: .25rem; color: var(--muted); }
   .ab-product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
   .ab-collection-grid { grid-template-columns: 1fr; }
   .ab-collection-card { min-height: 420px; }
-  .ab-philosophy__lines { grid-template-columns: 1fr; gap: 2rem; }
-  .ab-philosophy__lines > div:first-child { border-right: 0; border-bottom: 1px solid var(--border); padding-bottom: 2rem; }
   .ab-philosophy__lines p { font-size: 1.6rem; }
   .catalogue-toolbar { align-items: stretch; flex-direction: column; padding-inline: 1rem; }
   .catalogue-toolbar select { width: 100%; }
