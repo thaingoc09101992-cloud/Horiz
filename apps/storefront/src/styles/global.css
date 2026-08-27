@@ -329,13 +329,10 @@ td small { margin-top: .25rem; color: var(--muted); }
 .admin-data-panel .admin-table td:first-child { display: table-cell; }
 .admin-table--products { min-width: 720px; }
 .admin-image-column { width: 88px; }
-.admin-data-panel thead th { vertical-align: top; }
 .admin-th-sort { display: inline-flex; align-items: center; gap: .35rem; width: 100%; padding: 0; border: 0; background: transparent; color: var(--muted); font: inherit; font-weight: 600; text-align: left; cursor: pointer; }
 .admin-th-sort:hover, .admin-th-sort[data-active] { color: var(--text); }
 .admin-th-sort svg { width: 13px; height: 13px; flex: 0 0 auto; opacity: .4; }
 .admin-th-sort[data-active] svg { opacity: 1; }
-.admin-th-filter { width: 100%; margin-top: .45rem; min-height: 30px; padding: 0 .45rem; border: 1px solid var(--border); border-radius: var(--radius-xs); background: var(--surface); color: var(--text); font-size: .7rem; font-weight: 400; }
-.admin-th-filter::placeholder { color: var(--muted); }
 .admin-product-image { display: grid; width: 64px; height: 64px; overflow: hidden; place-items: center; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface-subtle); color: var(--muted); font-family: var(--font-display); font-size: 1rem; }
 .admin-product-image img { width: 100%; height: 100%; object-fit: cover; }
 .admin-heading-actions, .admin-import-tools { display: flex; align-items: center; flex-wrap: wrap; gap: .65rem; }

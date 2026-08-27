@@ -24,7 +24,6 @@ type AdminRow = {
 
 type SortKey = 'primary' | 'status' | 'value'
 type SortState = { key: SortKey; dir: 'asc' | 'desc' }
-type ColumnFilters = Partial<Record<SortKey, string>>
 
 // The "Giá trị" column holds a plain string for some sections and a number/date
 // for others; the numeric ones sort on row.sortValue instead of the label text.
@@ -83,7 +82,6 @@ export function AdminPlaceholderPage() {
   const [rows, setRows] = useState<AdminRow[]>([])
   const [query, setQuery] = useState('')
   const [sort, setSort] = useState<SortState | null>(null)
-  const [columnFilters, setColumnFilters] = useState<ColumnFilters>({})
   const [loading, setLoading] = useState(true)
   const [message, setMessage] = useState('')
   const [editor, setEditor] = useState<AdminRow | 'create' | null>(null)
@@ -166,29 +164,21 @@ export function AdminPlaceholderPage() {
 
   useEffect(() => { const timer = window.setTimeout(() => void load(), 0); return () => window.clearTimeout(timer) }, [load])
 
-  // Sorting / per-column filters are section-specific — drop them on navigation
-  // (state reset during render, per the React "changing state on prop change" pattern).
+  // Sorting is section-specific — drop it on navigation (state reset during
+  // render, per the React "changing state on prop change" pattern).
   const [sortedSection, setSortedSection] = useState(section)
   if (section !== sortedSection) {
     setSortedSection(section)
     setSort(null)
-    setColumnFilters({})
   }
 
   const collator = useMemo(() => new Intl.Collator('vi', { numeric: true, sensitivity: 'base' }), [])
 
   const visibleRows = useMemo(() => {
     const normalized = query.trim().toLocaleLowerCase('vi')
-    const fPrimary = (columnFilters.primary ?? '').trim().toLocaleLowerCase('vi')
-    const fStatus = (columnFilters.status ?? '').trim().toLocaleLowerCase('vi')
-    const fValue = (columnFilters.value ?? '').trim().toLocaleLowerCase('vi')
-    const filtered = rows.filter((row) => {
-      if (normalized && !(row.primary + ' ' + row.secondary + ' ' + row.status).toLocaleLowerCase('vi').includes(normalized)) return false
-      if (fPrimary && !(row.primary + ' ' + row.secondary).toLocaleLowerCase('vi').includes(fPrimary)) return false
-      if (fStatus && !row.status.toLocaleLowerCase('vi').includes(fStatus)) return false
-      if (fValue && !row.value.toLocaleLowerCase('vi').includes(fValue)) return false
-      return true
-    })
+    const filtered = normalized
+      ? rows.filter((row) => (row.primary + ' ' + row.secondary + ' ' + row.status).toLocaleLowerCase('vi').includes(normalized))
+      : rows
     if (!sort) return filtered
     const factor = sort.dir === 'asc' ? 1 : -1
     const numericValue = sort.key === 'value' && numericValueSections.has(section)
@@ -198,7 +188,7 @@ export function AdminPlaceholderPage() {
       const bv = sort.key === 'primary' ? b.primary : sort.key === 'status' ? b.status : b.value
       return factor * collator.compare(av, bv)
     })
-  }, [query, rows, columnFilters, sort, section, collator])
+  }, [query, rows, sort, section, collator])
 
   const handleSort = (key: SortKey) => {
     setSort((current) => (current?.key !== key ? { key, dir: 'asc' } : current.dir === 'asc' ? { key, dir: 'desc' } : null))
@@ -303,7 +293,6 @@ export function AdminPlaceholderPage() {
   const showsProductImages = ['products', 'inventory', 'pricing'].includes(section)
   const supportsImport = ['products', 'inventory', 'pricing'].includes(section)
   const primaryLabel = section === 'orders' ? 'Mã đơn' : label
-  const setColumnFilter = (key: SortKey, value: string) => setColumnFilters((current) => ({ ...current, [key]: value }))
 
   return (
     <main className="admin-main" id="main-content">
@@ -311,21 +300,18 @@ export function AdminPlaceholderPage() {
       <section className="dashboard-panel admin-data-panel">
         <div className="admin-data-toolbar"><label><span className="sr-only">Tìm trong {label}</span><input onChange={(event) => setQuery(event.target.value)} placeholder={'Tìm trong ' + label.toLowerCase() + '…'} type="search" value={query} /></label><button aria-label="Tải lại" className="icon-button" onClick={() => void load()} type="button"><RefreshCw aria-hidden="true" /></button></div>
         {message ? <p className="form-message form-message--neutral" role="status">{message}</p> : null}
-        {loading ? <p className="admin-empty">Đang tải dữ liệu…</p> : <div className="table-wrap"><table className={showsProductImages ? 'admin-table admin-table--products' : 'admin-table'}><thead><tr>{showsProductImages ? <th className="admin-image-column">Ảnh</th> : null}<SortableHeader filter={columnFilters.primary ?? ''} filterLabel={primaryLabel.toLowerCase()} label={primaryLabel} onFilter={(value) => setColumnFilter('primary', value)} onSort={() => handleSort('primary')} sort={sort} sortKey="primary" /><SortableHeader filter={columnFilters.status ?? ''} filterLabel="trạng thái" label="Trạng thái" onFilter={(value) => setColumnFilter('status', value)} onSort={() => handleSort('status')} sort={sort} sortKey="status" /><SortableHeader filter={columnFilters.value ?? ''} filterLabel="giá trị" label="Giá trị" onFilter={(value) => setColumnFilter('value', value)} onSort={() => handleSort('value')} sort={sort} sortKey="value" /><th><span className="sr-only">Thao tác</span></th></tr></thead><tbody>{visibleRows.length === 0 ? <tr><td colSpan={showsProductImages ? 5 : 4}><p className="admin-empty">Chưa có dữ liệu phù hợp.</p></td></tr> : visibleRows.map((row) => <Fragment key={row.id}><tr>{showsProductImages ? <td className="admin-image-column"><ProductThumbnail name={row.primary} src={row.imageUrl} /></td> : null}<td><strong>{row.primary}</strong></td><td><span className={row.isNew ? 'status-badge status-badge--new' : 'status-badge'}>{row.status}</span></td><td>{row.value}</td><td><div className="row-actions">{section === 'orders' ? <button aria-expanded={expandedOrderId === row.id} className="row-detail-button" onClick={() => void toggleOrderDetails(row.id)} type="button">Chi tiết <ChevronDown aria-hidden="true" /></button> : null}{canEdit ? <button aria-label={'Sửa ' + row.primary} onClick={() => { if (section === 'orders') void markOrderOpened(row.id); setEditor(row) }} type="button"><Edit3 aria-hidden="true" /></button> : null}{canDelete ? <button aria-label={'Xóa ' + row.primary} onClick={() => void remove(row)} type="button"><Trash2 aria-hidden="true" /></button> : null}</div></td></tr>{section === 'orders' && expandedOrderId === row.id ? <tr className="order-detail-row"><td colSpan={4}><OrderDetails items={orderItems[row.id] ?? []} loading={loadingOrderId === row.id} /></td></tr> : null}</Fragment>)}</tbody></table></div>}
+        {loading ? <p className="admin-empty">Đang tải dữ liệu…</p> : <div className="table-wrap"><table className={showsProductImages ? 'admin-table admin-table--products' : 'admin-table'}><thead><tr>{showsProductImages ? <th className="admin-image-column">Ảnh</th> : null}<SortableHeader label={primaryLabel} onSort={() => handleSort('primary')} sort={sort} sortKey="primary" /><SortableHeader label="Trạng thái" onSort={() => handleSort('status')} sort={sort} sortKey="status" /><SortableHeader label="Giá trị" onSort={() => handleSort('value')} sort={sort} sortKey="value" /><th><span className="sr-only">Thao tác</span></th></tr></thead><tbody>{visibleRows.length === 0 ? <tr><td colSpan={showsProductImages ? 5 : 4}><p className="admin-empty">Chưa có dữ liệu phù hợp.</p></td></tr> : visibleRows.map((row) => <Fragment key={row.id}><tr>{showsProductImages ? <td className="admin-image-column"><ProductThumbnail name={row.primary} src={row.imageUrl} /></td> : null}<td><strong>{row.primary}</strong></td><td><span className={row.isNew ? 'status-badge status-badge--new' : 'status-badge'}>{row.status}</span></td><td>{row.value}</td><td><div className="row-actions">{section === 'orders' ? <button aria-expanded={expandedOrderId === row.id} className="row-detail-button" onClick={() => void toggleOrderDetails(row.id)} type="button">Chi tiết <ChevronDown aria-hidden="true" /></button> : null}{canEdit ? <button aria-label={'Sửa ' + row.primary} onClick={() => { if (section === 'orders') void markOrderOpened(row.id); setEditor(row) }} type="button"><Edit3 aria-hidden="true" /></button> : null}{canDelete ? <button aria-label={'Xóa ' + row.primary} onClick={() => void remove(row)} type="button"><Trash2 aria-hidden="true" /></button> : null}</div></td></tr>{section === 'orders' && expandedOrderId === row.id ? <tr className="order-detail-row"><td colSpan={4}><OrderDetails items={orderItems[row.id] ?? []} loading={loadingOrderId === row.id} /></td></tr> : null}</Fragment>)}</tbody></table></div>}
       </section>
       {editor ? <Portal><div aria-modal="true" className="dialog-backdrop" role="dialog"><form className="admin-editor" onSubmit={(event) => void save(event)}><button aria-label="Đóng" className="icon-button" onClick={() => setEditor(null)} type="button"><X aria-hidden="true" /></button><p className="eyebrow">{editor === 'create' ? 'Tạo bản ghi' : 'Cập nhật'}</p><h2>{editor === 'create' ? 'Thêm ' + label.toLowerCase() : editor.primary}</h2>{editor === 'create' ? <CreateFields section={section} /> : <EditorFields row={editor} section={section} />}<button className="button button--primary button--wide" type="submit">Lưu thay đổi <ArrowRight aria-hidden="true" /></button></form></div></Portal> : null}
     </main>
   )
 }
 
-function SortableHeader({ label, sortKey, sort, onSort, filter, filterLabel, onFilter }: {
+function SortableHeader({ label, sortKey, sort, onSort }: {
   label: string
   sortKey: SortKey
   sort: SortState | null
   onSort: () => void
-  filter: string
-  filterLabel: string
-  onFilter: (value: string) => void
 }) {
   const active = sort?.key === sortKey
   const SortIcon = !active ? ArrowUpDown : sort.dir === 'asc' ? ArrowUp : ArrowDown
@@ -334,14 +320,6 @@ function SortableHeader({ label, sortKey, sort, onSort, filter, filterLabel, onF
       <button className="admin-th-sort" data-active={active || undefined} onClick={onSort} type="button">
         {label}<SortIcon aria-hidden="true" />
       </button>
-      <input
-        aria-label={'Lọc theo ' + filterLabel}
-        className="admin-th-filter"
-        onChange={(event) => onFilter(event.target.value)}
-        placeholder="Lọc…"
-        type="search"
-        value={filter}
-      />
     </th>
   )
 }
