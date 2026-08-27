@@ -18,6 +18,7 @@ type AdminRow = {
   rawValue?: number
   roleValue?: string
   statusValue?: string
+  isNew?: boolean
 }
 
 type OrderItemRow = {
@@ -109,9 +110,12 @@ export function AdminPlaceholderPage() {
         if (error) throw error
         next = (data ?? []).map((item) => ({ id: item.id, primary: item.name, secondary: item.discount_type === 'percentage' ? String(item.discount_value / 100) + '%' : formatVnd(item.discount_value), status: item.status, value: item.starts_at ? new Intl.DateTimeFormat('vi-VN').format(new Date(item.starts_at)) : 'Chưa lên lịch' }))
       } else if (section === 'orders') {
-        const { data, error } = await supabase.from('orders').select('id,order_number,email,status,grand_total,created_at').order('created_at', { ascending: false }).limit(200)
+        const { data, error } = await supabase.from('orders').select('id,order_number,email,status,grand_total,created_at,opened_at').order('created_at', { ascending: false }).limit(200)
         if (error) throw error
-        next = (data ?? []).map((item) => ({ id: item.id, primary: item.order_number, secondary: item.email, status: orderStatusLabels[item.status] ?? item.status, statusValue: item.status, value: formatVnd(item.grand_total), rawValue: item.grand_total }))
+        next = (data ?? []).map((item) => {
+          const isNew = !item.opened_at && item.status === 'pending_payment'
+          return { id: item.id, primary: item.order_number, secondary: item.email, status: isNew ? 'Đơn mới' : orderStatusLabels[item.status] ?? item.status, statusValue: item.status, value: formatVnd(item.grand_total), rawValue: item.grand_total, isNew }
+        })
       } else if (section === 'members') {
         const [profileResult, statusResult, roleResult] = await Promise.all([
           supabase.from('profiles').select('id,email,full_name,phone,created_at').order('created_at', { ascending: false }).limit(200),
@@ -156,6 +160,18 @@ export function AdminPlaceholderPage() {
     return normalized ? rows.filter((row) => (row.primary + ' ' + row.secondary + ' ' + row.status).toLocaleLowerCase('vi').includes(normalized)) : rows
   }, [query, rows])
 
+  // First time an admin opens a "Đơn mới" order (detail row or editor), stamp
+  // opened_at and move it into "Đang xử lý".
+  const markOrderOpened = async (orderId: string) => {
+    if (!supabase) return
+    if (!rows.find((row) => row.id === orderId)?.isNew) return
+    setRows((current) => current.map((row) => (
+      row.id === orderId ? { ...row, isNew: false, statusValue: 'processing', status: orderStatusLabels.processing ?? 'Đang xử lý' } : row
+    )))
+    const { error } = await supabase.from('orders').update({ opened_at: new Date().toISOString(), status: 'processing' }).eq('id', orderId).is('opened_at', null)
+    if (error) { setMessage(error.message); void load() }
+  }
+
   const toggleOrderDetails = async (orderId: string) => {
     if (!supabase) return
     if (expandedOrderId === orderId) {
@@ -163,6 +179,7 @@ export function AdminPlaceholderPage() {
       return
     }
     setExpandedOrderId(orderId)
+    void markOrderOpened(orderId)
     if (orderItems[orderId]) return
 
     setLoadingOrderId(orderId)
@@ -248,7 +265,7 @@ export function AdminPlaceholderPage() {
       <section className="dashboard-panel admin-data-panel">
         <div className="admin-data-toolbar"><label><span className="sr-only">Tìm trong {label}</span><input onChange={(event) => setQuery(event.target.value)} placeholder={'Tìm trong ' + label.toLowerCase() + '…'} type="search" value={query} /></label><button aria-label="Tải lại" className="icon-button" onClick={() => void load()} type="button"><RefreshCw aria-hidden="true" /></button></div>
         {message ? <p className="form-message form-message--neutral" role="status">{message}</p> : null}
-        {loading ? <p className="admin-empty">Đang tải dữ liệu…</p> : visibleRows.length === 0 ? <p className="admin-empty">Chưa có dữ liệu phù hợp.</p> : <div className="table-wrap"><table className={showsProductImages ? 'admin-table admin-table--products' : 'admin-table'}><thead><tr>{showsProductImages ? <th className="admin-image-column">Ảnh</th> : null}<th>{section === 'orders' ? 'Mã đơn' : label}</th><th>Trạng thái</th><th>Giá trị</th><th><span className="sr-only">Thao tác</span></th></tr></thead><tbody>{visibleRows.map((row) => <Fragment key={row.id}><tr>{showsProductImages ? <td className="admin-image-column"><ProductThumbnail name={row.primary} src={row.imageUrl} /></td> : null}<td><strong>{row.primary}</strong></td><td><span className="status-badge">{row.status}</span></td><td>{row.value}</td><td><div className="row-actions">{section === 'orders' ? <button aria-expanded={expandedOrderId === row.id} className="row-detail-button" onClick={() => void toggleOrderDetails(row.id)} type="button">Chi tiết <ChevronDown aria-hidden="true" /></button> : null}{canEdit ? <button aria-label={'Sửa ' + row.primary} onClick={() => setEditor(row)} type="button"><Edit3 aria-hidden="true" /></button> : null}{canDelete ? <button aria-label={'Xóa ' + row.primary} onClick={() => void remove(row)} type="button"><Trash2 aria-hidden="true" /></button> : null}</div></td></tr>{section === 'orders' && expandedOrderId === row.id ? <tr className="order-detail-row"><td colSpan={4}><OrderDetails items={orderItems[row.id] ?? []} loading={loadingOrderId === row.id} /></td></tr> : null}</Fragment>)}</tbody></table></div>}
+        {loading ? <p className="admin-empty">Đang tải dữ liệu…</p> : visibleRows.length === 0 ? <p className="admin-empty">Chưa có dữ liệu phù hợp.</p> : <div className="table-wrap"><table className={showsProductImages ? 'admin-table admin-table--products' : 'admin-table'}><thead><tr>{showsProductImages ? <th className="admin-image-column">Ảnh</th> : null}<th>{section === 'orders' ? 'Mã đơn' : label}</th><th>Trạng thái</th><th>Giá trị</th><th><span className="sr-only">Thao tác</span></th></tr></thead><tbody>{visibleRows.map((row) => <Fragment key={row.id}><tr>{showsProductImages ? <td className="admin-image-column"><ProductThumbnail name={row.primary} src={row.imageUrl} /></td> : null}<td><strong>{row.primary}</strong></td><td><span className={row.isNew ? 'status-badge status-badge--new' : 'status-badge'}>{row.status}</span></td><td>{row.value}</td><td><div className="row-actions">{section === 'orders' ? <button aria-expanded={expandedOrderId === row.id} className="row-detail-button" onClick={() => void toggleOrderDetails(row.id)} type="button">Chi tiết <ChevronDown aria-hidden="true" /></button> : null}{canEdit ? <button aria-label={'Sửa ' + row.primary} onClick={() => { if (section === 'orders') void markOrderOpened(row.id); setEditor(row) }} type="button"><Edit3 aria-hidden="true" /></button> : null}{canDelete ? <button aria-label={'Xóa ' + row.primary} onClick={() => void remove(row)} type="button"><Trash2 aria-hidden="true" /></button> : null}</div></td></tr>{section === 'orders' && expandedOrderId === row.id ? <tr className="order-detail-row"><td colSpan={4}><OrderDetails items={orderItems[row.id] ?? []} loading={loadingOrderId === row.id} /></td></tr> : null}</Fragment>)}</tbody></table></div>}
       </section>
       {editor ? <Portal><div aria-modal="true" className="dialog-backdrop" role="dialog"><form className="admin-editor" onSubmit={(event) => void save(event)}><button aria-label="Đóng" className="icon-button" onClick={() => setEditor(null)} type="button"><X aria-hidden="true" /></button><p className="eyebrow">{editor === 'create' ? 'Tạo bản ghi' : 'Cập nhật'}</p><h2>{editor === 'create' ? 'Thêm ' + label.toLowerCase() : editor.primary}</h2>{editor === 'create' ? <CreateFields section={section} /> : <EditorFields row={editor} section={section} />}<button className="button button--primary button--wide" type="submit">Lưu thay đổi <ArrowRight aria-hidden="true" /></button></form></div></Portal> : null}
     </main>

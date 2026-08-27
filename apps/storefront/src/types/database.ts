@@ -809,6 +809,7 @@ export type Database = {
           fulfillment_status: Database["public"]["Enums"]["fulfillment_state"]
           grand_total: number
           id: string
+          opened_at: string | null
           order_number: string
           payment_status: Database["public"]["Enums"]["payment_state"]
           phone: string | null
@@ -832,6 +833,7 @@ export type Database = {
           fulfillment_status?: Database["public"]["Enums"]["fulfillment_state"]
           grand_total: number
           id?: string
+          opened_at?: string | null
           order_number: string
           payment_status?: Database["public"]["Enums"]["payment_state"]
           phone?: string | null
@@ -855,6 +857,7 @@ export type Database = {
           fulfillment_status?: Database["public"]["Enums"]["fulfillment_state"]
           grand_total?: number
           id?: string
+          opened_at?: string | null
           order_number?: string
           payment_status?: Database["public"]["Enums"]["payment_state"]
           phone?: string | null
