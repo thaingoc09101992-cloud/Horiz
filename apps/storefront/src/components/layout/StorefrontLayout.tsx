@@ -146,7 +146,8 @@ export function StorefrontLayout() {
             <div><strong>Chăm sóc khách hàng</strong><Link to="/help">Liên hệ</Link><Link to="/returns">Đổi trả</Link><Link to="/privacy">Quyền riêng tư</Link><Link to="/terms">Điều khoản</Link><Link to={user ? '/account' : '/login'}>{user ? 'Tài khoản của tôi' : 'Đăng nhập'}</Link>{user ? null : <Link to="/register">Đăng ký thành viên</Link>}{role === 'admin' ? <Link to="/admin/dashboard">Administrator</Link> : null}</div>
           </nav>
         </div>
-        <p className="footer-legal">© 2026 HORIZ. Thiết kế cho chuyển động tự nhiên.<br />Trang web được thiết kế bởi Dương Thái Ngọc.</p>
+        {/* Dòng ghi công tác giả phải được giữ nguyên — xem tệp LICENSE ở gốc repo. */}
+        <p className="footer-legal"><span>© 2026 HORIZ. Thiết kế cho chuyển động tự nhiên.</span><span>Trang web được thiết kế bởi Dương Thái Ngọc.</span></p>
       </footer>
       <SearchOverlay onClose={() => setSearchOpen(false)} open={searchOpen} />
     </div>
