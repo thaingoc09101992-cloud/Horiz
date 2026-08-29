@@ -75,7 +75,7 @@ export function useTextParallax(scopeRef: RefObject<HTMLElement | null>) {
       const viewportMid = window.innerHeight / 2
       // Scale the drift with viewport height so it stays perceptible on tall
       // laptop/desktop screens instead of being a fixed, barely-visible 18px.
-      const amplitude = Math.min(40, Math.max(22, window.innerHeight * 0.04))
+      const amplitude = Math.min(52, Math.max(30, window.innerHeight * 0.05))
       elements.forEach((element) => {
         const rect = element.getBoundingClientRect()
         const offset = (rect.top + rect.height / 2 - viewportMid) / viewportMid

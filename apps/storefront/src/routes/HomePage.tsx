@@ -26,9 +26,10 @@ const collections = [
 ]
 
 // Hero slideshow — slide 0 keeps the original (CMS-overridable) copy; slides 1–3
-// carry their own copy for the women's, footwear and kids stories. Each banner
-// shows for 3.5s, then the next one eases in over 1s (soft fade + settle zoom).
-const HERO_SLIDE_INTERVAL_MS = 3500
+// carry their own copy for the women's, footwear and kids stories. Interval must
+// stay well above the 3s image transition (see .ab-hero-slide-in) so each banner
+// still gets a visible hold before the next one eases in.
+const HERO_SLIDE_INTERVAL_MS = 5500
 const heroSlides = [
   {
     image: '/prototype/hero-1.webp',
