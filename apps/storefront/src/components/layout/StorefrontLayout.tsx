@@ -141,7 +141,6 @@ export function StorefrontLayout() {
             {newsletterMessage ? <p aria-live="polite" className="newsletter-message">{newsletterMessage}</p> : null}
           </section>
           <nav aria-label="Liên kết cuối trang" className="footer-links">
-            <div><strong>Mua sắm</strong><Link to="/men">Nam</Link><Link to="/women">Nữ</Link><Link to="/collections/new">Sản phẩm mới</Link></div>
             <div><strong>Về HORIZ</strong><Link to="/about">Câu chuyện</Link><Link to="/materials">Chất liệu</Link></div>
             <div><strong>Chăm sóc khách hàng</strong><Link to="/help">Liên hệ</Link><Link to="/returns">Đổi trả</Link><Link to="/privacy">Quyền riêng tư</Link><Link to="/terms">Điều khoản</Link><Link to={user ? '/account' : '/login'}>{user ? 'Tài khoản của tôi' : 'Đăng nhập'}</Link>{user ? null : <Link to="/register">Đăng ký thành viên</Link>}{role === 'admin' ? <Link to="/admin/dashboard">Administrator</Link> : null}</div>
           </nav>
