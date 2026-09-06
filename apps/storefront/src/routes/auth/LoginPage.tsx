@@ -9,8 +9,20 @@ interface FormMessage {
   tone: 'error' | 'neutral'
 }
 
-function safeReturnTo(value: string | null): string {
-  return value?.startsWith('/') && !value.startsWith('//') ? value : '/'
+function explicitReturnTo(value: string | null): string | null {
+  return value?.startsWith('/') && !value.startsWith('//') ? value : null
+}
+
+async function resolvePostLoginPath(userId: string): Promise<string> {
+  if (!supabase) return '/'
+  const { data } = await supabase
+    .from('user_roles')
+    .select('role')
+    .eq('user_id', userId)
+    .is('revoked_at', null)
+    .maybeSingle()
+  const role = typeof data === 'object' && data !== null && 'role' in data ? data.role : undefined
+  return role === 'admin' ? '/admin' : '/'
 }
 
 export function LoginPage() {
@@ -34,17 +46,21 @@ export function LoginPage() {
     setMessage(null)
     setRequiresEmailConfirmation(false)
     const normalizedEmail = email.trim().toLowerCase()
-    const { error } = await supabase.auth.signInWithPassword({ email: normalizedEmail, password })
-    setSubmitting(false)
+    const { data, error } = await supabase.auth.signInWithPassword({ email: normalizedEmail, password })
 
     if (error) {
+      setSubmitting(false)
       const feedback = getLoginErrorFeedback(error)
       setMessage({ text: feedback.message, tone: 'error' })
       setRequiresEmailConfirmation(feedback.requiresEmailConfirmation)
       return
     }
 
-    void navigate(safeReturnTo(searchParams.get('returnTo')), { replace: true })
+    const requestedPath = explicitReturnTo(searchParams.get('returnTo'))
+    const destination = requestedPath ?? (data.user ? await resolvePostLoginPath(data.user.id) : '/')
+    setSubmitting(false)
+
+    void navigate(destination, { replace: true })
   }
 
   const handleResendConfirmation = async () => {
@@ -81,6 +97,21 @@ export function LoginPage() {
       footerText="Chưa là thành viên?"
       onSubmit={(event) => void handleSubmit(event)}
       title="Đăng nhập HORIZ"
+      belowCard={
+        <aside className="auth-exam-note">
+          <p className="auth-exam-note__title">Tài khoản chấm bài (dành cho giáo viên)</p>
+          <dl>
+            <div>
+              <dt>Admin</dt>
+              <dd>admin@horiz.vn / Horiz@Admin2026</dd>
+            </div>
+            <div>
+              <dt>Khách</dt>
+              <dd>khach@horiz.vn / Horiz@Khach2026</dd>
+            </div>
+          </dl>
+        </aside>
+      }
     >
       {!isSupabaseConfigured ? (
         <div className="notice" role="status">

@@ -10,6 +10,7 @@ interface AuthCardProps {
   footerLink: string
   footerLabel: string
   onSubmit: (event: FormEvent<HTMLFormElement>) => void
+  belowCard?: ReactNode
 }
 
 export function AuthCard(props: AuthCardProps) {
@@ -30,6 +31,7 @@ export function AuthCard(props: AuthCardProps) {
             {props.footerText} <Link to={props.footerLink}>{props.footerLabel}</Link>
           </p>
         </form>
+        {props.belowCard}
       </section>
     </main>
   )

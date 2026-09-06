@@ -1,4 +1,4 @@
-import { ChevronDown, LogOut, Menu, Search, ShieldCheck, ShoppingBag, UserRound, X } from 'lucide-react'
+import { ArrowRight, ChevronDown, LogOut, Menu, Search, ShieldCheck, ShoppingBag, UserRound, X } from 'lucide-react'
 import { lazy, useEffect, useRef, useState, type FormEvent } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router'
 import { useAuth } from '../../features/auth/AuthProvider'
@@ -132,17 +132,19 @@ export function StorefrontLayout() {
         <div className="footer-main">
           <section aria-label="Đăng ký nhận bản tin" className="footer-newsletter">
             <Wordmark />
-            <p className="footer-newsletter__description">Nhận thông tin mới nhất</p>
+            <p className="footer-newsletter__tagline">Thời trang cho<br />những hành trình lớn hơn</p>
+            <p className="footer-newsletter__description">Nhận thông tin mới nhất về bộ sưu tập, ưu đãi đặc biệt và những câu chuyện từ HORIZ.</p>
             <form className="newsletter-form" onSubmit={(event) => void subscribe(event)}>
               <label className="sr-only" htmlFor="newsletter-email">Email nhận bản tin</label>
               <input id="newsletter-email" onChange={(event) => setNewsletterEmail(event.target.value)} placeholder="Email của bạn" required type="email" value={newsletterEmail} />
-              <button className="button button--light" type="submit">Đăng ký</button>
+              <button className="button button--light" type="submit">Đăng ký <ArrowRight aria-hidden="true" size={15} strokeWidth={1.6} /></button>
             </form>
             {newsletterMessage ? <p aria-live="polite" className="newsletter-message">{newsletterMessage}</p> : null}
+            <p className="footer-newsletter__fineprint">Chúng tôi tôn trọng quyền riêng tư của bạn.</p>
           </section>
           <nav aria-label="Liên kết cuối trang" className="footer-links">
             <div><strong>Về HORIZ</strong><Link to="/about">Câu chuyện</Link><Link to="/materials">Chất liệu</Link></div>
-            <div><strong>Chăm sóc khách hàng</strong><Link to="/help">Liên hệ</Link><Link to="/returns">Đổi trả</Link><Link to="/privacy">Quyền riêng tư</Link><Link to="/terms">Điều khoản</Link><Link to={user ? '/account' : '/login'}>{user ? 'Tài khoản của tôi' : 'Đăng nhập'}</Link>{user ? null : <Link to="/register">Đăng ký thành viên</Link>}{role === 'admin' ? <Link to="/admin/dashboard">Administrator</Link> : null}</div>
+            <div><strong>Chăm sóc khách hàng</strong><Link to="/help">Liên hệ</Link><Link to="/returns">Đổi trả</Link><Link to="/privacy">Quyền riêng tư</Link><Link to="/terms">Điều khoản</Link><Link to="/account">Tài khoản của tôi</Link><Link to="/admin/dashboard">Administrator</Link></div>
           </nav>
           <section aria-label="Địa chỉ cửa hàng" className="footer-contact">
             <strong>Ghé thăm HORIZ</strong>
@@ -156,7 +158,7 @@ export function StorefrontLayout() {
                 title="Bản đồ đường tới HORIZ, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP. Hồ Chí Minh"
               />
             </div>
-            <a href="https://www.google.com/maps/search/?api=1&query=227%20Nguy%E1%BB%85n%20V%C4%83n%20C%E1%BB%AB%20Ph%C6%B0%E1%BB%9Dng%20Ch%E1%BB%A3%20Qu%C3%A1n" rel="noreferrer" target="_blank">Xem chỉ đường</a>
+            <a className="footer-contact__directions" href="https://www.google.com/maps/search/?api=1&query=227%20Nguy%E1%BB%85n%20V%C4%83n%20C%E1%BB%AB%20Ph%C6%B0%E1%BB%9Dng%20Ch%E1%BB%A3%20Qu%C3%A1n" rel="noreferrer" target="_blank">Xem chỉ đường <ArrowRight aria-hidden="true" size={14} strokeWidth={1.6} /></a>
           </section>
         </div>
         {/* Dòng ghi công tác giả phải được giữ nguyên — xem tệp LICENSE ở gốc repo. */}
