@@ -145,6 +145,20 @@ export function StorefrontLayout() {
             <div><strong>Về HORIZ</strong><Link to="/about">Câu chuyện</Link><Link to="/materials">Chất liệu</Link></div>
             <div><strong>Chăm sóc khách hàng</strong><Link to="/help">Liên hệ</Link><Link to="/returns">Đổi trả</Link><Link to="/privacy">Quyền riêng tư</Link><Link to="/terms">Điều khoản</Link><Link to={user ? '/account' : '/login'}>{user ? 'Tài khoản của tôi' : 'Đăng nhập'}</Link>{user ? null : <Link to="/register">Đăng ký thành viên</Link>}{role === 'admin' ? <Link to="/admin/dashboard">Administrator</Link> : null}</div>
           </nav>
+          <section aria-label="Địa chỉ cửa hàng" className="footer-contact">
+            <strong>Ghé thăm HORIZ</strong>
+            <address>227 Nguyễn Văn Cừ, Phường Chợ Quán, TP. Hồ Chí Minh</address>
+            <div className="footer-contact__map">
+              <iframe
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.638321103379!2d106.67861047560994!3d10.762332559452357!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1c1a72871d%3A0x7300e8391d075756!2zMjI3IE5ndXnhu4VuIFbEg24gQ-G7qywgQ2jhu6MgUXXDoW4sIEjhu5MgQ2jDrSBNaW5oIDcwMDAwMCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1788664556472!5m2!1svi!2s"
+                title="Bản đồ đường tới HORIZ, 227 Nguyễn Văn Cừ, Phường Chợ Quán, TP. Hồ Chí Minh"
+              />
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=227%20Nguy%E1%BB%85n%20V%C4%83n%20C%E1%BB%AB%20Ph%C6%B0%E1%BB%9Dng%20Ch%E1%BB%A3%20Qu%C3%A1n" rel="noreferrer" target="_blank">Xem chỉ đường</a>
+          </section>
         </div>
         {/* Dòng ghi công tác giả phải được giữ nguyên — xem tệp LICENSE ở gốc repo. */}
         <p className="footer-legal"><span>© 2026 HORIZ. Thiết kế cho chuyển động tự nhiên.</span><span>Website được thiết kế bởi Dương Thái Ngọc.</span></p>
