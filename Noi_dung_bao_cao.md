@@ -10,7 +10,7 @@
 | Hạng mục | Nội dung |
 |---|---|
 | **Lĩnh vực** | Thương mại điện tử (e-commerce) — bán lẻ **giày và thời trang** |
-| **Thương hiệu** | **HORIZ** — định vị "chuyển động tự nhiên", phong cách *natural editorial minimalism* (tối giản, ấm, giàu hình ảnh) |
+| **Thương hiệu** | **HORIZ** — slogan "Cùng bạn đi đến chân trời", phong cách *natural editorial minimalism* (tối giản, ấm, giàu hình ảnh) |
 | **Thị trường** | Việt Nam · ngôn ngữ mặc định tiếng Việt · tiền tệ VND |
 | **Nguồn tham chiếu** | Allbirds — chỉ học kiến trúc thông tin và hành trình mua hàng (UX pattern), **không** sao chép logo, nội dung, mã nguồn hay nhận diện |
 | **Logo** | `HORIZ-logo.png`, `HORIZ-logo` (bản wordmark ở `apps/storefront/public/horiz-wordmark.png`); font logo tham chiếu *Perpetua Titling MT*, chỉ dùng dạng ảnh đã raster/outline. Component hiển thị: `src/components/brand/Wordmark.tsx` |
@@ -190,7 +190,7 @@ Tính năng chung trong bảng dữ liệu admin (`AdminPlaceholderPage.tsx`): �
 
 **Kết quả:** tạo file `Noi_dung_bao_cao.md` ở gốc repo với đầy đủ 5 mục theo yêu cầu (chính là tài liệu này).
 
-### Prompt 5 — Bỏ nhóm "Mua sắm" và bố cục lại footer (prompt hiện tại)
+### Prompt 5 — Bỏ nhóm "Mua sắm" và bố cục lại footer
 
 **Yêu cầu:** kèm ảnh — bỏ nhóm liên kết **"Mua sắm"** (Nam / Nữ / Sản phẩm mới) trong footer và bố cục lại các mục; cập nhật lại `Noi_dung_bao_cao.md` nếu có phát sinh.
 
@@ -200,3 +200,20 @@ Tính năng chung trong bảng dữ liệu admin (`AdminPlaceholderPage.tsx`): �
 - `.footer-main` giữ **3 cột** nhưng cân lại tỷ lệ `1.5fr / 1fr / 1.5fr` (Bản tin · Liên kết · Địa chỉ + Bản đồ).
 - Kiểm tra DOM: desktop 3 cột `444 / 296 / 444px` canh thẳng hàng, nhóm còn lại đúng là "Về HORIZ" + "Chăm sóc khách hàng", **không tràn ngang**; mobile xếp 1 cột, ảnh chụp xác nhận thứ tự footer: wordmark → bản tin → Về HORIZ → Chăm sóc khách hàng → địa chỉ + bản đồ → dòng bản quyền.
 - Cập nhật tài liệu này (mục 2 & 3 bỏ nhắc nhóm "Mua sắm"; thêm Prompt 5).
+
+### Prompt 6 — Đổi chủ đề / slogan trang web (prompt hiện tại)
+
+**Yêu cầu:** đổi chủ đề trang web từ **"HORIZ — Chuyển động tự nhiên"** thành **"HORIZ — Cùng bạn đi đến chân trời"** cho các nội dung liên quan. Sau đó người dùng chốt phạm vi: chỉ đổi phần tiêu đề trang, **giữ nguyên** 4 chỗ mô tả vì chúng gắn với ý "chuyển động tự nhiên".
+
+**Kết quả — đã đổi:**
+- `apps/storefront/index.html`: `<title>`, `og:title`, `twitter:title` → "HORIZ — Cùng bạn đi đến chân trời".
+- `StorefrontLayout.tsx` — dòng bản quyền footer: "© 2026 HORIZ. Thiết kế cho chuyển động tự nhiên." → "© 2026 HORIZ. Cùng bạn đi đến chân trời."
+- Cập nhật mục 1 tài liệu này (slogan thương hiệu) và thêm Prompt 6.
+
+**Giữ nguyên theo yêu cầu (không đổi):**
+- `index.html` — `description`: "HORIZ — thiết kế chuyển động tự nhiên cho nhịp sống mỗi ngày."
+- `index.html` — `og:description` & `twitter:description`: "Thiết kế linh hoạt, thoáng nhẹ cho mọi chuyển động thường ngày."
+- `routes/ProductDetailPage.tsx` — meta description động: "{tên SP} — thiết kế HORIZ cho chuyển động tự nhiên."
+- `routes/StaticContentPage.tsx` — tiêu đề trang **/about**: "Chuyển động tự nhiên, thiết kế có chủ đích."
+
+Kiểm tra dev server: tiêu đề tab và dòng footer hiển thị slogan mới; 4 mô tả trên giữ nguyên.

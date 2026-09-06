@@ -160,7 +160,7 @@ export function StorefrontLayout() {
           </section>
         </div>
         {/* Dòng ghi công tác giả phải được giữ nguyên — xem tệp LICENSE ở gốc repo. */}
-        <p className="footer-legal"><span>© 2026 HORIZ. Thiết kế cho chuyển động tự nhiên.</span><span>Website được thiết kế bởi Dương Thái Ngọc.</span></p>
+        <p className="footer-legal"><span>© 2026 HORIZ. Cùng bạn đi đến chân trời.</span><span>Website được thiết kế bởi Dương Thái Ngọc.</span></p>
       </footer>
       <SearchOverlay onClose={() => setSearchOpen(false)} open={searchOpen} />
     </div>
