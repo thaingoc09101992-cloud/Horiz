@@ -7,7 +7,7 @@
 ## Nguyên tắc thực thi
 
 - Không tự mở rộng phạm vi ngoài PRD hoặc tự chọn payment/shipping khi chưa chốt.
-- Không sao chép code/copy/nhận diện Allbirds; chỉ tham chiếu pattern UX.
+- Không sao chép code, câu chữ hay nhận diện của bất kỳ thương hiệu nào khác; chỉ tham khảo pattern UX phổ biến.
 - Không publish asset có quyền sử dụng chưa được xác minh.
 - Bảo toàn thay đổi của người khác; kiểm tra diff trước/sau khi sửa.
 - Thay đổi schema phải có migration, generated types và test RLS.

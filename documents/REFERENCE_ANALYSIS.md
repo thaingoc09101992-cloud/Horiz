@@ -1,6 +1,6 @@
-# Phân tích tham chiếu Allbirds
+# Phân tích tham khảo trải nghiệm thương mại điện tử
 
-> Khảo sát website công khai ngày 24/08/2026. Giao diện và chương trình bán hàng có thể thay đổi theo thời điểm.
+> Khảo sát một số storefront thương mại điện tử công khai ngày 24/08/2026. Giao diện và chương trình bán hàng có thể thay đổi theo thời điểm.
 
 ## 1. Cấu trúc trải nghiệm đáng học
 
@@ -31,7 +31,7 @@ Homepage HORIZ prototype bám theo thứ tự trên và dùng typography sans đ
 
 ### Nội dung thương hiệu
 
-Allbirds lặp lại ba trụ cột: thoải mái cả ngày, dùng hằng ngày và vật liệu có nguồn gốc tự nhiên. HORIZ nên học cách lặp thông điệp nhất quán nhưng phải viết value proposition riêng.
+Các storefront tham khảo thường lặp lại vài trụ cột thông điệp: thoải mái cả ngày, dùng hằng ngày và vật liệu có nguồn gốc tự nhiên. HORIZ nên học cách lặp thông điệp nhất quán nhưng phải viết value proposition riêng.
 
 ## 2. Áp dụng cho HORIZ
 
@@ -46,15 +46,13 @@ Allbirds lặp lại ba trụ cột: thoải mái cả ngày, dùng hằng ngày
 
 ## 3. Không sao chép
 
-- Không dùng logo, wordmark, tên bộ sưu tập, slogan hoặc đoạn copy Allbirds.
+- Không dùng logo, wordmark, tên bộ sưu tập, slogan hoặc đoạn copy của bất kỳ thương hiệu tham khảo nào.
 - Không sao chép pixel-perfect, mã HTML/CSS/JS hoặc toàn bộ hệ màu/type.
 - Không công bố ảnh trong folder hiện tại khi chưa có giấy phép.
 - “Giống 90%” được hiểu là tương đương về loại trang, flow, độ hoàn thiện và mật độ nội dung; không phải giống 90% nhận diện.
 
 ## 4. Nguồn tham khảo
 
-- [Allbirds homepage](https://www.allbirds.com/)
-- [Allbirds — How We Operate](https://www.allbirds.com/pages/how-we-operate)
 - [Supabase Auth](https://supabase.com/docs/guides/auth)
 - [Supabase RLS](https://supabase.com/docs/guides/database/postgres/row-level-security)
 - [Cloudflare Pages](https://developers.cloudflare.com/pages/)

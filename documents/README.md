@@ -4,7 +4,7 @@
 
 ## Mục tiêu
 
-Xây dựng website bán giày và thời trang HORIZ có trải nghiệm mua sắm, nhịp bố cục và mức hoàn thiện tham chiếu Allbirds, nhưng sử dụng thương hiệu, nội dung, mã nguồn và hệ thiết kế riêng của HORIZ.
+Xây dựng website bán giày và thời trang HORIZ có trải nghiệm mua sắm, nhịp bố cục và mức hoàn thiện ngang các storefront thương mại điện tử hiện đại, sử dụng thương hiệu, nội dung, mã nguồn và hệ thiết kế riêng của HORIZ.
 
 ## Stack được chốt
 
@@ -39,8 +39,8 @@ Trang chủ, danh mục, tìm kiếm/lọc, chi tiết sản phẩm và biến t
 
 ## Quy tắc quan trọng
 
-- Không sao chép logo, câu chữ, mã nguồn hoặc nhận diện độc quyền của Allbirds.
-- Ảnh Allbirds trong `Source` chỉ dùng cho nghiên cứu/prototype khi chưa chứng minh được quyền thương mại.
+- Không sao chép logo, câu chữ, mã nguồn hoặc nhận diện độc quyền của bất kỳ thương hiệu nào khác.
+- Ảnh nguồn bên thứ ba trong `Source` chỉ dùng cho nghiên cứu/prototype khi chưa chứng minh được quyền thương mại.
 - Giá lưu bằng số nguyên VND; không lưu chuỗi đã định dạng.
 - Mọi bảng thuộc schema được Data API công khai phải bật RLS và cấp quyền tối thiểu.
 - Không đưa khóa Supabase secret/service role vào frontend hoặc GitHub.

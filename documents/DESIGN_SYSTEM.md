@@ -2,7 +2,7 @@
 
 ## Định hướng
 
-“Natural editorial minimalism”: tinh gọn, ấm, có chất liệu, không sao chép bảng màu hoặc typography Allbirds.
+“Natural editorial minimalism”: tinh gọn, ấm, có chất liệu; xây dựng bảng màu và typography riêng của HORIZ.
 
 ## Design tokens đề xuất
 

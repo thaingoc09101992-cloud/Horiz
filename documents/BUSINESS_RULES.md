@@ -51,7 +51,7 @@
 
 ## Đổi trả
 
-- Chính sách HORIZ phải được chủ dự án duyệt trước launch; không mặc định sao chép mốc 30 ngày của Allbirds.
+- Chính sách HORIZ phải được chủ dự án duyệt trước launch; không mặc định sao chép mốc 30 ngày từ website tham khảo.
 - Sản phẩm vệ sinh cá nhân/đồ lót và hàng final sale cần điều kiện riêng.
 - Refund chỉ được thực hiện server-side và ghi audit log.
 

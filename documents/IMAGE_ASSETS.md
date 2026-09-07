@@ -2,8 +2,8 @@
 
 ## 1. Nguồn hiện có
 
-- Root ảnh: `Source/Hinh anh/Allbirds_Images`.
-- Manifest: `Source/Allbirds_Images_Manifest.csv`.
+- Root ảnh: thư mục ảnh nguồn trong `Source/` (ngoài Git).
+- Manifest: file CSV manifest ảnh nguồn trong `Source/` (ngoài Git).
 - 1.263 JPG; 291 thư mục sản phẩm; giá nguồn khoảng 4–160 USD và 105.000–4.210.000 VND.
 - Mỗi dòng manifest có: `Danh_muc_chinh`, `Danh_muc_phu`, `San_pham`, `Ten_file`, `Duong_dan_tuong_doi`, `Kich_thuoc_byte`, `Gia_USD`, `Gia_VND`.
 
@@ -13,7 +13,7 @@
 - Nhiều sản phẩm có 1–5 ảnh; không được giả định luôn có 5.
 - Tên marketing, mô tả, chất liệu, size, tồn kho, alt text và thứ tự ảnh chưa có.
 - Giá lặp theo từng ảnh; import phải gom theo product/variant.
-- Có nguy cơ bản quyền vì thư mục và tên ảnh đến từ Allbirds.
+- Có nguy cơ bản quyền vì thư mục và tên ảnh đến từ nguồn bên thứ ba.
 
 ## 3. Mapping nhập dữ liệu
 
@@ -57,12 +57,12 @@ Không dùng tên file làm ID. Tên file có thể đổi; ID/checksum phải �
 - Xác nhận chủ sở hữu và giấy phép từng nhóm asset.
 - Lưu `rights_status`, `rights_owner`, `license_reference`, `expires_at`.
 - Asset `unknown/restricted` không được publish production.
-- Thay toàn bộ copy/slogan và metadata nhắc Allbirds bằng nội dung HORIZ.
+- Thay toàn bộ copy/slogan và metadata nhắc thương hiệu nguồn bằng nội dung HORIZ.
 
 ## 8. Asset dùng trong prototype cục bộ
 
 - Homepage development hiện dùng bản sao chọn lọc trong `apps/storefront/public/prototype` để kiểm tra bố cục và responsive.
-- Các file này có nguồn từ `Source/Hinh anh/Allbirds_Images/Homepage`; trạng thái quyền sử dụng vẫn là `unknown/restricted`.
+- Các file này có nguồn từ thư mục ảnh nguồn trong `Source/` (ngoài Git); trạng thái quyền sử dụng vẫn là `unknown/restricted`.
 - Không deploy nhóm asset prototype lên staging/production. Trước khi phát hành phải thay bằng ảnh HORIZ đã được xác nhận quyền sử dụng và cập nhật alt text tương ứng.
 
 ## 9. Catalogue được tuyển chọn từ manifest

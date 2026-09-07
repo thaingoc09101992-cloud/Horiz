@@ -8,7 +8,7 @@ Bạn là kỹ sư full-stack chịu trách nhiệm xây dựng website thương
 
 ## 1. Mục tiêu
 
-Xây dựng website bán hàng HORIZ có trải nghiệm mua sắm và độ hoàn thiện tham chiếu Allbirds, nhưng sử dụng thương hiệu, hệ thiết kế, nội dung và mã nguồn riêng của HORIZ.
+Xây dựng website bán hàng HORIZ có trải nghiệm mua sắm và độ hoàn thiện ngang các storefront thương mại điện tử hiện đại, sử dụng thương hiệu, hệ thiết kế, nội dung và mã nguồn riêng của HORIZ.
 
 Hệ thống gồm:
 
@@ -100,8 +100,8 @@ ADR phải có: bối cảnh, quyết định, phương án đã cân nhắc, h�
 - Nêu ngắn gọn phase và phạm vi đang thực hiện.
 - Nếu thông tin không rõ nhưng có thể suy ra an toàn từ tài liệu, dùng giả định đã ghi trong tài liệu.
 - Nếu quyết định ảnh hưởng payment, shipping, quyền dữ liệu, chính sách đổi trả, giá, tồn kho hoặc kiến trúc lớn mà chưa được chốt, phải hỏi người dùng trước khi triển khai.
-- Không sao chép source code, copywriting, logo hoặc nhận diện Allbirds.
-- Không publish ảnh Allbirds khi quyền sử dụng chưa có trạng thái `approved`.
+- Không sao chép source code, copywriting, logo hoặc nhận diện của bất kỳ thương hiệu nào khác.
+- Không publish ảnh có nguồn bên thứ ba khi quyền sử dụng chưa có trạng thái `approved`.
 - Không đưa toàn bộ thư mục ảnh nguồn vào frontend bundle.
 
 ## 6. Quy tắc database và Supabase

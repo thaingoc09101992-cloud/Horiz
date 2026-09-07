@@ -2,7 +2,7 @@
 
 ## 1. Tầm nhìn
 
-HORIZ là cửa hàng trực tuyến ưu tiên trải nghiệm tối giản, giàu hình ảnh, dễ chọn biến thể và mua nhanh. Allbirds là nguồn tham chiếu về kiến trúc thông tin và hành trình mua hàng; HORIZ phải tạo bản sắc riêng thay vì trở thành bản sao trực quan.
+HORIZ là cửa hàng trực tuyến ưu tiên trải nghiệm tối giản, giàu hình ảnh, dễ chọn biến thể và mua nhanh. Dự án tham khảo kiến trúc thông tin và hành trình mua hàng của các storefront thương mại điện tử hiện đại, nhưng tạo bản sắc riêng thay vì trở thành bản sao trực quan.
 
 ## 2. Hiện trạng workspace
 
@@ -13,7 +13,7 @@ Workspace đã có nền ứng dụng Phase 1 tại `apps/storefront`; catalogue
 | Ảnh sản phẩm và homepage | 1.263 JPG, 327,47 MB |
 | Thư mục sản phẩm duy nhất | 291 |
 | Ảnh homepage | 25 |
-| Manifest | `Source/Allbirds_Images_Manifest.csv`, 1.263 dòng |
+| Manifest | file CSV manifest ảnh nguồn trong `Source/` (ngoài Git), 1.263 dòng |
 | Logo HORIZ | 2 PNG ở thư mục gốc |
 
 Phân bổ ảnh: Women 590, Men 487, Unisex 156, Homepage 25, Toddler 5.
