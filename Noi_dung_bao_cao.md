@@ -48,7 +48,7 @@ Logo là **wordmark** chữ "HORÏZ" kiểu serif thanh lịch (nguồn: `elegan
 | Yêu cầu | Đường dẫn | Mô tả |
 |---|---|---|
 | **Trang Chủ** (Home Page) | `/` | Trang chủ storefront: hero, sản phẩm mới, danh mục, bộ sưu tập, khối chất liệu/triết lý |
-| **Về Chúng Tôi** (About Us) | `/about` | Câu chuyện HORIZ; footer của trang có **nhúng Google Maps** (bản đồ đường tới cửa hàng) + link chỉ đường |
+| **Về Chúng Tôi** (About Us) | `/about` | Câu chuyện & triết lý HORIZ; **nhúng video YouTube giới thiệu thương hiệu** ngay trong thân trang (bố cục cạnh 2 khối nội dung); ngoài ra footer còn **nhúng Google Maps** (bản đồ đường tới cửa hàng) + link chỉ đường |
 | **Chi tiết sản phẩm** (Detail) | `/products/:productId` | Trang chi tiết một sản phẩm (PDP) |
 
 ### 2.2. Toàn bộ trang trong ứng dụng
@@ -66,7 +66,7 @@ Logo là **wordmark** chữ "HORÏZ" kiểu serif thanh lịch (nguồn: `elegan
 | `/register` | Đăng ký | Tạo tài khoản + xác minh email; mặc định nhận vai trò `customer` |
 | `/forgot-password` | Quên mật khẩu | Gửi email đặt lại mật khẩu |
 | `/reset-password` | Đặt lại mật khẩu | Nhập mật khẩu mới từ link trong email |
-| `/about` | Về chúng tôi | Câu chuyện & triết lý thương hiệu |
+| `/about` | Về chúng tôi | Câu chuyện & triết lý thương hiệu; nhúng **video YouTube** (iframe `youtube-nocookie`, responsive 16:9) đặt cạnh 2 khối nội dung "Điều chúng tôi theo đuổi / Cách chúng tôi thiết kế" |
 | `/materials` | Chất liệu | Giới thiệu vật liệu (len Merino, sợi cây, vật liệu tái chế) |
 | `/help` | Hỗ trợ / Liên hệ | Thông tin liên hệ, giờ làm việc, hướng dẫn chọn size |
 | `/returns` | Đổi trả | Chính sách đổi trả 30 ngày |
@@ -92,6 +92,7 @@ Logo là **wordmark** chữ "HORÏZ" kiểu serif thanh lịch (nguồn: `elegan
 - **Tìm kiếm:** ô tìm kiếm nhanh ở header (SearchOverlay) + trang tìm kiếm đầy đủ với bộ lọc đối tượng / danh mục / size / màu và sắp xếp theo giá/tên; trạng thái bộ lọc lưu trên URL để chia sẻ/reload.
 - **Chi tiết sản phẩm:** gallery nhiều ảnh, chọn **size theo biến thể (variant) thật** — đọc `product_variants` + tồn kho `inventory_items` từ Supabase, hiển thị "còn N sản phẩm" hoặc "hết hàng", bắt buộc chọn size trước khi thêm giỏ, modal hướng dẫn chọn size, dữ liệu có cấu trúc JSON‑LD (`schema.org/Product`), gợi ý sản phẩm liên quan.
 - **Giỏ hàng:** thêm / tăng giảm số lượng / xóa dòng; cùng sản phẩm khác size là hai dòng riêng; tính tạm tính + phí vận chuyển theo ngưỡng miễn phí ship; giỏ lưu ở `localStorage` (key `horiz-cart-v1`), giữ nguyên sau khi tải lại trang.
+- **Trang About — nhúng video YouTube:** trang `/about` nhúng video giới thiệu thương hiệu bằng iframe `youtube-nocookie` (responsive 16:9, `loading="lazy"`), bố cục ngang: video bên trái, 2 khối nội dung bên phải để xem được ngay không cần cuộn; dưới 980px tự xếp dọc.
 - **Bản đồ cửa hàng:** nhúng iframe Google Maps ở footer + link "Xem chỉ đường".
 - **Đăng ký nhận bản tin:** form ở footer → ghi vào bảng `newsletter_subscribers`.
 

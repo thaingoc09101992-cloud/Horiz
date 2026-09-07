@@ -494,6 +494,23 @@ td small { margin-top: .25rem; color: var(--muted); }
 .content-page__sections p { margin: 0; color: var(--muted); line-height: 1.75; }
 .content-page > .button { margin-left: max(2rem, calc((100vw - 1200px) / 2)); }
 
+/* About page: video + text blocks side by side, visible without scrolling */
+.content-page--media > header { padding-top: clamp(2rem, 5vw, 3.5rem); padding-bottom: 1.25rem; }
+.content-page--media > header h1 { font-size: clamp(2.1rem, 3.8vw, 3.4rem); }
+.content-page--media > header > p:last-child { margin-top: 1rem; }
+.content-page__feature { display: grid; max-width: 1400px; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 2rem; margin: 1rem auto 3rem; padding: 0 2rem; }
+.content-page__video { min-width: 0; margin: 0; }
+.content-page__video-frame { position: relative; overflow: hidden; aspect-ratio: 16 / 9; border: 1px solid var(--border); border-radius: var(--radius-md); background: #000; }
+.content-page__video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.content-page__video figcaption { margin-top: .9rem; color: var(--muted); font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.content-page__feature .content-page__sections { display: flex; max-width: none; flex-direction: column; gap: 1px; margin: 0; border: 1px solid var(--border); border-radius: var(--radius-md); }
+.content-page__feature .content-page__sections section { display: flex; flex: 1; flex-direction: column; justify-content: center; min-height: 0; padding: 1.75rem 2rem; }
+
+@media (max-width: 980px) {
+  .content-page__feature { grid-template-columns: 1fr; margin-top: 1.5rem; }
+  .content-page--media > header h1 { font-size: clamp(2rem, 6vw, 3rem); }
+}
+
 .account-page > header > p:last-child { margin-top: 1.5rem; color: var(--muted); }
 .account-layout { display: grid; max-width: 1300px; grid-template-columns: 220px 1fr; gap: 2rem; margin: auto; padding: 0 2rem 7rem; }
 .account-layout > nav { display: flex; align-self: start; flex-direction: column; padding: .6rem; border: 1px solid var(--border); border-radius: var(--radius-md); }
@@ -540,6 +557,7 @@ td small { margin-top: .25rem; color: var(--muted); }
   .account-content { padding: 1.2rem; }
   .account-summary-grid, .address-grid, .content-page__sections { grid-template-columns: 1fr; }
   .content-page__sections { margin-inline: 1rem; }
+  .content-page__feature { padding-inline: 1rem; }
   .account-list article { grid-template-columns: 1fr auto; }
   .account-list article > strong { grid-column: 1 / -1; }
 }

@@ -1,7 +1,15 @@
 import { Link, useLocation } from 'react-router'
 
-const pages: Record<string, { eyebrow: string; title: string; intro: string; sections: Array<[string, string]> }> = {
-  about: { eyebrow: 'Câu chuyện HORIZ', title: 'Chuyển động tự nhiên, thiết kế có chủ đích.', intro: 'HORIZ tạo ra những sản phẩm tối giản, linh hoạt và dễ sống cùng mỗi ngày.', sections: [['Điều chúng tôi theo đuổi', 'Một đôi giày tốt không cần gây chú ý. Nó cần vừa vặn, bền bỉ và giúp bạn đi qua ngày dài một cách tự nhiên.'], ['Cách chúng tôi thiết kế', 'Mỗi chi tiết được cân nhắc theo ba tiêu chí: thoải mái thực tế, hình dáng lâu bền và vật liệu phù hợp với công năng.']] },
+type Page = {
+  eyebrow: string
+  title: string
+  intro: string
+  video?: { id: string; caption: string }
+  sections: Array<[string, string]>
+}
+
+const pages: Record<string, Page> = {
+  about: { eyebrow: 'Câu chuyện HORIZ', title: 'Chuyển động tự nhiên, thiết kế có chủ đích.', intro: 'HORIZ tạo ra những sản phẩm tối giản, linh hoạt và dễ sống cùng mỗi ngày.', video: { id: 'h6vacp9XpWQ', caption: 'Phim thương hiệu HORIZ' }, sections: [['Điều chúng tôi theo đuổi', 'Một đôi giày tốt không cần gây chú ý. Nó cần vừa vặn, bền bỉ và giúp bạn đi qua ngày dài một cách tự nhiên.'], ['Cách chúng tôi thiết kế', 'Mỗi chi tiết được cân nhắc theo ba tiêu chí: thoải mái thực tế, hình dáng lâu bền và vật liệu phù hợp với công năng.']] },
   materials: { eyebrow: 'Vật liệu', title: 'Ít hơn, nhưng đúng hơn.', intro: 'Chúng tôi ưu tiên vật liệu tự nhiên và tái chế khi chúng thực sự cải thiện trải nghiệm sử dụng.', sections: [['Len Merino', 'Điều hòa nhiệt, mềm và phù hợp với nhiều điều kiện thời tiết.'], ['Sợi cây', 'Nhẹ, thoáng và mang lại cảm giác mát cho những ngày di chuyển nhiều.'], ['Vật liệu tái chế', 'Được sử dụng có chọn lọc ở dây giày, lớp lót và bao bì để giảm vật liệu nguyên sinh.']] },
   help: { eyebrow: 'Hỗ trợ', title: 'Chúng tôi có thể giúp gì?', intro: 'Bạn có thể liên hệ đội ngũ HORIZ trong giờ làm việc từ 09:00 đến 18:00, thứ Hai đến thứ Bảy.', sections: [['Đơn hàng', 'Gửi email support@horiz.vn kèm mã đơn hàng để được kiểm tra nhanh.'], ['Chọn kích thước', 'Đo chiều dài bàn chân vào cuối ngày và đối chiếu bảng size trên từng trang sản phẩm.'], ['Liên hệ', 'Email: support@horiz.vn · Hotline: 1900 6868.']] },
   returns: { eyebrow: 'Đổi trả', title: 'Đổi trả rõ ràng trong 30 ngày.', intro: 'Sản phẩm chưa qua sử dụng, còn nguyên tem và hộp có thể yêu cầu đổi trả trong vòng 30 ngày kể từ khi nhận hàng.', sections: [['Điều kiện áp dụng', 'Sản phẩm sạch, chưa giặt, không có dấu hiệu sử dụng và còn đầy đủ phụ kiện đi kèm.'], ['Quy trình', 'Liên hệ hỗ trợ với mã đơn; chúng tôi xác nhận yêu cầu và hướng dẫn gửi trả.'], ['Hoàn tiền', 'Khoản hoàn được xử lý sau khi sản phẩm được kiểm tra, theo phương thức thanh toán ban đầu khi có thể.']] },
@@ -12,5 +20,46 @@ const pages: Record<string, { eyebrow: string; title: string; intro: string; sec
 export function StaticContentPage() {
   const key = useLocation().pathname.slice(1)
   const page = pages[key] ?? pages.help!
-  return <main className="content-page" id="main-content"><header><p className="ab-kicker">{page.eyebrow}</p><h1>{page.title}</h1><p>{page.intro}</p></header><div className="content-page__sections">{page.sections.map(([title, body]) => <section key={title}><h2>{title}</h2><p>{body}</p></section>)}</div>{key === 'help' ? <Link className="button button--primary" to="/search">Tìm sản phẩm</Link> : null}</main>
+
+  const sections = (
+    <div className="content-page__sections">
+      {page.sections.map(([title, body]) => (
+        <section key={title}>
+          <h2>{title}</h2>
+          <p>{body}</p>
+        </section>
+      ))}
+    </div>
+  )
+
+  return (
+    <main className={page.video ? 'content-page content-page--media' : 'content-page'} id="main-content">
+      <header>
+        <p className="ab-kicker">{page.eyebrow}</p>
+        <h1>{page.title}</h1>
+        <p>{page.intro}</p>
+      </header>
+      {page.video ? (
+        <div className="content-page__feature">
+          <figure className="content-page__video">
+            <div className="content-page__video-frame">
+              <iframe
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+                src={`https://www.youtube-nocookie.com/embed/${page.video.id}?rel=0`}
+                title={page.video.caption}
+              />
+            </div>
+            <figcaption>{page.video.caption}</figcaption>
+          </figure>
+          {sections}
+        </div>
+      ) : (
+        sections
+      )}
+      {key === 'help' ? <Link className="button button--primary" to="/search">Tìm sản phẩm</Link> : null}
+    </main>
+  )
 }
