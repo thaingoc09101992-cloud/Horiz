@@ -4,6 +4,7 @@ import { Link } from 'react-router'
 import catalogue from '../data/catalogue.generated.json'
 import { useHeroParallax, useRevealMotion, useTextParallax } from '../features/motion/useMotion'
 import { formatVnd } from '../lib/format'
+import { useSeoMeta } from '../lib/seo'
 import { supabase } from '../lib/supabase'
 
 // A curated pick of real catalogue products — using catalogue ids (rather than
@@ -68,6 +69,12 @@ const heroSlides = [
 const revealDelay = (index: number) => ({ '--reveal-index': index } as CSSProperties)
 
 export function HomePage() {
+  useSeoMeta({
+    title: 'HORIZ — Cùng bạn đi đến chân trời',
+    description: 'HORIZ — thiết kế chuyển động tự nhiên cho nhịp sống mỗi ngày.',
+    path: '/',
+  })
+
   const [heroCopy, setHeroCopy] = useState({
     eyebrow: 'HORIZ / BỘ SƯU TẬP MỚI',
     title: 'Thiết kế vượt thời gian.',
@@ -149,7 +156,7 @@ export function HomePage() {
               <picture className="ab-hero__slide" data-state={state} key={slide.image}>
                 <img
                   alt={slide.alt}
-                  fetchPriority={index === 0 ? 'high' : undefined}
+                  fetchPriority={index === 0 ? 'high' : 'low'}
                   src={slide.image}
                 />
               </picture>
@@ -203,7 +210,7 @@ export function HomePage() {
               <article className="ab-product-card" data-category={product.category} data-reveal key={product.id} style={revealDelay(index)}>
                 <Link to={`/products/${product.id}`}>
                   <div className="ab-product-card__image">
-                    <img alt={product.name} src={product.image} />
+                    <img alt={product.name} loading="lazy" src={product.image} />
                     {index === 0 ? <span>Mới</span> : null}
                   </div>
                   <h3>{product.name}</h3><strong>{formatVnd(product.price)}</strong>
@@ -226,7 +233,7 @@ export function HomePage() {
       <section className="ab-editorial">
         <div className="ab-editorial__inner">
           <div className="ab-editorial__visual" data-reveal>
-            <img alt="Chất liệu tự nhiên của HORIZ" src="/prototype/campaign-sand.jpg" />
+            <img alt="Chất liệu tự nhiên của HORIZ" loading="lazy" src="/prototype/campaign-sand.jpg" />
           </div>
           <div className="ab-editorial__content" data-reveal>
             <p className="ab-kicker">Chất liệu &amp; triết lý</p>
@@ -244,7 +251,7 @@ export function HomePage() {
         <div className="ab-collection-grid">
           {collections.map((collection, index) => (
             <Link className="ab-collection-card" data-reveal key={collection.href} style={revealDelay(index)} to={collection.href}>
-              <img alt={`Bộ sưu tập ${collection.label} HORIZ`} src={collection.image} />
+              <img alt={`Bộ sưu tập ${collection.label} HORIZ`} loading="lazy" src={collection.image} />
               <span>{collection.label} <ArrowRight aria-hidden="true" /></span>
             </Link>
           ))}

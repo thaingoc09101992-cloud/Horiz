@@ -7,6 +7,7 @@ import { useAuth } from '../features/auth/AuthProvider'
 import { useCart } from '../features/cart/CartProvider'
 import { formatVnd } from '../lib/format'
 import { getProductSizes } from '../lib/productOptions'
+import { SITE_ORIGIN, useSeoMeta, type SeoJsonLd } from '../lib/seo'
 import { supabase } from '../lib/supabase'
 import { NotFoundPage } from './NotFoundPage'
 
@@ -57,23 +58,49 @@ export function ProductDetailPage() {
     return () => { active = false }
   }, [product, user])
 
-  useEffect(() => {
-    if (!product) return
-    const previousTitle = document.title
-    document.title = product.name + ' | HORIZ'
-    const description = document.querySelector<HTMLMetaElement>('meta[name="description"]')
-    const previousDescription = description?.content ?? ''
-    if (description) description.content = product.name + ' — thiết kế HORIZ cho chuyển động tự nhiên.'
-    const canonical = document.createElement('link')
-    canonical.rel = 'canonical'
-    canonical.href = window.location.origin + '/products/' + product.id
-    document.head.append(canonical)
-    const structuredData = document.createElement('script')
-    structuredData.type = 'application/ld+json'
-    structuredData.text = JSON.stringify({ '@context': 'https://schema.org', '@type': 'Product', name: product.name, image: product.images.map((image) => window.location.origin + image), sku: product.id, brand: { '@type': 'Brand', name: 'HORIZ' }, offers: { '@type': 'Offer', priceCurrency: 'VND', price: product.price, availability: 'https://schema.org/InStock', url: canonical.href } })
-    document.head.append(structuredData)
-    return () => { document.title = previousTitle; if (description) description.content = previousDescription; canonical.remove(); structuredData.remove() }
+  const productDescription = product ? product.name + ' — thiết kế HORIZ cho chuyển động tự nhiên.' : 'Sản phẩm HORIZ.'
+  const productJsonLd = useMemo<SeoJsonLd[] | undefined>(() => {
+    if (!product) return undefined
+    const canonicalUrl = SITE_ORIGIN + '/products/' + product.id
+    return [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name: product.name,
+        description: productDescription,
+        image: product.images.map((image) => SITE_ORIGIN + image),
+        sku: product.sku,
+        category: product.category,
+        brand: { '@type': 'Brand', name: 'HORIZ' },
+        offers: {
+          '@type': 'Offer',
+          priceCurrency: 'VND',
+          price: product.price,
+          availability: 'https://schema.org/InStock',
+          url: canonicalUrl,
+        },
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Trang chủ', item: SITE_ORIGIN + '/' },
+          { '@type': 'ListItem', position: 2, name: product.audience, item: SITE_ORIGIN + '/' + product.audience.toLowerCase() },
+          { '@type': 'ListItem', position: 3, name: product.name, item: canonicalUrl },
+        ],
+      },
+    ]
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- productDescription is derived from product
   }, [product])
+
+  useSeoMeta({
+    title: product ? product.name + ' | HORIZ' : 'Không tìm thấy sản phẩm | HORIZ',
+    description: productDescription,
+    path: '/products/' + (product?.id ?? productId ?? ''),
+    noindex: !product,
+    image: product?.image,
+    jsonLd: productJsonLd,
+  })
 
   const sizes = useMemo(() => variants.length ? variants.map((variant) => variant.size) : product ? getProductSizes(product.category, product.audience) : [], [product, variants])
   const selectedVariant = variants.find((variant) => variant.size === selectedSize)
@@ -102,7 +129,7 @@ export function ProductDetailPage() {
       <nav aria-label="Đường dẫn" className="pdp-breadcrumb"><Link to={'/' + product.audience.toLowerCase()}>{product.audience}</Link><span>/</span><span>{product.category}</span></nav>
       <div className="pdp-layout">
         <section className="pdp-gallery" aria-label="Ảnh sản phẩm">
-          <div className="pdp-gallery__main"><img alt={product.name + ' — ảnh ' + String(selectedImage + 1)} src={product.images[selectedImage]} /></div>
+          <div className="pdp-gallery__main"><img alt={product.name + ' — ảnh ' + String(selectedImage + 1)} fetchPriority="high" src={product.images[selectedImage]} /></div>
           <div className="pdp-thumbnails">{product.images.map((image, index) => <button aria-label={'Xem ảnh ' + String(index + 1)} className={selectedImage === index ? 'active' : ''} key={image} onClick={() => setSelectedImage(index)} type="button"><img alt="" src={image} /></button>)}</div>
         </section>
         <section className="pdp-buybox">

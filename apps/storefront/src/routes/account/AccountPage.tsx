@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState, type FormEvent } from 'react'
 import { NavLink, useLocation } from 'react-router'
 import { useAuth } from '../../features/auth/AuthProvider'
 import { formatVnd } from '../../lib/format'
+import { useSeoMeta } from '../../lib/seo'
 import { supabase } from '../../lib/supabase'
 
 type Address = { id: string; recipient: string; phone: string; line1: string; ward: string | null; district: string | null; province: string; is_default: boolean }
@@ -24,6 +25,7 @@ const accountNav = [
 export function AccountPage() {
   const { pathname } = useLocation()
   const { user } = useAuth()
+  useSeoMeta({ title: 'Tài khoản của bạn | HORIZ', description: 'Quản lý tài khoản HORIZ của bạn.', path: pathname, noindex: true })
   const section = pathname.split('/')[2] ?? 'overview'
   const [profile, setProfile] = useState({ full_name: '', phone: '' })
   const [orders, setOrders] = useState<Order[]>([])

@@ -27,6 +27,20 @@
     <meta name="twitter:description" content="Thiết kế linh hoạt, thoáng nhẹ cho mọi chuyển động thường ngày." />
     <meta name="twitter:image" content="https://horiz.vn/og.png" />
     <title>HORIZ — Cùng bạn đi đến chân trời</title>
+    <!--
+      Sitewide entities (Organization + WebSite) live here as static JSON-LD
+      because this is a pure client-rendered SPA (see wrangler.jsonc) — the
+      per-route metadata from src/lib/seo.ts only reaches crawlers that
+      execute JavaScript, but these two apply to every page and cost nothing
+      to serve statically. Keep in sync with the contact details shown on
+      /help and in the footer if those ever change.
+    -->
+    <script type="application/ld+json">
+      {"@context":"https://schema.org","@type":"Organization","name":"HORIZ","url":"https://horiz.vn/","logo":"https://horiz.vn/horiz-wordmark.png","email":"support@horiz.vn","address":{"@type":"PostalAddress","streetAddress":"227 Nguyễn Văn Cừ","addressLocality":"Phường Chợ Quán","addressRegion":"Thành phố Hồ Chí Minh","addressCountry":"VN"},"contactPoint":{"@type":"ContactPoint","telephone":"1900 6868","contactType":"customer service","email":"support@horiz.vn","areaServed":"VN","availableLanguage":["vi"]}}
+    </script>
+    <script type="application/ld+json">
+      {"@context":"https://schema.org","@type":"WebSite","name":"HORIZ","url":"https://horiz.vn/","potentialAction":{"@type":"SearchAction","target":"https://horiz.vn/search?q={search_term_string}","query-input":"required name=search_term_string"}}
+    </script>
   </head>
   <body>
     <div id="root"></div>

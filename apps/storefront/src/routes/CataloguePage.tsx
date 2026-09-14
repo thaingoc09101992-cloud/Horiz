@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { Link, useLocation, useParams } from 'react-router'
 import products from '../data/catalogue.generated.json'
 import { formatVnd } from '../lib/format'
+import { useSeoMeta } from '../lib/seo'
 
 const pageContent: Record<string, { audience?: string; title: string; description: string }> = {
   women: { audience: 'Women', title: 'Nữ', description: 'Giày và trang phục nhẹ, linh hoạt cho từng chuyển động trong ngày.' },
@@ -16,7 +17,20 @@ export function CataloguePage() {
   const { collection } = useParams()
   const { pathname } = useLocation()
   const pageKey = collection ?? pathname.split('/').filter(Boolean)[0] ?? 'new'
+  // Only these keys have real, distinct content — any other /collections/:slug
+  // (e.g. an unlinked or mistyped one) falls back to the same "all products"
+  // view, so it's marked noindex below to avoid duplicate-content URLs
+  // instead of being silently presented as a unique page to search engines.
+  const isRecognizedCollection = pageKey in pageContent
   const content = pageContent[pageKey] ?? { title: 'Bộ sưu tập', description: 'Danh mục sản phẩm được tuyển chọn từ manifest HORIZ.' }
+
+  useSeoMeta({
+    title: content.title + ' | HORIZ',
+    description: content.description,
+    path: pathname,
+    noindex: !isRecognizedCollection,
+  })
+
   const [category, setCategory] = useState('Tất cả')
   const [sort, setSort] = useState('featured')
 
@@ -35,6 +49,7 @@ export function CataloguePage() {
 
   return (
     <main className="catalogue-page" id="main-content">
+      <h1 className="sr-only">{content.title} | HORIZ</h1>
       <div className="catalogue-toolbar">
         <div className="catalogue-tabs" role="group" aria-label="Loại sản phẩm">
           {categories.map((item) => <button className={selectedCategory === item ? 'active' : ''} key={item} onClick={() => setCategory(item)} type="button">{item}</button>)}

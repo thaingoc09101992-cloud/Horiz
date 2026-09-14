@@ -6,3 +6,13 @@
 
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Product/prototype photography is not content-hashed like /assets/*, so a
+# shorter cacheable window (vs. immutable) leaves room to replace a file at
+# the same path without a long stale-cache tail — still a meaningful repeat-
+# visit win for Core Web Vitals over the previous no-cache-header default.
+/catalogue/*
+  Cache-Control: public, max-age=604800, must-revalidate
+
+/prototype/*
+  Cache-Control: public, max-age=604800, must-revalidate

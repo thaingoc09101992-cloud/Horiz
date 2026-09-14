@@ -1,5 +1,6 @@
 import type { FormEvent, ReactNode } from 'react'
-import { Link } from 'react-router'
+import { Link, useLocation } from 'react-router'
+import { useSeoMeta } from '../../lib/seo'
 
 interface AuthCardProps {
   eyebrow: string
@@ -14,6 +15,10 @@ interface AuthCardProps {
 }
 
 export function AuthCard(props: AuthCardProps) {
+  const { pathname } = useLocation()
+  // Login/register/password-recovery screens have no search intent — noindex.
+  useSeoMeta({ title: props.title + ' | HORIZ', description: props.description, path: pathname, noindex: true })
+
   return (
     <main className="auth-page" id="main-content">
       <section className="auth-art" aria-hidden="true">

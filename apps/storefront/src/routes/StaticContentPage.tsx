@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router'
+import { useSeoMeta } from '../lib/seo'
 
 type Page = {
   eyebrow: string
@@ -18,8 +19,15 @@ const pages: Record<string, Page> = {
 }
 
 export function StaticContentPage() {
-  const key = useLocation().pathname.slice(1)
+  const { pathname } = useLocation()
+  const key = pathname.slice(1)
   const page = pages[key] ?? pages.help!
+
+  useSeoMeta({
+    title: page.title + ' | HORIZ',
+    description: page.intro,
+    path: pathname,
+  })
 
   const sections = (
     <div className="content-page__sections">

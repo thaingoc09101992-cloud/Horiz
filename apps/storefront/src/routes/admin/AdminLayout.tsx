@@ -17,6 +17,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { Link, NavLink, Outlet } from 'react-router'
 import { Wordmark } from '../../components/brand/Wordmark'
 import { useAuth } from '../../features/auth/AuthProvider'
+import { useSeoMeta } from '../../lib/seo'
 import { supabase } from '../../lib/supabase'
 
 const ORDERS_LAST_SEEN_KEY = 'horiz-admin-orders-last-seen:v1'
@@ -42,6 +43,10 @@ const adminNav = [
 ]
 
 export function AdminLayout() {
+  // Also disallowed in robots.txt — this is defense-in-depth for any
+  // admin URL an authenticated crawl or accidental link might surface.
+  useSeoMeta({ title: 'Administrator | HORIZ', description: 'Khu vực quản trị HORIZ.', path: '/admin', noindex: true })
+
   const [navOpen, setNavOpen] = useState(false)
   const [newOrderCount, setNewOrderCount] = useState(0)
   const { signOut, user } = useAuth()

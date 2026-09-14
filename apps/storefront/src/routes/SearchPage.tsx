@@ -4,6 +4,7 @@ import { Link, useSearchParams } from 'react-router'
 import products from '../data/catalogue.generated.json'
 import { formatVnd } from '../lib/format'
 import { getProductSizes } from '../lib/productOptions'
+import { useSeoMeta } from '../lib/seo'
 
 const colorKeywords = ['black', 'white', 'grey', 'gray', 'navy', 'blue', 'green', 'beige', 'brown', 'pink', 'red', 'yellow', 'orange', 'purple']
 
@@ -53,6 +54,15 @@ export function SearchPage() {
   }
 
   const activeFilterCount = [audience, category, size, color].filter((value) => value !== 'all').length
+
+  // Internal search/filter results — every query combination is noindexed to
+  // avoid an unbounded number of near-duplicate URLs in Google's index.
+  useSeoMeta({
+    title: query ? `Kết quả cho "${query}" | HORIZ` : 'Tìm kiếm sản phẩm | HORIZ',
+    description: 'Tìm kiếm và lọc sản phẩm HORIZ theo danh mục, kích thước và màu sắc.',
+    path: '/search',
+    noindex: true,
+  })
 
   return (
     <main className="search-page" id="main-content">

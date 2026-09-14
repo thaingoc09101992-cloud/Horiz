@@ -2,10 +2,13 @@ import { Minus, Plus, ShoppingBag, Trash2 } from 'lucide-react'
 import { Link } from 'react-router'
 import { useCart } from '../features/cart/CartProvider'
 import { formatVnd } from '../lib/format'
+import { useSeoMeta } from '../lib/seo'
 
 export function CartPage() {
   const { items, subtotal, updateQuantity, removeItem } = useCart()
   const freeShippingRemaining = Math.max(0, 1500000 - subtotal)
+
+  useSeoMeta({ title: 'Giỏ hàng | HORIZ', description: 'Giỏ hàng của bạn tại HORIZ.', path: '/cart', noindex: true })
 
   return (
     <main className="cart-page" id="main-content">

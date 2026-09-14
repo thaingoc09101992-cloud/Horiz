@@ -4,6 +4,7 @@ import { Link } from 'react-router'
 import { useAuth } from '../features/auth/AuthProvider'
 import { useCart } from '../features/cart/CartProvider'
 import { formatVnd } from '../lib/format'
+import { useSeoMeta } from '../lib/seo'
 import { calculateShipping } from '../lib/shipping'
 import { supabase } from '../lib/supabase'
 
@@ -28,6 +29,8 @@ function readCheckoutResult(value: unknown): CheckoutResult | null {
 }
 
 export function CheckoutConfirmation({ result }: { result: CheckoutResult }) {
+  useSeoMeta({ title: 'Đặt hàng thành công | HORIZ', description: 'Xác nhận đơn hàng HORIZ.', path: '/checkout', noindex: true })
+
   return (
     <main className="permission-page checkout-confirmation" id="main-content">
       <p className="eyebrow">Đặt hàng thành công</p>
@@ -50,6 +53,8 @@ export function CheckoutConfirmation({ result }: { result: CheckoutResult }) {
 }
 
 export function CheckoutPage() {
+  useSeoMeta({ title: 'Thanh toán | HORIZ', description: 'Hoàn tất đơn hàng HORIZ.', path: '/checkout', noindex: true })
+
   const { user } = useAuth()
   const { items, subtotal, clearCart } = useCart()
   const [email, setEmail] = useState(user?.email ?? '')

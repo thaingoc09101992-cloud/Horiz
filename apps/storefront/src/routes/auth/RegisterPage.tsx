@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router'
+import { useSeoMeta } from '../../lib/seo'
 import { isSupabaseConfigured, supabase } from '../../lib/supabase'
 import { AuthCard } from './AuthCard'
 
@@ -68,14 +69,7 @@ export function RegisterPage() {
   }
 
   if (success) {
-    return (
-      <main className="permission-page" id="main-content">
-        <p className="eyebrow">Chỉ còn một bước</p>
-        <h1>Kiểm tra email của bạn.</h1>
-        <p>Chúng tôi đã gửi liên kết xác minh để hoàn tất tài khoản HORIZ.</p>
-        <a className="button button--primary" href="/login">Đến trang đăng nhập</a>
-      </main>
-    )
+    return <RegisterSuccessNotice />
   }
 
   return (
@@ -112,5 +106,18 @@ export function RegisterPage() {
       </button>
       {message ? <p className="form-message" role="alert">{message}</p> : null}
     </AuthCard>
+  )
+}
+
+function RegisterSuccessNotice() {
+  useSeoMeta({ title: 'Kiểm tra email của bạn | HORIZ', description: 'Xác minh email để hoàn tất tài khoản HORIZ.', path: '/register', noindex: true })
+
+  return (
+    <main className="permission-page" id="main-content">
+      <p className="eyebrow">Chỉ còn một bước</p>
+      <h1>Kiểm tra email của bạn.</h1>
+      <p>Chúng tôi đã gửi liên kết xác minh để hoàn tất tài khoản HORIZ.</p>
+      <a className="button button--primary" href="/login">Đến trang đăng nhập</a>
+    </main>
   )
 }

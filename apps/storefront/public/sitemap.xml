@@ -5,7 +5,8 @@
   <url><loc>https://horiz.vn/men</loc><changefreq>monthly</changefreq></url>
   <url><loc>https://horiz.vn/unisex</loc><changefreq>monthly</changefreq></url>
   <url><loc>https://horiz.vn/toddler</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://horiz.vn/search</loc><changefreq>monthly</changefreq></url>
+  <url><loc>https://horiz.vn/collections/new</loc><changefreq>monthly</changefreq></url>
+  <url><loc>https://horiz.vn/collections/best-sellers</loc><changefreq>monthly</changefreq></url>
   <url><loc>https://horiz.vn/about</loc><changefreq>monthly</changefreq></url>
   <url><loc>https://horiz.vn/materials</loc><changefreq>monthly</changefreq></url>
   <url><loc>https://horiz.vn/help</loc><changefreq>monthly</changefreq></url>
